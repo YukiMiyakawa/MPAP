@@ -1,4 +1,5 @@
 <div class="container">
+
   <div class="row">
     <div class="col">
       <%= attachment_image_tag @main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
@@ -7,5 +8,24 @@
       <%= link_to '編集', edit_main_post_path(@main_post) %>
       <%= link_to '削除', main_post_path, method: :delete %>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <% @comments.each do |comment| %>
+        <%= comment.user.name %>
+        <%= comment.content %>
+        <%= link_to '編集', edit_main_post_comment_path(@main_post, comment) %>
+        <%= link_to '削除', main_post_path(comment.main_post_id), method: :delete %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= form_with model:[@main_post, @comment], local:true do |f| %>
+    <%= f.label :Content %>
+    <%= f.text_area :content %>
+    <%= f.submit class: 'btn btn-secondary' %>
+    <% end %>
   </div>
 </div>

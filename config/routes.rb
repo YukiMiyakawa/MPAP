@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   }
 
  resources :users, only: [:index, :show, :edit, :update]
- resources :main_posts
-
+ resources :main_posts do
+  resources :comments, only: [:create, :destroy, :edit, :update]
+ end
 end

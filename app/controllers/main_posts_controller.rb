@@ -1,11 +1,12 @@
 class MainPostsController < ApplicationController
   def index
     @main_posts = MainPost.all
-    p @main_posts
   end
 
   def show
     @main_post = MainPost.find(params[:id])
+    @comments = Comment.all
+    @comment = Comment.new
   end
 
   def new
@@ -30,7 +31,7 @@ class MainPostsController < ApplicationController
   def update
      @main_post = MainPost.find(params[:id])
     if  @main_post.update(main_post_params)
-      redirect_to main_post_path(@main_post), notice: "You have updated book successfully."
+      redirect_to request.referrer, notice: "You have updated book successfully."
     else
       render "edit"
     end
