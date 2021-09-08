@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= form_with model:@main_post, local:true do |f| %>
+        <%= f.label :Title %>
+        <%= f.text_field :title, class: "form-control name" %>
+
+        <%= f.label :Content %>
+        <%= f.text_area :content, class: "form-control introduction" %>
+
+        <%= f.label :image %>
+        <%= f.attachment_field :image, class: "form-control-file user_image" %>
+
+        <%= f.submit class: 'btn btn-secondary' %>
+
+      <% end %>
+    </div>
+  </div>
+</div>
