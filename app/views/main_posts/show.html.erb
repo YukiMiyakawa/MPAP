@@ -5,21 +5,11 @@
       <%= attachment_image_tag @main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
       <%= @main_post.title %>
       <%= @main_post.content %>
-      
-      <% if @main_post.favorited_by?(current_user) %>
-        <p>
-          <%= link_to main_post_favorites_path(@main_post), method: :delete do %>
-            ♥<%= @main_post.favorites.count %> いいね
-          <% end %>
-        </p>
-        <% else %>
-        <p>
-          <%= link_to main_post_favorites_path(@main_post), method: :post do %>
-            ♡<%= @main_post.favorites.count %> いいね
-          <% end %>
-        </p>
-      <% end %>
-      
+
+      <div id="main_post_<%= @main_post.id %>" >
+        <%= render "favorites/favorite-btn", main_post: @main_post %>
+      </div>
+
       <%= link_to '編集', edit_main_post_path(@main_post) %>
       <%= link_to '削除', main_post_path, method: :delete %>
     </div>
