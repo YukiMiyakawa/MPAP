@@ -1,36 +1,62 @@
 <div class="container">
 
-  <div class="row">
-    <div class="col">
-      <%= attachment_image_tag @main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
-      <%= @main_post.title %>
-      <%= @main_post.content %>
+  <div class="bg-secondary">
+    <h2><%= @main_post.title %></h2>
+    <div><%= attachment_image_tag @main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
+    <div><%= @main_post.content %></div>
 
-      <div id="main_post_<%= @main_post.id %>" >
-        <%= render "favorites/favorite-btn", main_post: @main_post %>
-      </div>
-
-      <%= link_to '編集', edit_main_post_path(@main_post) %>
-      <%= link_to '削除', main_post_path, method: :delete %>
+    <div id="main_post_<%= @main_post.id %>" >
+      <%= render "favorites/favorite-btn", main_post: @main_post %>
     </div>
+
+    <%= link_to '編集', edit_main_post_path(@main_post), class: "text-light" %>
+    <%= link_to '削除', main_post_path, method: :delete, class: "text-light" %>
   </div>
 
-  <div class="row">
-    <div class="col">
-      <% @comments.each do |comment| %>
-        <%= comment.user.name %>
-        <%= comment.content %>
-        <%= link_to '編集', edit_main_post_comment_path(@main_post, comment) %>
-        <%= link_to '削除', main_post_comment_path(@main_post, comment), method: :delete %>
-      <% end %>
-    </div>
+  <div>
+    <% if @main_post.user_id == current_user.id %>
+      <h5>サブ記事投稿</h5>
+        <%= form_with model:[@main_post, @sub_post], local:true do |f| %>
+          <%= f.label :Title %>
+          <%= f.text_field :title, class: "form-control name" %>
+
+          <%= f.label :Content %>
+          <%= f.text_area :content, class: "form-control introduction" %>
+
+          <%= f.label :image %>
+          <%= f.attachment_field :image, class: "form-control-file user_image" %>
+
+          <%= f.submit class: 'btn btn-light' %>
+
+       <% end %>
+    <% end %>
   </div>
 
-  <div class="row">
+  <div class="bg-secondary">
+    <% @sub_posts.each do |sub_post| %>
+      <h2><%= sub_post.title %></h2>
+      <div><%= attachment_image_tag sub_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
+      <div><%= sub_post.content %></div>
+      <%= link_to '編集', edit_main_post_sub_post_path(@main_post, sub_post), class: "text-light" %>
+      <%= link_to '削除', main_post_sub_post_path(@main_post, sub_post), method: :delete, class: "text-light" %>
+    <% end %>
+  </div>
+
+  <div>
+    <h5>コメント</h5>
+    <% @comments.each do |comment| %>
+      <div><%= comment.user.name %></div>
+      <div><%= comment.content %></div>
+      <%= link_to '編集', edit_main_post_comment_path(@main_post, comment), class: "text-dark" %>
+      <%= link_to '削除', main_post_comment_path(@main_post, comment), method: :delete, class: "text-dark" %>
+    <% end %>
+  </div>
+
+  <div class="bg-light">
     <%= form_with model:[@main_post, @comment], local:true do |f| %>
-    <%= f.label :Content %>
-    <%= f.text_area :content %>
-    <%= f.submit class: 'btn btn-secondary' %>
+    <div><%= f.label :Content %></div>
+    <div><%= f.text_area :content %></div>
+    <div><%= f.submit class: 'btn btn-light' %></div>
     <% end %>
   </div>
 </div>

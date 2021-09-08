@@ -21,10 +21,11 @@ Rails.application.routes.draw do
   get 'followings' => 'relationships#followings', as: 'followings'
   get 'followers' => 'relationships#followers', as: 'followers'
  end
- 
+
  resources :main_posts do
+  resources :sub_posts, only: [:create, :destroy, :edit, :update]
   resources :comments, only: [:create, :destroy, :edit, :update]
   resource :favorites, only: [:create, :destroy]
  end
- 
+
 end

@@ -5,6 +5,8 @@ class MainPostsController < ApplicationController
 
   def show
     @main_post = MainPost.find(params[:id])
+    @sub_post = SubPost.new
+    @sub_posts = SubPost.all
     @comments = Comment.all
     @comment = Comment.new
   end
