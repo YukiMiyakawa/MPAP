@@ -11,7 +11,10 @@ class SubPostsController < ApplicationController
   end
 
   def edit
-  　@sub_post = SubPost.find(params[:id])
+  #   puts "debug=#{params.inspect}"
+  #   # byebug
+    @main_post = MainPost.find(params[:main_post_id])
+    @sub_post = SubPost.find(params[:id])
   end
 
   def update
