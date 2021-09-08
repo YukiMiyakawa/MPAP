@@ -1,6 +1,7 @@
 class MainPostsController < ApplicationController
   def index
-    @main_posts = MainPosts.all
+    @main_posts = MainPost.all
+    p @main_posts
   end
 
   def show
