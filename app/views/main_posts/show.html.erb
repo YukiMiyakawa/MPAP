@@ -16,7 +16,7 @@
         <%= comment.user.name %>
         <%= comment.content %>
         <%= link_to '編集', edit_main_post_comment_path(@main_post, comment) %>
-        <%= link_to '削除', main_post_path(comment.main_post_id), method: :delete %>
+        <%= link_to '削除', main_post_comment_path(@main_post, comment), method: :delete %>
       <% end %>
     </div>
   </div>

@@ -1,15 +1,14 @@
 class CommentsController < ApplicationController
   def create
-
     main_post = MainPost.find(params[:main_post_id])
     @comment = Comment.new(main_post_params)
     @comment.user_id = current_user.id
     @comment.main_post_id = main_post.id
     if  @comment.save
-      redirect_to main_posts_path, notice: "You have created book successfully."
+      redirect_to main_post_path(params[:main_post_id]), notice: "You have created book successfully."
     else
       @comments = Comment.all
-      render 'index'
+      redirect_to main_post_path(params[:main_post_id])
     end
   end
 
@@ -28,9 +27,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-     @comment = Comment.find(params[:id])
-     @comment.destroy
-    redirect_to main_posts_path
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to main_post_path(params[:main_post_id])
   end
 
   private
