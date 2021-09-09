@@ -16,27 +16,31 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
- #ユーザールーティング
- resources :users, only: [:index, :show, :edit, :update] do
-  resource :relationships, only: [:create, :destroy]
-  resources :tweets, only: [:create, :destroy, :edit, :update]
-  get 'followings' => 'relationships#followings', as: 'followings'
-  get 'followers' => 'relationships#followers', as: 'followers'
- end
+  #ユーザールーティング
+  resources :users, only: [:index, :show, :edit, :update] do
+    resource :relationships, only: [:create, :destroy]
+    resources :tweets, only: [:create, :destroy, :edit, :update]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+  end
 
- resources :main_posts do
+  get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'
+  patch ':id/withdraw/:name' => 'users#withdraw', as: 'withdraw_user'
+  put 'withdraw/:name' => 'users#withdraw'
+
+  resources :main_posts do
   resources :sub_posts, only: [:create, :destroy, :edit, :update]
   resources :comments, only: [:create, :destroy, :edit, :update]
   resource :favorites, only: [:create, :destroy]
- end
+  end
 
- #管理者ルーティング
- namespace :admins do
-   root to: "homes#top"
-   resources :main_posts, only: [:index, :show, :update, :destroy] do
-     resources :comments, only: [:destroy]
-   end
-   resources :users
- end
+  #管理者ルーティング
+  namespace :admins do
+    root to: "homes#top"
+    resources :main_posts, only: [:index, :show, :update, :destroy] do
+      resources :comments, only: [:destroy]
+    end
+    resources :users
+  end
 
 end

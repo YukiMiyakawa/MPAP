@@ -24,4 +24,6 @@
     <div><%= render "tweets/index", tweets: @tweets, user: @user %></div>
   </div>
 
+  <div><%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name) %></div>
+
 </div>

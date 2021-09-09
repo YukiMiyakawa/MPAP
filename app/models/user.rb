@@ -26,4 +26,9 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+  #論理削除
+  # def active_for_authentication?
+  #   super && (self.user_status == false)
+  # end
 end
