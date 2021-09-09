@@ -8,8 +8,9 @@
 <% else %>
 
 <div class="container">
-
+<!--メイン記事-->
   <div class="bg-secondary">
+
     <h2><%= @main_post.title %></h2>
     <div><%= attachment_image_tag @main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
     <div><%= @main_post.content %></div>
@@ -18,11 +19,15 @@
       <%= render "favorites/favorite-btn", main_post: @main_post %>
     </div>
 
-    <%= link_to '編集', edit_main_post_path(@main_post), class: "text-light" %>
-    <%= link_to '削除', main_post_path(@main_post), method: :delete, class: "text-light" %>
-  </div>
+    <% if @main_post.user_id == current_user.id %>
+      <%= link_to '編集', edit_main_post_path(@main_post), class: "text-light" %>
+      <%= link_to '削除', main_post_path(@main_post), method: :delete, class: "text-light" %>
+    <% end %>
 
+  </div>
+<!--サブ記事-->
   <div>
+
     <% if @main_post.user_id == current_user.id %>
       <h5>サブ記事投稿</h5>
         <%= form_with model:[@main_post, @sub_post], local:true do |f| %>
@@ -39,25 +44,37 @@
 
        <% end %>
     <% end %>
+
   </div>
 
   <div class="bg-secondary">
     <% @sub_posts.each do |sub_post| %>
+
       <h2><%= sub_post.title %></h2>
       <div><%= attachment_image_tag sub_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
       <div><%= sub_post.content %></div>
-      <%= link_to '編集', edit_main_post_sub_post_path(@main_post, sub_post), class: "text-light" %>
-      <%= link_to '削除', main_post_sub_post_path(@main_post, sub_post), method: :delete, class: "text-light" %>
+
+      <% if @main_post.user_id == current_user.id %>
+        <%= link_to '編集', edit_main_post_sub_post_path(@main_post, sub_post), class: "text-light" %>
+        <%= link_to '削除', main_post_sub_post_path(@main_post, sub_post), method: :delete, class: "text-light" %>
+      <% end %>
+
     <% end %>
   </div>
 
+<!--コメント-->
   <div>
     <h5>コメント</h5>
     <% @comments.each do |comment| %>
+
       <div><%= comment.user.name %></div>
       <div><%= comment.content %></div>
+
+    <% if comment.user_id == current_user.id %>
       <%= link_to '編集', edit_main_post_comment_path(@main_post, comment), class: "text-dark" %>
       <%= link_to '削除', main_post_comment_path(@main_post, comment), method: :delete, class: "text-dark" %>
+    <% end %>
+
     <% end %>
   </div>
 

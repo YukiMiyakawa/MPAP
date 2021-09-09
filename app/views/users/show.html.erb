@@ -3,9 +3,20 @@
 
   <div class="row">
     <div class="col">
+      <!--ユーザー情報-->
       <%= @user.name %>
-      <p><%= link_to '編集', edit_user_path(@user) %></p>
 
+      <% if @user.id == current_user.id %>
+      <p><%= link_to '編集', edit_user_path(@user) %></p>
+      <% end %>
+
+      <!--得意音楽ジャンル-->
+      <div><%= render "user_music_genres/index", user: @user, user_music_genre: @user_music_genre, user_music_genres: @user_music_genres %></div>
+
+      <!--得意楽器-->
+      <div><%= render "user_instruments/index", user: @user, user_instrument: @user_instrument, user_instruments: @user_instruments %></div>
+
+　　　<!--フォロー-->
       <p>follows <%= link_to @user.followings.count, user_followings_path(@user) %></p>
       <p>followers <%= link_to @user.followers.count, user_followers_path(@user) %></p>
       <% if @user.id != current_user.id %>
@@ -15,6 +26,7 @@
           <%= link_to "フォローする", user_relationships_path(@user), method: :post, class: "btn btn-success" %>
         <% end %>
       <% end %>
+
     </div>
   </div>
 
@@ -24,6 +36,8 @@
     <div><%= render "tweets/index", tweets: @tweets, user: @user %></div>
   </div>
 
+  <!--退会-->
+　<% if @user.id == current_user.id %>
   <div><%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name) %></div>
-
+  <% end %>
 </div>

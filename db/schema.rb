@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_09_063745) do
+ActiveRecord::Schema.define(version: 2021_09_09_092942) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -82,6 +82,20 @@ ActiveRecord::Schema.define(version: 2021_09_09_063745) do
     t.integer "user_id", null: false
     t.string "comment", null: false
     t.integer "practice_time", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_instruments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "instrument_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_music_genres", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "music_genre_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

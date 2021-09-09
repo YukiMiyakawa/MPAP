@@ -3,6 +3,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @tweet = Tweet.new
     @tweets = Tweet.where(user_id: current_user.id)
+    @user_music_genre = UserMusicGenre.new
+    @user_music_genres = UserMusicGenre.all
+    @user_instrument = UserInstrument.new
+    @user_instruments = UserInstrument.all
   end
 
   def edit

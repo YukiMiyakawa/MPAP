@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     resources :tweets, only: [:create, :destroy, :edit, :update]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
+    resources :user_music_genres, only: [:create, :destroy]
+    resources :user_instruments, only: [:create, :destroy]
   end
 
   get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'
@@ -29,9 +31,9 @@ Rails.application.routes.draw do
   put 'withdraw/:name' => 'users#withdraw'
 
   resources :main_posts do
-  resources :sub_posts, only: [:create, :destroy, :edit, :update]
-  resources :comments, only: [:create, :destroy, :edit, :update]
-  resource :favorites, only: [:create, :destroy]
+    resources :sub_posts, only: [:create, :destroy, :edit, :update]
+    resources :comments, only: [:create, :destroy, :edit, :update]
+    resource :favorites, only: [:create, :destroy]
   end
 
   #管理者ルーティング
