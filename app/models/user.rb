@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  #認証キーに[:name]追加
+  devise :database_authenticatable, authentication_keys: [:name]
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
