@@ -1,0 +1,19 @@
+<%= form_with url: admins_music_genres_path, model: music_genre, local: true do |f| %>
+  <%= f.text_field :name, placeholder: "得意音楽ジャンル追加" %>
+  <%= f.submit "追加", class: "btn btn-outline-dark ml-3" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr><th>得意音楽ジャンル名</th><th><th></th></th></tr>
+  </thead>
+  <tbody>
+    <% music_genres.each do |music_genre| %>
+    <tr>
+      <td><%= music_genre.name %></td>
+      <td><%= link_to '編集', edit_admins_music_genre_path(music_genre.id) %></td>
+      <td><%= link_to '削除', admins_music_genre_path(music_genre.id), method: :delete %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -41,6 +41,8 @@ Rails.application.routes.draw do
       resources :comments, only: [:destroy]
     end
     resources :users
+    resources :instruments, only: [:index, :create, :destroy, :edit, :update]
+    resources :music_genres, only: [:create, :destroy, :edit, :update]
   end
 
 end
