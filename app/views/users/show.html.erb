@@ -1,9 +1,10 @@
-<h1>Show</h1>
 <div class="container">
+  <h1>Show</h1>
+
   <div class="row">
     <div class="col">
       <%= @user.name %>
-      <%= link_to '編集', edit_user_path(@user) %>
+      <p><%= link_to '編集', edit_user_path(@user) %></p>
 
       <p>follows</p>
       <%= link_to @user.followings.count, user_followings_path(@user) %>
@@ -18,4 +19,11 @@
       <% end %>
     </div>
   </div>
+
+  <!--Tweet部分-->
+  <div class="row">
+    <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
+    <div><%= render "tweets/index", tweets: @tweets, user: @user %></div>
+  </div>
+
 </div>
