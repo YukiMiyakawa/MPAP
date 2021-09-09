@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  # devise_for :users
-  # devise_for :admins
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   root to: 'homes#top'
   get 'home/about' => 'homes#about'
 
+  #deviseルーティング
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+ #ユーザールーティング
  resources :users, only: [:index, :show, :edit, :update] do
   resource :relationships, only: [:create, :destroy]
   resources :tweets, only: [:create, :destroy, :edit, :update]
@@ -27,6 +28,14 @@ Rails.application.routes.draw do
   resources :sub_posts, only: [:create, :destroy, :edit, :update]
   resources :comments, only: [:create, :destroy, :edit, :update]
   resource :favorites, only: [:create, :destroy]
+ end
+
+ #管理者ルーティング
+ namespace :admins do
+   root to: "homes#top"
+   resources :main_posts, only: [:index, :show, :update, :destroy] do
+     resources :comments, only: [:destroy]
+   end
  end
 
 end

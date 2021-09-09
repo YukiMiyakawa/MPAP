@@ -1,3 +1,12 @@
+<!--記事公開停止中-->
+<% if @main_post.public_status? %>
+<div class="container">
+  <div class="row"> 現在この記事は公開停止中です</div>
+</div>
+
+<!--記事公開中-->
+<% else %>
+
 <div class="container">
 
   <div class="bg-secondary">
@@ -10,7 +19,7 @@
     </div>
 
     <%= link_to '編集', edit_main_post_path(@main_post), class: "text-light" %>
-    <%= link_to '削除', main_post_path, method: :delete, class: "text-light" %>
+    <%= link_to '削除', main_post_path(@main_post), method: :delete, class: "text-light" %>
   </div>
 
   <div>
@@ -60,3 +69,5 @@
     <% end %>
   </div>
 </div>
+
+<% end %>

@@ -6,8 +6,8 @@ class MainPostsController < ApplicationController
   def show
     @main_post = MainPost.find(params[:id])
     @sub_post = SubPost.new
-    @sub_posts = SubPost.all
-    @comments = Comment.all
+    @sub_posts = SubPost.where(main_post_id: @main_post.id)
+    @comments = Comment.where(main_post_id: @main_post.id)
     @comment = Comment.new
   end
 
