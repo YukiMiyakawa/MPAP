@@ -15,7 +15,9 @@ class User < ApplicationRecord
   has_many :user_music_genres, dependent: :destroy
   has_many :user_instruments, dependent: :destroy
   has_many :book_marks, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
+  #フォロー機能
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower
@@ -32,9 +34,4 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-
-  #論理削除
-  # def active_for_authentication?
-  #   super && (self.user_status == false)
-  # end
 end

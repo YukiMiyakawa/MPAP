@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
     resources :user_music_genres, only: [:create, :destroy]
     resources :user_instruments, only: [:create, :destroy]
+    resources :tasks, only: [:create, :destroy]
   end
 
   get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'

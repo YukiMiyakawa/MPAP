@@ -2,11 +2,13 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @tweet = Tweet.new
-    @tweets = Tweet.where(user_id: current_user.id)
+    @tweets = Tweet.where(user_id: @user.id)
     @user_music_genre = UserMusicGenre.new
-    @user_music_genres = UserMusicGenre.all
+    @user_music_genres = UserMusicGenre.where(user_id: @user.id)
     @user_instrument = UserInstrument.new
-    @user_instruments = UserInstrument.all
+    @user_instruments = UserInstrument.where(user_id: @user.id)
+    @task = Task.new
+    @tasks = Task.where(user_id: @user.id)
   end
 
   def edit
