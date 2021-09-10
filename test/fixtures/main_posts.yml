@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  title: MyString
+  content: MyText
+  imege_id: MyString
+  practice_status: false
+  public_status: false
+
+two:
+  user_id: 1
+  title: MyString
+  content: MyText
+  imege_id: MyString
+  practice_status: false
+  public_status: false

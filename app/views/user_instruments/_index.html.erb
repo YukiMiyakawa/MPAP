@@ -1,0 +1,23 @@
+<a>得意楽器一覧</a>
+<% if user.id == current_user.id %>
+  <%= form_with url: user_user_instruments_path(user), model: user_instrument, local: true do |f| %>
+    <%= f.collection_select :instrument_id, Instrument.all, :id, :name, include_blank: "-- 選択してください --"  %>
+    <%= f.submit "追加", class: "btn btn-outline-dark ml-3" %>
+  <% end %>
+<% end %>
+
+<table>
+  <thead>
+    <tr><th>得意楽器名</th><th></th></tr>
+  </thead>
+  <tbody>
+    <% user_instruments.each do |user_instrument| %>
+    <tr>
+      <td><%= user_instrument.instrument.name %></td>
+      <% if user.id == current_user.id %>
+      <td><%= link_to '削除', user_user_instrument_path(user, user_instrument), method: :delete %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

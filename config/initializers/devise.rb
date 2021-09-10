@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '664e0f1f5ec13e22f03cae20c817e813c1bf5949e268385196ff2bf5187e90b011d273aac02d2c5e89bd60bd768ca7ff21e66f498a61cc25e1c019802581b781'
+  # config.secret_key = '376a3b2ef39d82dbabfdf772b1ffaf643421ebea7ed9da19cf73061ebed6913e61b8f07403648a86913ea2b608e914eb2c6b4d375d90ae87bbd47a5d9a85738c'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -46,7 +46,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [:name]
+  # config.authentication_keys = [:name]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '9ba4406e91b519bebbc87c3702157b1412c8393800a0b2386b541219d7701b1e37cc290e40c95a2e53c4502dab24346636623632bf033b06a7661f44fe3e63ab'
+  # config.pepper = '6aa100dc31dabab259c2eea81823e4fbd237bd7ff65abb75f0cccfb64ccbbf62e19279a8d08f1a7239371cf59f540f1acf5fc7d4b7824b7a1f0ced95907a0a73'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -252,7 +252,7 @@ Devise.setup do |config|
 
   # Set this configuration to false if you want /users/sign_out to sign out
   # only the current scope. By default, Devise signs out all scopes.
-  # config.sign_out_all_scopes = true
+  config.sign_out_all_scopes = false
 
   # ==> Navigation configuration
   # Lists the formats that should be treated as navigational. Formats like
