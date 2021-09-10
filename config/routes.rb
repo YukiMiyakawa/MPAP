@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :sub_posts, only: [:create, :destroy, :edit, :update]
     resources :comments, only: [:create, :destroy, :edit, :update]
     resource :favorites, only: [:create, :destroy]
+    resource :book_marks, only: [:create, :destroy]
   end
 
   #管理者ルーティング

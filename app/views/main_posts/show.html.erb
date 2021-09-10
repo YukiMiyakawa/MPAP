@@ -10,15 +10,22 @@
 <div class="container">
 <!--メイン記事-->
   <div class="bg-secondary">
-
+    <!--メイン記事内容-->
     <h2><%= @main_post.title %></h2>
     <div><%= attachment_image_tag @main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
     <div><%= @main_post.content %></div>
 
+    <!--いいね-->
     <div id="main_post_<%= @main_post.id %>" >
       <%= render "favorites/favorite-btn", main_post: @main_post %>
     </div>
 
+    <!--ブックマーク-->
+    <div id="book_mark_<%= @main_post.id %>" >
+      <%= render "book_marks/book_mark-btn", main_post: @main_post %>
+    </div>
+
+    <!--メイン記事編集-->
     <% if @main_post.user_id == current_user.id %>
       <%= link_to '編集', edit_main_post_path(@main_post), class: "text-light" %>
       <%= link_to '削除', main_post_path(@main_post), method: :delete, class: "text-light" %>
