@@ -4,7 +4,10 @@
   <div class="row">
     <div class="col">
       <!--ユーザー情報-->
-      <%= @user.name %>
+      <%= attachment_image_tag @user, :image, format: "jpeg", fallback: "no_user_image.jpg", size: "200x150" %>
+      <p>ユーザー名</p><%= @user.name %>
+      <p>紹介文</p><%= @user.introduction %>
+      <p>目標練習時間min/day</p><%= @user.target_time %>
 
       <% if @user.id == current_user.id %>
       <p><%= link_to '編集', edit_user_path(@user) %></p>
