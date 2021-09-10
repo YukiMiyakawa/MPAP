@@ -1,0 +1,38 @@
+<div class="container">
+
+  <div class="bg-secondary">
+    <div class="col-8">
+      <%= form_with url: admins_main_post_path(@main_post), model: @main_post, local: true do |f| %>
+      <span>記事公開ステータス：</span>
+      <%= f.radio_button :public_status, false ,class:"ml-3" %>
+      <%= f.label :public_status, '公開中', value: false %>
+      <%= f.radio_button :public_status, true %>
+      <%= f.label :public_status, '公開停止中', value: true %>
+    　<%= f.submit "変更を保存", class: "btn btn-outline-dark" %>
+      <% end %>
+    </div>
+    <h2><%= @main_post.title %></h2>
+    <div><%= attachment_image_tag @main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
+    <div><%= @main_post.content %></div>
+
+    <div><%= @main_post.favorites.count %></div>
+
+    <div><%= link_to '削除', admins_main_post_path(@main_post), method: :delete, class: "text-light" %></div>
+
+  <div class="bg-secondary">
+    <% @sub_posts.each do |sub_post| %>
+      <h2><%= sub_post.title %></h2>
+      <div><%= attachment_image_tag sub_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
+      <div><%= sub_post.content %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <h5>コメント</h5>
+    <% @comments.each do |comment| %>
+      <div><%= comment.user.name %></div>
+      <div><%= comment.content %></div>
+      <%= link_to '削除', admins_main_post_comment_path(@main_post, comment), method: :delete, class: "text-dark" %>
+    <% end %>
+  </div>
+</div>

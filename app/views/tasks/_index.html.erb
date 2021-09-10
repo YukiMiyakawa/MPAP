@@ -1,0 +1,23 @@
+<a>練習項目一覧</a>
+<% if user.id == current_user.id %>
+  <%= form_with url: user_tasks_path(user), model: task, local: true do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit "追加", class: "btn btn-outline-dark ml-3" %>
+  <% end %>
+<% end %>
+
+<table>
+  <thead>
+    <tr><th>練習項目</th><th></th></tr>
+  </thead>
+  <tbody>
+    <% tasks.each do |task| %>
+    <tr>
+      <td><%= task.name %></td>
+      <% if user.id == current_user.id %>
+      <td><%= link_to '削除', user_task_path(user, task), method: :delete %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

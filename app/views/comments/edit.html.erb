@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      
+    <%= form_with model:[@main_post, @comment], local:true do |f| %>
+    <%= f.label :Content %>
+    <%= f.text_area :content %>
+    <%= f.submit class: 'btn btn-secondary' %>
+    <% end %>
+      
+    </div>
+  </div>
+</div>

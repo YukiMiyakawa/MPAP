@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Edit</h1>
+      <%= form_with model:@user, local:true do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.label :introduction %>
+        <%= f.text_area :introduction %>
+        <%= f.label :target_time %>
+        <%= f.text_area :target_time %>
+        <%= f.label :image %>
+        <%= f.attachment_field :image, class: "form-control-file user_image" %>
+      <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+</div>

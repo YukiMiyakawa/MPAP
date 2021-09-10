@@ -1,0 +1,11 @@
+<div class="container">
+  <%= form_with model:[@user, @tweet], local:true do |f| %>
+    <%= f.label :Tweet %>
+    <%= f.text_area :comment, class: "form-control name" %>
+
+    <%= f.label :'PracticeTime(min)' %>
+    <%= f.text_field :practice_time, class: "form-control introduction" %>
+
+    <%= f.submit class: 'btn btn-secondary' %>
+  <% end %>
+</div>
