@@ -18,7 +18,9 @@
           <%= user_instrument.instrument.name %><br>
         <% end %>
       </td>
-      <td></td>
+      <td>
+        <%= link_to "こちら", user_main_post_path(user) %>
+      </td>
     </tr>
   </tbody>
   <% end %>

@@ -45,6 +45,10 @@ class MainPostsController < ApplicationController
     redirect_to main_posts_path
   end
 
+  def user_main_post
+    @main_posts = MainPost.where(user_id: params[:id])
+  end
+
   private
 
   def main_post_params

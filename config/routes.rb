@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resource :book_marks, only: [:create, :destroy]
   end
+  
+  get 'user_main_post/:id' => 'main_posts#user_main_post', as: 'user_main_post'
 
   #管理者ルーティング
   namespace :admins do
