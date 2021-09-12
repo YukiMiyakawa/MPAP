@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+
+    <%= render "searches/search_form" %>
+
+    <% if @range =='1' %>
+
+      <% @main_posts.each do |main_post| %>
+  　　　<%= link_to main_post_path(main_post.id) do %>
+        <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
+        <%= main_post.title %>
+        <%= main_post.content %>
+        <% end %>
+      <% end %>
+
+    <% elsif @range == '2' %>
+
+    <% elsif @range == '3' %>
+
+      <%= render "relationships/index", users: @users %>
+
+    <% else %>
+
+     <% @main_posts.each do |main_post| %>
+  　　　<%= link_to main_post_path(main_post.id) do %>
+        <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
+        <%= main_post.title %>
+        <%= main_post.content %>
+        <% end %>
+      <% end %>
+
+    <% end %>
+
+  </div>
+</div>

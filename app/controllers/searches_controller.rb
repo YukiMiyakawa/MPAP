@@ -17,11 +17,29 @@ class SearchesController < ApplicationController
         @main_posts.where!("title NOT LIKE ?", "%#{keyword.delete_prefix('-')}%")
       end
 
+    elsif @range == '2'
+
+    elsif @range == '3'
+
+      keywords = params[:keyword].split(/[[:blank:]]+/).select(&:present?)
+      negative_keywords, positive_keywords =
+      keywords.partition {|keyword| keyword.start_with?("-") }
+
+      @users = User.all
+
+      positive_keywords.each do |keyword|
+        @users = @users.where("name LIKE ?", "%#{keyword}%")
+      end
+
+      negative_keywords.each do |keyword|
+        @users.where!("name NOT LIKE ?", "%#{keyword.delete_prefix('-')}%")
+      end
+
     else
       @main_posts = MainPost.all
     end
   end
-  
+
   def sort_result
   end
 
