@@ -3,12 +3,21 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @tweet = Tweet.new
     @tweets = Tweet.where(user_id: @user.id)
+    
+    # 合計練習時間
+    @today = Date.today
+    @today_min = @tweets.where(created_at: @today.all_day).sum(:practice_time)
+    @month_min = @tweets.where(created_at: @today.all_month).sum(:practice_time)
+    @sum_min = @tweets.sum(:practice_time)
+
     @user_music_genre = UserMusicGenre.new
     @user_music_genres = UserMusicGenre.where(user_id: @user.id)
     @user_instrument = UserInstrument.new
     @user_instruments = UserInstrument.where(user_id: @user.id)
     @task = Task.new
     @tasks = Task.where(user_id: @user.id)
+
+
   end
 
   def edit

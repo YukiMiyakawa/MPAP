@@ -36,6 +36,8 @@
     </div>
   </div>
 
+  <div><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
+
   <!--Tweet部分-->
   <div class="row">
     <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
