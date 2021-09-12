@@ -20,13 +20,14 @@
       <div><%= render "user_instruments/index", user: @user, user_instrument: @user_instrument, user_instruments: @user_instruments %></div>
 
 　　　<!--フォロー-->
-      <div id="following-count_<%= @user.id %>" ><%= link_to @user.followings.count, user_followings_path(@user) %></div>
-      <div id="follower-count_<%= @user.id %>" ><%= link_to @user.followers.count, user_followers_path(@user) %></div>
+      <div id="following-count_<%= @user.id %>" ><%= link_to "follow:#{@user.followings.count}", user_followings_path(@user) %></div>
+      <div id="follower-count_<%= @user.id %>" ><%= link_to "follower:#{@user.followers.count}", user_followers_path(@user) %></div>
       <% if @user.id != current_user.id %>
         <div id="follow-button_<%= @user.id %>" >
         <%= render "relationships/follow-btn", user: @user %>
         </div>
       <% end %>
+
 
       <!--タスク-->
       <div><%= render "tasks/index", user: @user, task: @task, tasks: @tasks %></div>

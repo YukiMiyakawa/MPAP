@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+
     @tweet = Tweet.new
     @tweets = Tweet.where(user_id: @user.id)
-    
-    # 合計練習時間
+
+    #合計練習時間
     @today = Date.today
     @today_min = @tweets.where(created_at: @today.all_day).sum(:practice_time)
     @month_min = @tweets.where(created_at: @today.all_month).sum(:practice_time)
