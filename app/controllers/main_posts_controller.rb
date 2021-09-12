@@ -33,7 +33,7 @@ class MainPostsController < ApplicationController
   def update
      @main_post = MainPost.find(params[:id])
     if  @main_post.update(main_post_params)
-      redirect_to request.referrer, notice: "You have updated book successfully."
+      redirect_to main_post_path(@main_post), notice: "You have updated book successfully."
     else
       render "edit"
     end
@@ -48,6 +48,6 @@ class MainPostsController < ApplicationController
   private
 
   def main_post_params
-    params.require(:main_post).permit(:title, :content, :image)
+    params.require(:main_post).permit(:title, :content, :image, :audio, :youtube_url)
   end
 end

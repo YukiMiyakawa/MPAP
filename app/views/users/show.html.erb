@@ -20,15 +20,14 @@
       <div><%= render "user_instruments/index", user: @user, user_instrument: @user_instrument, user_instruments: @user_instruments %></div>
 
 　　　<!--フォロー-->
-      <p>follows <%= link_to @user.followings.count, user_followings_path(@user) %></p>
-      <p>followers <%= link_to @user.followers.count, user_followers_path(@user) %></p>
+      <div id="following-count_<%= @user.id %>" ><%= link_to "follow:#{@user.followings.count}", user_followings_path(@user) %></div>
+      <div id="follower-count_<%= @user.id %>" ><%= link_to "follower:#{@user.followers.count}", user_followers_path(@user) %></div>
       <% if @user.id != current_user.id %>
-        <% if current_user.following?(@user) %>
-          <%= link_to "フォロー外す", user_relationships_path(@user), method: :delete, class: "btn btn-primary" %>
-        <% else %>
-          <%= link_to "フォローする", user_relationships_path(@user), method: :post, class: "btn btn-success" %>
-        <% end %>
+        <div id="follow-button_<%= @user.id %>" >
+        <%= render "relationships/follow-btn", user: @user %>
+        </div>
       <% end %>
+
 
       <!--タスク-->
       <div><%= render "tasks/index", user: @user, task: @task, tasks: @tasks %></div>
@@ -36,9 +35,14 @@
     </div>
   </div>
 
+  <!--合計練習時間-->
+  <div><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
+
   <!--Tweet部分-->
   <div class="row">
+    <% if @user.id == current_user.id %>
     <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
+    <% end %>
     <div><%= render "tweets/index", tweets: @tweets, user: @user %></div>
   </div>
 

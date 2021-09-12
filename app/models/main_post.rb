@@ -1,4 +1,5 @@
 class MainPost < ApplicationRecord
+  mount_uploader :audio, AudioUploader
   attachment :image
   belongs_to :user
   has_many :comments, dependent: :destroy
