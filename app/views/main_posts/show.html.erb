@@ -13,6 +13,7 @@
     <!--メイン記事内容-->
     <h2><%= @main_post.title %></h2>
     <div><%= attachment_image_tag @main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
+    <div><%= audio_tag @main_post.audio_was, :controls => true if @main_post.audio? %></div>
     <div><%= @main_post.content %></div>
 
     <!--いいね-->
