@@ -48,6 +48,6 @@ class MainPostsController < ApplicationController
   private
 
   def main_post_params
-    params.require(:main_post).permit(:title, :content, :image, :audio)
+    params.require(:main_post).permit(:title, :content, :image, :audio, :youtube_url)
   end
 end

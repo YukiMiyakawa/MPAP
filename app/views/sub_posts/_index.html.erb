@@ -1,7 +1,10 @@
 <% sub_posts.each do |sub_post| %>
 
   <h2><%= sub_post.title %></h2>
-  <div><%= attachment_image_tag sub_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
+  <% if @main_post.youtube_url.present? %>
+  <div><iframe width="560" height="315" src="https://www.youtube.com/embed/<%=sub_post.youtube_url[32..42]%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+  <% end %>
+  <div><%= attachment_image_tag sub_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "560x315" %></div>
   <div><%= audio_tag sub_post.audio_was, :controls => true if sub_post.audio? %></div>
   <div><%= sub_post.content %></div>
 
