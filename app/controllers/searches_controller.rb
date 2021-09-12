@@ -1,7 +1,7 @@
 class SearchesController < ApplicationController
   def search
     @range = params[:range]
-    # byebug
+
     if @range == '1'
       keywords = params[:keyword].split(/[[:blank:]]+/).select(&:present?)
       negative_keywords, positive_keywords =
@@ -20,6 +20,9 @@ class SearchesController < ApplicationController
     else
       @main_posts = MainPost.all
     end
+  end
+  
+  def sort_result
   end
 
 end

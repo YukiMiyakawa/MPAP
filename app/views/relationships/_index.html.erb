@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr class="table-active">
+      <th>会員名</th><th>得意ジャンル</th><th>使用楽器</th><th>投稿一覧</th>
+    </tr>
+  </thead>
+  <% users.each do |user| %>
+  <tbody>
+    <tr>
+      <td><%= link_to user.name, edit_admins_user_path(user) %></td>
+      <td>
+        <% user.user_music_genres.each do |user_music_genre| %>
+          <%= user_music_genre.music_genre.name %><br>
+        <% end %>
+      </td>
+      <td>
+        <% user.user_instruments.each do |user_instrument| %>
+          <%= user_instrument.instrument.name %><br>
+        <% end %>
+      </td>
+      <td></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>

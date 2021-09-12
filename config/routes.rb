@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
 
   get 'search' => 'searches#search', as: 'search'
+  # get 'sort_result' => 'searches#sort_result', as: 'sort_result'
   get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'
   patch ':id/withdraw/:name' => 'users#withdraw', as: 'withdraw_user'
   put 'withdraw/:name' => 'users#withdraw'
