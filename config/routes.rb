@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     resources :tasks, only: [:create, :destroy]
   end
 
+  get 'search' => 'searches#search', as: 'search'
+  get 'search_result' => 'searches#index', as: 'search_index'
   get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'
   patch ':id/withdraw/:name' => 'users#withdraw', as: 'withdraw_user'
   put 'withdraw/:name' => 'users#withdraw'

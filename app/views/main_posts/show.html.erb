@@ -37,16 +37,16 @@
 
   </div>
 <!--サブ記事-->
+  <!--サブ記事内容-->
+  <div class="bg-secondary">
+    <%= render "sub_posts/index", main_post: @main_post, sub_posts: @sub_posts %>
+  </div>
   <!--サブ記事投稿-->
   <div>
     <% if @main_post.user_id == current_user.id %>
     <h5>サブ記事投稿</h5>
     <%= render "sub_posts/form", main_post: @main_post, sub_post: @sub_post %>
     <% end %>
-  </div>
-  <!--サブ記事内容-->
-  <div class="bg-secondary">
-    <%= render "sub_posts/index", main_post: @main_post, sub_posts: @sub_posts %>
   </div>
 
 <!--コメント-->
