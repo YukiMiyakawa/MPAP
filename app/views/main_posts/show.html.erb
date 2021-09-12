@@ -34,40 +34,16 @@
 
   </div>
 <!--サブ記事-->
+  <!--サブ記事投稿-->
   <div>
-
     <% if @main_post.user_id == current_user.id %>
-      <h5>サブ記事投稿</h5>
-        <%= form_with model:[@main_post, @sub_post], local:true do |f| %>
-          <%= f.label :Title %>
-          <%= f.text_field :title, class: "form-control name" %>
-
-          <%= f.label :Content %>
-          <%= f.text_area :content, class: "form-control introduction" %>
-
-          <%= f.label :image %>
-          <%= f.attachment_field :image, class: "form-control-file user_image" %>
-
-          <%= f.submit class: 'btn btn-light' %>
-
-       <% end %>
+    <h5>サブ記事投稿</h5>
+    <%= render "sub_posts/form", main_post: @main_post, sub_post: @sub_post %>
     <% end %>
-
   </div>
-
+  <!--サブ記事内容-->
   <div class="bg-secondary">
-    <% @sub_posts.each do |sub_post| %>
-
-      <h2><%= sub_post.title %></h2>
-      <div><%= attachment_image_tag sub_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
-      <div><%= sub_post.content %></div>
-
-      <% if @main_post.user_id == current_user.id %>
-        <%= link_to '編集', edit_main_post_sub_post_path(@main_post, sub_post), class: "text-light" %>
-        <%= link_to '削除', main_post_sub_post_path(@main_post, sub_post), method: :delete, class: "text-light" %>
-      <% end %>
-
-    <% end %>
+    <%= render "sub_posts/index", main_post: @main_post, sub_posts: @sub_posts %>
   </div>
 
 <!--コメント-->

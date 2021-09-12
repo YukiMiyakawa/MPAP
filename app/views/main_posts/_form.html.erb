@@ -8,10 +8,8 @@
     <%= f.label :image %>
     <%= f.attachment_field :image, class: "form-control-file user_image" %>
 
-    <div class="field">
-      <%= f.label :audio %>
-      <%= f.file_field :audio %>
-    </div>
+    <%= f.label :audio %>
+    <%= f.file_field :audio, class: "form-control-file user_audio" %>
 
     <%= f.submit class: 'btn btn-secondary' %>
 

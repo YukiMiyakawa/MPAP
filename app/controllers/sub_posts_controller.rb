@@ -34,6 +34,6 @@ class SubPostsController < ApplicationController
   end
 
   def sub_post_params
-    params.require(:sub_post).permit(:title, :content, :image, :id)
+    params.require(:sub_post).permit(:title, :content, :image, :id, :audio)
   end
 end
