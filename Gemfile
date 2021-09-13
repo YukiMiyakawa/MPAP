@@ -70,7 +70,7 @@ gem 'font-awesome-sass', '~> 5.13'
 gem 'carrierwave'
 gem 'audiojs-rails'
 gem 'cloudinary'
-
+gem 'simple_calendar', '~> 2.0'
 
 # デプロイ用
 # gem 'dotenv-rails'

@@ -30,6 +30,6 @@ class TweetsController < ApplicationController
   end
 
   def tweet_params
-    params.require(:tweet).permit(:comment, :practice_time)
+    params.require(:tweet).permit(:comment, :practice_time, :start_time)
   end
 end

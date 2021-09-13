@@ -46,6 +46,16 @@
     <div><%= render "tweets/index", tweets: @tweets, user: @user %></div>
   </div>
 
+  <%= month_calendar events: @tweets do |date, tweets| %>
+    <%= date.day %>
+
+    <% tweets.each do |tweet| %>
+      <div>
+        <%= tweet.comment %>
+      </div>
+    <% end %>
+  <% end %>
+
   <!--退会-->
 　<% if @user.id == current_user.id %>
   <div><%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name) %></div>
