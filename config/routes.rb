@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
 
   get 'search' => 'searches#search', as: 'search'
-  # get 'sort_result' => 'searches#sort_result', as: 'sort_result'
+  get 'one_tag_search/:id' => 'searches#one_tag_search', as: 'one_tag_search'
   get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'
   patch ':id/withdraw/:name' => 'users#withdraw', as: 'withdraw_user'
   put 'withdraw/:name' => 'users#withdraw'
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resource :book_marks, only: [:create, :destroy]
   end
-  
+
   get 'user_main_post/:id' => 'main_posts#user_main_post', as: 'user_main_post'
 
   #管理者ルーティング

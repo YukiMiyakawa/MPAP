@@ -2,6 +2,7 @@ class SearchesController < ApplicationController
   def search
     @range = params[:range]
 
+    # 記事タイトルキーワード検索
     if @range == '1'
       keywords = params[:keyword].split(/[[:blank:]]+/).select(&:present?)
       negative_keywords, positive_keywords =
@@ -17,8 +18,10 @@ class SearchesController < ApplicationController
         @main_posts.where!("title NOT LIKE ?", "%#{keyword.delete_prefix('-')}%")
       end
 
+    # 記事複数タグ検索
     elsif @range == '2'
 
+    # ユーザー名検索
     elsif @range == '3'
 
       keywords = params[:keyword].split(/[[:blank:]]+/).select(&:present?)
@@ -35,6 +38,7 @@ class SearchesController < ApplicationController
         @users.where!("name NOT LIKE ?", "%#{keyword.delete_prefix('-')}%")
       end
 
+    # ユーザー音楽ジャンル & 使用楽器検索
     elsif @range == '4'
       @user_instruments = UserInstrument.where(instrument_id: params[:instrument_id])
       @user_music_genres = UserMusicGenre.where(music_genre_id: params[:music_genre_id])
@@ -43,14 +47,17 @@ class SearchesController < ApplicationController
       @music_genre_user_id = @user_music_genres.pluck(:user_id)
 
       @user_id = @instrument_user_id & @music_genre_user_id
-
       @users = User.find(@user_id)
     else
       @main_posts = MainPost.all
+      @users = User.all
     end
   end
 
-  def sort_result
+  def one_tag_search
+    @tag = Tag.find(params[:id])
+    @main_posts = @tag.main_posts
+    @tag_list= Tag.all
   end
 
 end
