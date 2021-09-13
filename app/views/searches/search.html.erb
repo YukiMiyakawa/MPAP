@@ -3,8 +3,6 @@
 
     <%= render "searches/search_form" %>
 
-
-
     <% if @range =='1' %>
 
       <% @main_posts.each do |main_post| %>
@@ -19,55 +17,13 @@
 
     <% elsif @range == '3' %>
 
-      <%= form_with url: search_path, method: :get, local: true do |f| %>
-        <%= f.hidden_field :range, :value => '4' %>
-        <%= f.collection_select :instrument_id, Instrument.all, :id, :name, include_blank: "-- 使用楽器 --"  %>
-        <%= f.collection_select :music_genre_id, MusicGenre.all, :id, :name, include_blank: "-- 得意ジャンル --"  %>
-        <%= f.submit "検索" %>
-      <% end %>
-
+      <%= render "searches/search_user" %>
       <%= render "relationships/index", users: @users %>
 
-    <% elsif @range == '4' %>
+    <% else @range == '4' %>
 
-      <table class="table">
-        <thead>
-          <tr class="table-active">
-            <th>会員名</th><th>得意ジャンル</th><th>使用楽器</th><th>投稿一覧</th>
-          </tr>
-        </thead>
-        <% @user_music_genres.each do |user_music_genre| %>
-        <% if user_music_genre.user_id == @user_instruments.user_id %>
-        <tbody>
-          <tr>
-            <td><%= link_to @user_music_genre.user.name, edit_admins_user_path(user_music_genre.user) %></td>
-            <td>
-              <% @user_music_genres.each do |user_music_genre| %>
-                <%= @user_music_genre.music_genre.name %><br>
-              <% end %>
-            </td>
-            <td>
-              <% @user_music_genre.user.user_instruments.each do |user_instrument| %>
-                <%= @user_instrument.instrument.name %><br>
-              <% end %>
-            </td>
-            <td>
-       
-            </td>
-          </tr>
-        </tbody>
-        <% end %>
-      </table>
-
-    <% else %>
-
-     <% @main_posts.each do |main_post| %>
-  　　　<%= link_to main_post_path(main_post.id) do %>
-        <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
-        <%= main_post.title %>
-        <%= main_post.content %>
-        <% end %>
-      <% end %>
+      <%= render "searches/search_user" %>
+      <%= render "relationships/index", users: @users %>
 
     <% end %>
 

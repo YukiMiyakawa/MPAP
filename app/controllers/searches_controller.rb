@@ -36,18 +36,15 @@ class SearchesController < ApplicationController
       end
 
     elsif @range == '4'
-      # byebug
       @user_instruments = UserInstrument.where(instrument_id: params[:instrument_id])
       @user_music_genres = UserMusicGenre.where(music_genre_id: params[:music_genre_id])
 
-　　# 　@users_genre = {}
-　　# 　@user_instruments.each do |instrument|
-　　# 　  @user_music_genres.each do |genre|
-　　# 　    if instrument.user_id == genre.user_id
-　　# 　      @users_genret = genre
-　　# 　    end
-　　# 　 end
+      @instrument_user_id = @user_instruments.pluck(:user_id)
+      @music_genre_user_id = @user_music_genres.pluck(:user_id)
 
+      @user_id = @instrument_user_id & @music_genre_user_id
+
+      @users = User.find(@user_id)
     else
       @main_posts = MainPost.all
     end

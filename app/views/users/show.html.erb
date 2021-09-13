@@ -28,36 +28,37 @@
         </div>
       <% end %>
 
-
       <!--タスク-->
       <div><%= render "tasks/index", user: @user, task: @task, tasks: @tasks %></div>
 
     </div>
+    <div class="col">
+
+      <!--合計練習時間-->
+      <div><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
+
+      <!--Tweet部分-->
+
+        <% if @user.id == current_user.id %>
+        <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
+        <% end %>
+        <div><%= render "tweets/index", tweets: @tweets, user: @user %></div>
+
+
+      <%= month_calendar events: @tweets do |date, tweets| %>
+        <%= date.day %>
+
+        <% tweets.each do |tweet| %>
+          <div>
+            <%= tweet.comment %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <!--退会-->
+    　<% if @user.id == current_user.id %>
+      <div><%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name) %></div>
+      <% end %>
+    </div>
   </div>
-
-  <!--合計練習時間-->
-  <div><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
-
-  <!--Tweet部分-->
-  <div class="row">
-    <% if @user.id == current_user.id %>
-    <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
-    <% end %>
-    <div><%= render "tweets/index", tweets: @tweets, user: @user %></div>
-  </div>
-
-  <%= month_calendar events: @tweets do |date, tweets| %>
-    <%= date.day %>
-
-    <% tweets.each do |tweet| %>
-      <div>
-        <%= tweet.comment %>
-      </div>
-    <% end %>
-  <% end %>
-
-  <!--退会-->
-　<% if @user.id == current_user.id %>
-  <div><%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name) %></div>
-  <% end %>
 </div>
