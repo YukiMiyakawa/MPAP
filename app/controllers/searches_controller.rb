@@ -35,6 +35,19 @@ class SearchesController < ApplicationController
         @users.where!("name NOT LIKE ?", "%#{keyword.delete_prefix('-')}%")
       end
 
+    elsif @range == '4'
+      # byebug
+      @user_instruments = UserInstrument.where(instrument_id: params[:instrument_id])
+      @user_music_genres = UserMusicGenre.where(music_genre_id: params[:music_genre_id])
+
+　　# 　@users_genre = {}
+　　# 　@user_instruments.each do |instrument|
+　　# 　  @user_music_genres.each do |genre|
+　　# 　    if instrument.user_id == genre.user_id
+　　# 　      @users_genret = genre
+　　# 　    end
+　　# 　 end
+
     else
       @main_posts = MainPost.all
     end
