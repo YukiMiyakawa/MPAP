@@ -5,8 +5,11 @@
 
     <!--タグリスト-->
     <% @tag_list.each do |list|%>
+    <% if list.post_tags.count != 0 %>
     <%=list.name %>
-    <%="(#{list.posts.count})" %><% end %>
+      <%="(#{list.post_tags.count})" %>
+    <% end %>
+    <% end %>
 
     <% @main_posts.each do |main_post| %>
       <div class="col">

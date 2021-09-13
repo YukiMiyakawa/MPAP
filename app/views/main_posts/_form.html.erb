@@ -15,7 +15,7 @@
     <%= f.file_field :audio, class: "form-control-file user_audio" %>
 
     <%= f.label "Tag (,で区切ると複数タグ登録できます)" %>
-    <%=f.text_field :tag_name ,class:"form-control book_body"%>
+    <%=f.text_field :tag_name ,value: tag_list, class:"form-control book_body"%>
 
     <%= f.submit class: 'btn btn-secondary' %>
 
