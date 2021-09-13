@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_12_121434) do
+ActiveRecord::Schema.define(version: 2021_09_13_062611) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -52,16 +52,6 @@ ActiveRecord::Schema.define(version: 2021_09_12_121434) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "main_post_tags", force: :cascade do |t|
-    t.integer "main_post_id"
-    t.integer "post_tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["main_post_id", "post_tag_id"], name: "index_main_post_tags_on_main_post_id_and_post_tag_id", unique: true
-    t.index ["main_post_id"], name: "index_main_post_tags_on_main_post_id"
-    t.index ["post_tag_id"], name: "index_main_post_tags_on_post_tag_id"
-  end
-
   create_table "main_posts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "title", null: false
@@ -82,7 +72,8 @@ ActiveRecord::Schema.define(version: 2021_09_12_121434) do
   end
 
   create_table "post_tags", force: :cascade do |t|
-    t.string "name", null: false
+    t.integer "main_post_id", null: false
+    t.integer "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -103,6 +94,12 @@ ActiveRecord::Schema.define(version: 2021_09_12_121434) do
     t.datetime "updated_at", null: false
     t.string "audio"
     t.string "youtube_url"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|

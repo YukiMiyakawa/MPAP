@@ -3,6 +3,11 @@
 
     <%= render "searches/search_form" %>
 
+    <!--タグリスト-->
+    <% @tag_list.each do |list|%>
+    <%=list.name %>
+    <%="(#{list.posts.count})" %><% end %>
+
     <% @main_posts.each do |main_post| %>
       <div class="col">
 
