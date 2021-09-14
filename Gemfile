@@ -71,6 +71,7 @@ gem 'carrierwave'
 gem 'audiojs-rails'
 gem 'cloudinary'
 gem 'simple_calendar', '~> 2.0'
+gem 'chartkick'
 
 # デプロイ用
 # gem 'dotenv-rails'

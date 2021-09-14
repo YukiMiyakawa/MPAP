@@ -36,6 +36,9 @@
 
       <!--合計練習時間-->
       <div><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
+      <%= line_chart @practice_sum_chart, empty: "No data" %>
+      <%= pie_chart @achievement_rate, donut: true, suffix: "%", min: 0, max: 100 , empty: "No data" %>
+
 
       <!--Tweet部分-->
 

@@ -4,13 +4,6 @@ class UsersController < ApplicationController
 
     @tweet = Tweet.new
     @tweets = Tweet.where(user_id: @user.id)
-
-    #合計練習時間
-    @today = Date.today
-    @today_min = @tweets.where(created_at: @today.all_day).sum(:practice_time)
-    @month_min = @tweets.where(created_at: @today.all_month).sum(:practice_time)
-    @sum_min = @tweets.sum(:practice_time)
-
     @user_music_genre = UserMusicGenre.new
     @user_music_genres = UserMusicGenre.where(user_id: @user.id)
     @user_instrument = UserInstrument.new
@@ -18,6 +11,31 @@ class UsersController < ApplicationController
     @task = Task.new
     @tasks = Task.where(user_id: @user.id)
 
+    #合計練習時間
+    @today = Date.today
+    @today_min = @tweets.where(created_at: @today.all_day).sum(:practice_time)
+    @week_min = @tweets.where(created_at: @today.all_week).sum(:practice_time)
+    @month_min = @tweets.where(created_at: @today.all_month).sum(:practice_time)
+    @sum_min = @tweets.sum(:practice_time)
+
+    # グラフ算出
+    # 週間練習時間"折れ線グラフ"
+    @practice_sum_chart = @user.microposts_period("week")
+    # 週間練習達成率
+    unless @user.target_time.nil?
+      week_target_time = @user.target_time*7
+      @target_time_rate = @week_min.to_i*100/week_target_time.to_i
+    end
+    if @target_time_rate.nil?
+      @achievement_rate = {}
+    elsif @target_time_rate > 100
+      @achievement_rate = {"達成率"=>@target_time_rate}
+    elsif @target_time_rate < 100
+      @un_target_time_rate = 100 - @target_time_rate
+      @achievement_rate = {"達成率"=>@target_time_rate, "未達成率"=>@un_target_time_rate}
+    else
+      @achievement_rate = {}
+    end
 
   end
 

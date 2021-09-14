@@ -37,6 +37,7 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
+  # 期間毎の練習時間算出
   def microposts_period(period)
     current = Time.current.beginning_of_day
     case period
@@ -53,10 +54,9 @@ class User < ApplicationRecord
     dates = {}
     (start_date.to_datetime...end_date.to_datetime).each do |date|
       tweets = self.tweets.where(created_at: date.beginning_of_day...date.end_of_day)
-      sum_times = tweets.sum(:time)
+      sum_times = tweets.sum(:practice_time)
       dates.store(date.to_date.to_s, sum_times)
     end
     return dates
   end
-
 end
