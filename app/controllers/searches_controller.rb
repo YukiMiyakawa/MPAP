@@ -20,6 +20,15 @@ class SearchesController < ApplicationController
 
     # 記事複数タグ検索
     elsif @range == '2'
+      # byebug
+      keywords = params[:keyword].split(/[[:blank:]]+/).select(&:present?)
+
+      @tags = Tag.where(name: keywords)
+      # @main_posts = MainPost.all
+      # byebug
+      # @tags.each do |tag|
+      #   @main_posts = @main_posts.where(id: tag.post_tag.main_post_id)
+      # end
 
     # ユーザー名検索
     elsif @range == '3'

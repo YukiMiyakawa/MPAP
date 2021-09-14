@@ -15,6 +15,15 @@
 
     <% elsif @range == '2' %>
 
+    <% @tags.each do |list|%>
+    <% if list.post_tags.count != 0 %>
+      <%= link_to one_tag_search_path(list.id) do %>
+        <%= list.post_tags.main_post_id %>
+          <%="(#{list.post_tags.count})" %>
+        <% end %>
+      <% end %>
+    <% end %>
+
     <% elsif @range == '3' %>
 
       <%= render "searches/search_user" %>

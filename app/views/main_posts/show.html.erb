@@ -14,7 +14,9 @@
     <h2><%= @main_post.title %></h2>
 
     <% @post_tags.each do |tag| %>
+    <%= link_to one_tag_search_path(tag.id) do %>
     <%=tag.name%><%="(#{tag.post_tags.count})" %><% end %>
+    <% end %>
 
     <% if @main_post.youtube_url.present? %>
     <div><iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@main_post.youtube_url[32..42]%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>

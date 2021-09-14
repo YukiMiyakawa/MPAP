@@ -36,4 +36,27 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+  def microposts_period(period)
+    current = Time.current.beginning_of_day
+    case period
+    when "week"
+      start_date = current.ago(6.days)
+    when "month"
+      start_date = current.ago(1.month - 1.day)
+    when "year"
+      start_date = current.ago(1.year - 1.day)
+    else
+      start_date = current.ago(6.days)
+    end
+    end_date = Time.current
+    dates = {}
+    (start_date.to_datetime...end_date.to_datetime).each do |date|
+      tweets = self.tweets.where(created_at: date.beginning_of_day...date.end_of_day)
+      sum_times = tweets.sum(:time)
+      dates.store(date.to_date.to_s, sum_times)
+    end
+    return dates
+  end
+
 end
