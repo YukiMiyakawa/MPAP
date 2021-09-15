@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'inquirys/index'
+  get 'inquirys/confirm'
+  get 'inquirys/thanks'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #deviseルーティング
   devise_for :users, controllers: {
@@ -41,6 +44,11 @@ Rails.application.routes.draw do
   end
 
   get 'user_main_post/:id' => 'main_posts#user_main_post', as: 'user_main_post'
+
+  # 問い合わせ
+  get   'inquirys'         => 'inquirys#index'     # 入力画面
+  post  'inquirys/confirm' => 'inquirys#confirm'   # 確認画面
+  post  'inquirys/thanks'  => 'inquirys#thanks'    # 送信完了画面
 
   #管理者ルーティング
   namespace :admins do
