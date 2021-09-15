@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   post  'inquirys/confirm' => 'inquirys#confirm'   # 確認画面
   post  'inquirys/thanks'  => 'inquirys#thanks'    # 送信完了画面
 
+  # DM機能
   resources :messages, only: [:create, :destroy]
   resources :rooms, only: [:create, :index, :show]
 
