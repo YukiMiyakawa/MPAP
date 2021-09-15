@@ -28,6 +28,18 @@
         </div>
       <% end %>
 
+      <!--DMroom作成-->
+      <% unless @user.id == current_user.id %>
+        <% if @is_room == true %>
+          <%= link_to 'メッセージ', room_path(@room_id), class: 'btn-sm btn-success' %>
+        <% else %>
+          <%= form_with url:rooms_path, model:@entry, local:true do |f| %>
+            <%= f.hidden_field :user_id, value: @user.id %>
+            <%= f.submit 'メッセージ', class: 'btn-sm btn-success' %>
+          <% end %>
+        <% end %>
+      <% end %>
+
       <!--タスク-->
       <div><%= render "tasks/index", user: @user, task: @task, tasks: @tasks %></div>
 
