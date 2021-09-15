@@ -1,6 +1,7 @@
 class SearchesController < ApplicationController
   def search
     @range = params[:range]
+    @tag_list= Tag.all
 
     # 記事タイトルキーワード検索
     if @range == '1'
@@ -21,20 +22,19 @@ class SearchesController < ApplicationController
 
     # 記事複数タグ検索
     elsif @range == '2'
-      # byebug
       keywords = params[:keyword].split(/[[:blank:]]+/).select(&:present?)
 
       @tags = Tag.where(name: keywords)
-　　　　　                          # 1)id列だけ取る     2)指定したタグを元にグルーピング　3)havingはグルーピングしたものに対して条件を書くときに使用する
-　　# 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 distinctは指定したタグをもとにグルーピングを紐解く
+                                    #1)id列だけ取る    2)指定したタグを元にグルーピング 3)havingはグルーピングしたものに対して条件を書くときに使用する
+                                                                                         #distinctは指定したタグをもとにグルーピングを紐解く
       @post_tags = PostTag.where(tag_id: @tags.pluck(:id)).group(:main_post_id).having("count(distinct tag_id)=?",@tags.size)
       @main_posts = MainPost.find(@post_tags.pluck(:main_post_id))
 
-      @tag_list= Tag.all
+      @keywords = params[:keyword]
 
     # ユーザー名検索
     elsif @range == '3'
-とく
+
       keywords = params[:keyword].split(/[[:blank:]]+/).select(&:present?)
       negative_keywords, positive_keywords =
       keywords.partition {|keyword| keyword.start_with?("-") }
@@ -80,7 +80,6 @@ class SearchesController < ApplicationController
   end
 
   def result_sort
-    @tag_list= Tag.all
     selection = params[:sort]
 
     keywords = params[:keyword].split(/[[:blank:]]+/).select(&:present?)
@@ -96,8 +95,22 @@ class SearchesController < ApplicationController
     negative_keywords.each do |keyword|
       @main_posts.where!("title NOT LIKE ?", "%#{keyword.delete_prefix('-')}%")
     end
-    @main_posts= @main_posts.post_sort(selection)
+    @main_posts = @main_posts.post_sort(selection)
     @keywords = params[:keyword]
+    @tag_list= Tag.all
+  end
+
+  def result_tag_sort
+    selection = params[:sort]
+    keywords = params[:keyword].split(/[[:blank:]]+/).select(&:present?)
+
+    @tags = Tag.where(name: keywords)
+
+    @post_tags = PostTag.where(tag_id: @tags.pluck(:id)).group(:main_post_id).having("count(distinct tag_id)=?",@tags.size)
+    @main_posts = MainPost.find(@post_tags.pluck(:main_post_id))
+    @main_posts = @main_posts.post_sort(selection)
+    @keywords = params[:keyword]
+    @tag_list= Tag.all
   end
 
 end

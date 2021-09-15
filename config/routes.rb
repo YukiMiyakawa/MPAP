@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   # ソート
   get 'index_sort' => 'searches#index_sort', as: 'index_sort'
   get 'result_sort' => 'searches#result_sort', as: 'result_sort'
+  get 'result_tag_sort' => 'searches#result_tag_sort', as: 'result_tag_sort'
 
   # 退会ルーティング
   get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'
