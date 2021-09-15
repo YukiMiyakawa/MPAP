@@ -12,14 +12,23 @@ class User < ApplicationRecord
 
   has_many :main_posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+
   has_many :favorites, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_posts, through: :favorites, source: :main_post
+
   has_many :tweets, dependent: :destroy
+
   has_many :user_music_genres, dependent: :destroy
   has_many :user_instruments, dependent: :destroy
+
   has_many :book_marks, dependent: :destroy
+
   has_many :tasks, dependent: :destroy
+
+  # DM機能
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   #フォロー機能
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy

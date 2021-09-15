@@ -29,9 +29,13 @@ Rails.application.routes.draw do
     resources :tasks, only: [:create, :destroy]
   end
 
+  # 検索
   get 'search' => 'searches#search', as: 'search'
   get 'one_tag_search/:id' => 'searches#one_tag_search', as: 'one_tag_search'
+  # ソート
   get 'index_sort' => 'searches#index_sort', as: 'index_sort'
+
+  # 退会ルーティング
   get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'
   patch ':id/withdraw/:name' => 'users#withdraw', as: 'withdraw_user'
   put 'withdraw/:name' => 'users#withdraw'
@@ -49,6 +53,10 @@ Rails.application.routes.draw do
   get   'inquirys'         => 'inquirys#index'     # 入力画面
   post  'inquirys/confirm' => 'inquirys#confirm'   # 確認画面
   post  'inquirys/thanks'  => 'inquirys#thanks'    # 送信完了画面
+
+  # DM機能
+  resources :messages, only: [:create, :destroy]
+  resources :rooms, only: [:create, :index, :show]
 
   #管理者ルーティング
   namespace :admins do
