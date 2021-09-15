@@ -28,7 +28,7 @@ UI Flows：[管理者側](https://drive.google.com/file/d/1ouzboJ5d7cX7FTNKQHVK4
 テーブル定義書は[こちら](https://docs.google.com/spreadsheets/d/1fmrbVQmbp1pQuAKB2mJj0oC2-kfgEpYzaZQKrBIGUFE/edit#gid=202497749)
 
 ## チャレンジ要素一覧
-機能一覧は[こちら](https://docs.google.com/spreadsheets/d/12GcL6g5aH2P9qOIKd3nTSvoFarDrhqtpWImeGhdQZT0/edit#gid=0)
+機能一覧は[こちら](https://docs.google.com/spreadsheets/d/1dGtsQnjotonoB_lfifJPDpjnfEe2Ja5592S9VArG5Qs/edit#gid=0)
 
 ## 開発環境
 - OS：Linux(CentOS)
