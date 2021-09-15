@@ -1,9 +1,30 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      
-      <%= render 'form', main_post: @main_post %>
-      
+
+      <%= form_with model: @main_post, local:true do |f| %>
+        <%= f.label :Title %>
+        <%= f.text_field :title, class: "form-control name" %>
+
+        <%= f.label :Content %>
+        <%= f.text_area :content, class: "form-control introduction" %>
+
+        <%= f.label :Youtube_Url %>
+        <%= f.text_field :youtube_url, class: "form-control youtube_url" %>
+
+        <%= f.label :image %>
+        <%= f.attachment_field :image, class: "form-control-file user_image" %>
+
+        <%= f.label :audio %>
+        <%= f.file_field :audio, class: "form-control-file user_audio" %>
+
+        <%= f.label "Tag (,で区切ると複数タグ登録できます)" %>
+        <%=f.text_field :tag_name, class:"form-control book_body"%>
+
+        <%= f.submit class: 'btn btn-secondary' %>
+
+     <% end %>
+
     </div>
   </div>
 </div>

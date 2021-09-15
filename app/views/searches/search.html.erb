@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+
+    <%= render "searches/search_form" %>
+
+    <% if @range =='1' %>
+
+      <% @main_posts.each do |main_post| %>
+  　　　<%= link_to main_post_path(main_post.id) do %>
+        <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
+        <%= main_post.title %>
+        <%= main_post.content %>
+        <% end %>
+      <% end %>
+
+    <% elsif @range == '2' %>
+
+    <% @tags.each do |list|%>
+    <% if list.post_tags.count != 0 %>
+      <%= link_to one_tag_search_path(list.id) do %>
+        <%= list.post_tags.main_post_id %>
+          <%="(#{list.post_tags.count})" %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% elsif @range == '3' %>
+
+      <%= render "searches/search_user" %>
+      <%= render "relationships/index", users: @users %>
+
+    <% else @range == '4' %>
+
+      <%= render "searches/search_user" %>
+      <%= render "relationships/index", users: @users %>
+
+    <% end %>
+
+  </div>
+</div>
