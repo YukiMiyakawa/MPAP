@@ -36,7 +36,7 @@ class MainPost < ApplicationRecord
   end
 
   # main_posts_indexソート機能
-  def self.sort(selection)
+  def self.post_sort(selection)
     case selection
     when 'new'
       return all.order(created_at: :DESC)
