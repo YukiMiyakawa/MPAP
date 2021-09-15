@@ -29,9 +29,13 @@ Rails.application.routes.draw do
     resources :tasks, only: [:create, :destroy]
   end
 
+  # 検索
   get 'search' => 'searches#search', as: 'search'
   get 'one_tag_search/:id' => 'searches#one_tag_search', as: 'one_tag_search'
+  # ソート
   get 'index_sort' => 'searches#index_sort', as: 'index_sort'
+
+  # 退会ルーティング
   get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'
   patch ':id/withdraw/:name' => 'users#withdraw', as: 'withdraw_user'
   put 'withdraw/:name' => 'users#withdraw'
