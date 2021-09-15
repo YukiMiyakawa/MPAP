@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :main_posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_posts, through: :favorites, source: :main_post
   has_many :tweets, dependent: :destroy
   has_many :user_music_genres, dependent: :destroy
   has_many :user_instruments, dependent: :destroy

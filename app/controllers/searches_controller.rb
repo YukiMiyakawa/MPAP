@@ -67,6 +67,14 @@ class SearchesController < ApplicationController
     @tag = Tag.find(params[:id])
     @main_posts = @tag.main_posts
     @tag_list= Tag.all
+    render template: "main_posts/index"
+  end
+
+  def index_sort
+    selection = params[:keyword]
+    @main_posts = MainPost.sort(selection)
+    @tag_list= Tag.all
+    render template: "main_posts/index"
   end
 
 end

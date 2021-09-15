@@ -19,9 +19,9 @@ class UsersController < ApplicationController
     @sum_min = @tweets.sum(:practice_time)
 
     # グラフ算出
-    # 週間練習時間"折れ線グラフ"
+    # 週間練習時間折れ線グラフ
     @practice_sum_chart = @user.microposts_period("week")
-    # 週間練習達成率
+    # 週間練習達成率円グラフ
     unless @user.target_time.nil?
       week_target_time = @user.target_time*7
       @target_time_rate = @week_min.to_i*100/week_target_time.to_i

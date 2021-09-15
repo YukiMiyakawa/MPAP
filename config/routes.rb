@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   get 'search' => 'searches#search', as: 'search'
   get 'one_tag_search/:id' => 'searches#one_tag_search', as: 'one_tag_search'
+  get 'index_sort' => 'searches#index_sort', as: 'index_sort'
   get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'
   patch ':id/withdraw/:name' => 'users#withdraw', as: 'withdraw_user'
   put 'withdraw/:name' => 'users#withdraw'

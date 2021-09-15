@@ -4,6 +4,7 @@ class MainPost < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
   has_many :sub_posts, dependent: :destroy
   has_many :book_marks, dependent: :destroy
 
@@ -31,6 +32,20 @@ class MainPost < ApplicationRecord
     new_tags.each do |new|
       new_request_tag = Tag.find_or_create_by(name: new)
       tags << new_request_tag
+    end
+  end
+
+  # main_posts_indexソート機能
+  def self.sort(selection)
+    case selection
+    when 'new'
+      return all.order(created_at: :DESC)
+    when 'old'
+      return all.order(created_at: :ASC)
+    when 'likes'
+      return includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+    when 'dislikes'
+      return includes(:favorited_users).sort {|a,b| a.favorited_users.size <=> b.favorited_users.size}
     end
   end
 end

@@ -1,6 +1,6 @@
 class MainPostsController < ApplicationController
   def index
-    @main_posts = MainPost.all
+    @main_posts = MainPost.all.order(created_at: :DESC)
     @tag_list= Tag.all
   end
 
@@ -26,7 +26,7 @@ class MainPostsController < ApplicationController
       @main_post.save_tag(tag_list)
       redirect_to main_post_path(@main_post), notice: "You have created book successfully."
     else
-      @main_posts = MainPost.all
+      @main_posts = MainPost.all.order(created_at: :DESC)
       render 'index'
     end
   end
