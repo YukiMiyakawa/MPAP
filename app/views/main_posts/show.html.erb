@@ -17,7 +17,6 @@
     <%= link_to one_tag_search_path(tag.id) do %>
     <%=tag.name%><%="(#{tag.post_tags.count})" %><% end %>
     <% end %>
-
     <% if @main_post.youtube_url.present? %>
     <div><iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@main_post.youtube_url[32..42]%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
     <% end %>
@@ -67,7 +66,6 @@
       <%= link_to '編集', edit_main_post_comment_path(@main_post, comment), class: "text-dark" %>
       <%= link_to '削除', main_post_comment_path(@main_post, comment), method: :delete, class: "text-dark" %>
     <% end %>
-
     <% end %>
   </div>
 

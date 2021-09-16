@@ -107,8 +107,12 @@ class SearchesController < ApplicationController
     @tags = Tag.where(name: keywords)
 
     @post_tags = PostTag.where(tag_id: @tags.pluck(:id)).group(:main_post_id).having("count(distinct tag_id)=?",@tags.size)
-    @main_posts = MainPost.find(@post_tags.pluck(:main_post_id))
+    # @main_posts = MainPost.find(@post_tags.pluck(:main_post_id))
+    # byebug
+    #<ActiveRecord::Relation SQLを発行してDBをつなげる？　複数レコードを返すような検索を行ったときに帰ってくるインスタンスがwhere
+    @main_posts = MainPost.where(id: @post_tags.pluck(:main_post_id))
     @main_posts = @main_posts.post_sort(selection)
+
     @keywords = params[:keyword]
     @tag_list= Tag.all
   end
