@@ -12,10 +12,11 @@ class UsersController < ApplicationController
     @tasks = Task.where(user_id: @user.id)
 
     #合計練習時間
-    @today = Date.today
-    @today_min = @tweets.where(created_at: @today.all_day).sum(:practice_time)
-    @week_min = @tweets.where(created_at: @today.all_week).sum(:practice_time)
-    @month_min = @tweets.where(created_at: @today.all_month).sum(:practice_time)
+    today = Date.today
+    now = Time.current
+    @today_min = @tweets.where(created_at: now.all_day).sum(:practice_time)
+    @week_min = @tweets.where(created_at: today.all_week).sum(:practice_time)
+    @month_min = @tweets.where(created_at: today.all_month).sum(:practice_time)
     @sum_min = @tweets.sum(:practice_time)
 
     # グラフ算出
