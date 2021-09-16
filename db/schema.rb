@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_055050) do
+ActiveRecord::Schema.define(version: 2021_09_16_231112) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_055050) do
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "message_id"
     t.index ["comment_id"], name: "index_notifications_on_comment_id"
     t.index ["main_post_id"], name: "index_notifications_on_main_post_id"
     t.index ["room_id"], name: "index_notifications_on_room_id"
