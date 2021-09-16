@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     resource :book_marks, only: [:create, :destroy]
   end
 
+  # 会員の投稿記事一覧
   get 'user_main_post/:id' => 'main_posts#user_main_post', as: 'user_main_post'
 
   # 問い合わせ
@@ -59,6 +60,9 @@ Rails.application.routes.draw do
   # DM機能
   resources :messages, only: [:create, :destroy]
   resources :rooms, only: [:create, :index, :show]
+
+  # 通知一覧
+  resources :notifications, only: :index
 
   #管理者ルーティング
   namespace :admins do

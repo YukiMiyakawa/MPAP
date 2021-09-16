@@ -4,7 +4,11 @@ class CommentsController < ApplicationController
     @comment = Comment.new(main_post_params)
     @comment.user_id = current_user.id
     @comment.main_post_id = main_post.id
+    @main_post = @comment.main_post
     if  @comment.save
+      # コメント通知
+      @main_post.create_notification_comment!(current_user, @comment.id)
+      
       redirect_to main_post_path(params[:main_post_id]), notice: "You have created book successfully."
     else
       @comments = Comment.all
