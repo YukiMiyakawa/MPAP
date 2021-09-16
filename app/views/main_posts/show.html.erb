@@ -25,16 +25,10 @@
     <div><%= @main_post.content %></div>
 
     <!--いいね-->
-      <% if @main_post.favorited_by?(current_user) %>
-        <p>
-          <%= link_to @main_post.favorites.count, main_post_favorites_path(@main_post), method: :delete, class: "fas fa-heart heart_red" %>
-        </p>
-        <% else %>
-        <p>
-          <%= link_to @main_post.favorites.count, main_post_favorites_path(@main_post), method: :post, class: "fas fa-heart heart_white" %>
-        </p>
-      <% end %>
-      
+    <div id="main_post_<%= @main_post.id %>" >
+      <%= render "favorites/favorite-btn", main_post: @main_post %>
+    </div>
+
     <!--ブックマーク-->
     <div id="book_mark_<%= @main_post.id %>" >
       <%= render "book_marks/book_mark-btn", main_post: @main_post %>

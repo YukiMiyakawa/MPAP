@@ -40,7 +40,7 @@ class MainPost < ApplicationRecord
     end
   end
 
-  # main_posts_indexソート機能
+  # main_posts_indexソート機能(クラス)
   def self.post_sort(selection)
     case selection
     when 'new'
