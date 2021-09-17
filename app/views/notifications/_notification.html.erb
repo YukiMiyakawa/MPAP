@@ -27,6 +27,8 @@
       <% end %>
     <% end %>
     <span>にコメントしました:<%= Comment.find_by(id: notification.comment_id)&.content %></span>
+  <% when 'message' then %>
+    <span>あなたに<strong><%= link_to 'チャット', room_path(notification.room_id) %></strong>を送りました : <%= Message.find_by(id: notification.message_id)&.body %></span>
   <% end %>
 
 </div>

@@ -5,6 +5,8 @@ class RoomsController < ApplicationController
     @current_entry = Entry.create(user_id: current_user.id, room_id: room.id)
     # Entryモデルにメッセージ相手のレコードを作成
     @another_entry = Entry.create(user_id: params[:entry][:user_id], room_id: room.id)
+
+    # @visited_id = params[:entry][:user_id]
     redirect_to room_path(room)
   end
 
