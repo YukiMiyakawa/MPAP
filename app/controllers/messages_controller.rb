@@ -4,8 +4,8 @@ class MessagesController < ApplicationController
     message.user_id = current_user.id
     # チャット通知
     # @visited_id = Message.select(:user_id).where(room_id: message.room_id).where.not(user_id: current_user.id).distinct
-    @visited_id = Message.where(room_id: message.room_id).where.not(user_id: current_user.id)
-    byebug
+    @visited_id = params[:message][:visited_id]
+    # byebug
     @room_id = message.room
 
     if message.save
@@ -13,14 +13,14 @@ class MessagesController < ApplicationController
       notification = current_user.active_notifications.new(
         room_id: @room_id.id,
         message_id: message.id,
-        visited_id: @visited_id['user_id'],
+        visited_id: @visited_id,
         action: 'message'
       )
       # 自分の投稿に対するコメントの場合は、通知済みとする
       if notification.visitor_id == notification.visited_id
         notification.checked = true
       end
-      byebug
+      # byebug
       notification.save if notification.valid?
 
       redirect_to room_path(message.room)
