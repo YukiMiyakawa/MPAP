@@ -56,27 +56,28 @@
 
           <% @main_posts.each do |main_post| %>
             <div class="col">
-            <div class="shadow">
-        　　  　<%= link_to main_post_path(main_post.id) do %>
-                <div class="ml-4 mr-4 text-dark"><strong><%= main_post.title.truncate(26, omission: '...') %></strong></div>
-                <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150", class:"ml-4" %><br>
-                <div class="ml-4 mr-4 text-dark">
-                  <%= main_post.content.truncate(26, omission: '...') %><br>
-                  <p class="text-danger">♡<%= main_post.favorites.count %><br></p>
-                  <%= main_post.created_at.strftime("%Y-%m-%d") %>
+              <div id="post_index" class="shadow">
+
+          　　  　<%= link_to main_post_path(main_post.id) do %>
+                  <div class="ml-4 mr-4 text-dark"><strong><%= main_post.title.truncate(26, omission: '...') %></strong></div>
+                  <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150", class:"ml-4" %><br>
+                  <div class="ml-4 mr-4 text-dark">
+                    <%= main_post.content.truncate(26, omission: '...') %><br>
+                    <p class="text-danger">♡<%= main_post.favorites.count %><br></p>
+                    <%= main_post.created_at.strftime("%Y-%m-%d") %>
+                  </div>
+
+                <% end %>
+
+                <div class="ml-4 mr-4">
+                <% main_post.tags.first(1).each do |tag| %>
+                  <%= link_to one_tag_search_path(tag.id), class:"btn btn-outline-secondary" do %>
+                  <%= tag.name %>
+                  <% end %>
+                <% end %>
                 </div>
 
-              <% end %>
-
-              <div class="ml-1 mb-1">
-              <% main_post.tags.first(3).each do |tag| %>
-                <%= link_to one_tag_search_path(tag.id), class:"btn btn-outline-secondary" do %>
-                <%= tag.name %>
-                <% end %>
-              <% end %>
               </div>
-
-            </div>
             </div>
           <% end %>
 
