@@ -5,9 +5,9 @@ class UsersController < ApplicationController
     @tweet = Tweet.new
     @tweets = Tweet.where(user_id: @user.id).order(created_at: :desc).page(params[:page]).per(10)
     @user_music_genre = UserMusicGenre.new
-    @user_music_genres = UserMusicGenre.where(user_id: @user.id)
+    @user_music_genres = UserMusicGenre.where(user_id: @user.id).page(params[:page]).per(5)
     @user_instrument = UserInstrument.new
-    @user_instruments = UserInstrument.where(user_id: @user.id)
+    @user_instruments = UserInstrument.where(user_id: @user.id).page(params[:page]).per(5)
     @task = Task.new
     @tasks = Task.where(user_id: @user.id)
 

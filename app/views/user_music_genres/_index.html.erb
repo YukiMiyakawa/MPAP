@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div>
   <table class="table table-dark">
     <thead>
       <tr class="table-active"><th class="text-center">得意音楽ジャンル</th><th></th></tr>
@@ -18,12 +18,15 @@
       <% end %>
     </tbody>
   </table>
+  <div class="row justify-content-center">
+  <%= paginate user_music_genres %>
+  </div>
 </div>
 
 <div class="row justify-content-center pb-3">
   <% if user.id == current_user.id %>
     <%= form_with url: user_user_music_genres_path(user), model: user_music_genre, local: true do |f| %>
-      <%= f.collection_select :music_genre_id, MusicGenre.all, :id, :name, include_blank: "-- 選択してください --"  %>
+      <%= f.collection_select :music_genre_id, MusicGenre.all, :id, :name, include_blank: "-- ジャンルを選択してください --"  %>
       <%= f.submit "追加", class: "btn btn-outline-secondary" %>
     <% end %>
   <% end %>

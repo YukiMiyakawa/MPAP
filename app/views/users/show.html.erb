@@ -10,13 +10,13 @@
     <div class ="col-md-4">
 
       <!--得意音楽ジャンル-->
-      <div><%= render "user_music_genres/index", user: @user, user_music_genre: @user_music_genre, user_music_genres: @user_music_genres %></div>
+      <div class="shadow-sm bg-light p-3 mb-3"><%= render "user_music_genres/index", user: @user, user_music_genre: @user_music_genre, user_music_genres: @user_music_genres %></div>
 
     </div>
     <div class ="col-md-4">
 
       <!--得意楽器-->
-      <div><%= render "user_instruments/index", user: @user, user_instrument: @user_instrument, user_instruments: @user_instruments %></div>
+      <div class="shadow-sm bg-light p-3 mb-3"><%= render "user_instruments/index", user: @user, user_instrument: @user_instrument, user_instruments: @user_instruments %></div>
 
     </div>
   </div>
@@ -25,11 +25,11 @@
     <div class="col-md-4">
 
       <!--タスク-->
-      <div><%= render "tasks/index", user: @user, task: @task, tasks: @tasks %></div>
+      <div class="shadow-sm bg-light p-3 mb-3"><%= render "tasks/index", user: @user, task: @task, tasks: @tasks %></div>
 
       <!--Tweet部分-->
       <% if @user.id == current_user.id %>
-        <div class="border border-secondary-top-bottom rounded p-2">
+        <div class="border border-secondary-top-bottom rounded p-4">
           <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
         </div>
       <% end %>
@@ -45,21 +45,21 @@
     <div class="col-md-8">
 
       <!--合計練習時間-->
-      <div><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
+      <div class="shadow-sm bg-light p-3 mb-3"><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
 
       <div class="row">
-        <div class="col-md-6 text-center">
+        <div class="col-md-6 text-center shadow-sm bg-light p-3 mb-3">
           <a><strong>週間練習時間</strong></a>
           <%= area_chart @practice_sum_chart, empty: "目標練習時間を設定し練習時間をつぶやいて下さい", colors: ["#993333"] %>
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-md-6 text-center shadow-sm bg-light p-3 mb-3">
           <a><strong>週間練習時間達成度</strong></a>
           <%= pie_chart @achievement_rate, donut: true, suffix: "%", min: 0, max: 100, colors: ["#993333", "#808080"], empty: "目標練習時間を設定し練習時間をつぶやいて下さい" %>
         </div>
       </div>
 
       <!--カレンダー-->
-      <div class="text-center pt-3">
+      <div class="text-center shadow-sm bg-light p-3 mb-3">
       <a><strong>練習記録カレンダー</strong></a>
       <%= month_calendar events: @tweets do |date, tweets| %>
         <%= date.day %>
