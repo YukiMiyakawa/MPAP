@@ -4,12 +4,32 @@
     <div class="pr-4">
     <%= render "searches/search_form" %>
     </div>
-    <div>
-    <%= form_with url: index_sort_path, method: :get, local: true do |f| %>
-      <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
-      <%= f.submit "ソート" %>
+
+    <% if @range == 1 %>
+      <div>
+        <%= form_with url: result_sort_path, method: :get, local: true do |f| %>
+          <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
+          <%= hidden_field_tag :keyword, @keywords %>
+          <%= f.submit "ソート" %>
+        <% end %>
+      </div>
+    <% elsif @range == 2 %>
+      <div>
+        <%= form_with url: result_tag_sort_path, method: :get, local: true do |f| %>
+          <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
+          <%= hidden_field_tag :keyword, @keywords %>
+          <%= f.submit "ソート" %>
+        <% end %>
+      </div>
+    <% else %>
+      <div>
+      <%= form_with url: index_sort_path, method: :get, local: true do |f| %>
+        <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
+        <%= f.submit "ソート" %>
+      <% end %>
+      </div>
     <% end %>
-    </div>
+
 
   </div>
   <div class="row ml-2">
@@ -40,14 +60,21 @@
         　　  　<%= link_to main_post_path(main_post.id) do %>
                 <div class="ml-4 mr-4 text-dark"><strong><%= main_post.title.truncate(26, omission: '...') %></strong></div>
                 <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150", class:"ml-4" %><br>
-                <div class="ml-4 mr-4 text-dark"><%= main_post.content.truncate(26, omission: '...') %></div>
+                <div class="ml-4 mr-4 text-dark">
+                  <%= main_post.content.truncate(26, omission: '...') %><br>
+                  <p class="text-danger">♡<%= main_post.favorites.count %><br></p>
+                  <%= main_post.created_at.strftime("%Y-%m-%d") %>
+                </div>
+
               <% end %>
 
+              <div class="ml-1 mb-1">
               <% main_post.tags.first(3).each do |tag| %>
                 <%= link_to one_tag_search_path(tag.id), class:"btn btn-outline-secondary" do %>
                 <%= tag.name %>
                 <% end %>
               <% end %>
+              </div>
 
             </div>
             </div>
