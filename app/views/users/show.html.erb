@@ -1,70 +1,107 @@
-<div class="container">
-  <h1>Show</h1>
-
+<div class="container pt-3">
   <div class="row">
-    <div class="col">
-      <!--ユーザー情報-->
-      <%= attachment_image_tag @user, :image, format: "jpeg", fallback: "no_user_image.jpg", size: "200x150" %>
-      <p>ユーザー名</p><%= @user.name %>
-      <p>紹介文</p><%= @user.introduction %>
-      <p>目標練習時間min/day</p><%= @user.target_time %>
+    <div class ="col-md-4">
 
-      <% if @user.id == current_user.id %>
-      <p><%= link_to '編集', edit_user_path(@user) %></p>
-      <% end %>
+      <!--ユーザー情報-->
+      <div class="shadow p-3 mb-3">
+        <%= attachment_image_tag @user, :image, format: "jpeg", fallback: "no_user_image.jpg", size: "200x150", class:"d-block mx-auto" %>
+        <H5 class="text-center"><strong><%= @user.name %></strong></H5>
+        <p class="text-center border-top"><strong>introduction</strong></p>
+        <p class="text-center"><%= @user.introduction %></p>
+
+    　　  <!--フォロー-->
+    　　  <div class=" border-top">
+          <div class="row justify-content-center mt-2 mb-2">
+            <div id="following-count_<%= @user.id %>"><span><strong>follow: </strong><%= link_to "#{@user.followings.count}", user_followings_path(@user) %>  </span></div>
+            <div id="follower-count_<%= @user.id %>", class="ml-3"><span><strong>  follower: </strong><%= link_to "#{@user.followers.count}", user_followers_path(@user) %></span></div>
+            <% if @user.id != current_user.id %>
+              <div id="follow-button_<%= @user.id %>", class="ml-3" >
+              <%= render "relationships/follow-btn", user: @user %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <p class="text-center border-top mt-2 mb-2">目標練習時間 <%= @user.target_time %> 分/日</p>
+
+        <!--チャットルーム作成-->
+        <div class="border-top">
+          <div class="row justify-content-center">
+          <% unless @user.id == current_user.id %>
+            <% if @is_room == true %>
+              <%= link_to 'メッセージを送る', room_path(@room_id), class: 'btn-sm btn-outline-secondary mt-2' %>
+            <% else %>
+              <%= form_with url:rooms_path, model:@entry, local:true do |f| %>
+                <%= f.hidden_field :user_id, value: @user.id %>
+                <%= f.submit 'メッセージを送る', class: 'btn-sm btn-outline-secondary' %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <% if @user.id == current_user.id %><%= link_to 'チャットルーム一覧', rooms_path, class: 'text-dark mt-2' %><% end %>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <% if @user.id == current_user.id %>
+          <%= link_to '編集', edit_user_path(@user),class:"btn btn-outline-secondary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class ="col-md-4">
 
       <!--得意音楽ジャンル-->
       <div><%= render "user_music_genres/index", user: @user, user_music_genre: @user_music_genre, user_music_genres: @user_music_genres %></div>
 
+    </div>
+    <div class ="col-md-4">
+
       <!--得意楽器-->
       <div><%= render "user_instruments/index", user: @user, user_instrument: @user_instrument, user_instruments: @user_instruments %></div>
 
-　　　<!--フォロー-->
-      <div id="following-count_<%= @user.id %>" ><%= link_to "follow:#{@user.followings.count}", user_followings_path(@user) %></div>
-      <div id="follower-count_<%= @user.id %>" ><%= link_to "follower:#{@user.followers.count}", user_followers_path(@user) %></div>
-      <% if @user.id != current_user.id %>
-        <div id="follow-button_<%= @user.id %>" >
-        <%= render "relationships/follow-btn", user: @user %>
-        </div>
-      <% end %>
+    </div>
+  </div>
 
-      <!--通知-->
-      <%= link_to "通知一覧", notifications_path %>
-
-      <!--DMroom作成-->
-      <% unless @user.id == current_user.id %>
-        <% if @is_room == true %>
-          <%= link_to 'メッセージ', room_path(@room_id), class: 'btn-sm btn-success' %>
-        <% else %>
-          <%= form_with url:rooms_path, model:@entry, local:true do |f| %>
-            <%= f.hidden_field :user_id, value: @user.id %>
-            <%= f.submit 'メッセージ', class: 'btn-sm btn-success' %>
-          <% end %>
-        <% end %>
-      <% end %>
-
-      <% if @user.id == current_user.id %><%= link_to 'チャットルーム一覧', rooms_path %><% end %>
+  <div class="row pt-3">
+    <div class="col-md-4">
 
       <!--タスク-->
       <div><%= render "tasks/index", user: @user, task: @task, tasks: @tasks %></div>
 
+      <!--Tweet部分-->
+      <% if @user.id == current_user.id %>
+        <div class="border border-secondary-top-bottom rounded p-2">
+          <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
+        </div>
+      <% end %>
+      <div class="pt-3">
+        <div class="overflow-auto" style="height:600px;">
+          <%= render "tweets/index", tweets: @tweets, user: @user %>
+        </div>
+      </div>
+
+
     </div>
-    <div class="col">
+
+    <div class="col-md-8">
 
       <!--合計練習時間-->
       <div><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
-      <%= line_chart @practice_sum_chart, empty: "No data" %>
-      <%= pie_chart @achievement_rate, donut: true, suffix: "%", min: 0, max: 100 , empty: "No data" %>
 
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <a><strong>週間練習時間</strong></a>
+          <%= line_chart @practice_sum_chart, empty: "目標練習時間を設定し練習時間をつぶやいて下さい" %>
+        </div>
+        <div class="col-md-6 text-center">
+          <a><strong>週間練習時間達成度</strong></a>
+          <%= pie_chart @achievement_rate, donut: true, suffix: "%", min: 0, max: 100 , empty: "目標練習時間を設定し練習時間をつぶやいて下さい" %>
+        </div>
+      </div>
 
-      <!--Tweet部分-->
-
-        <% if @user.id == current_user.id %>
-        <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
-        <% end %>
-        <div><%= render "tweets/index", tweets: @tweets, user: @user %></div>
-
-
+      <!--カレンダー-->
       <%= month_calendar events: @tweets do |date, tweets| %>
         <%= date.day %>
 
@@ -75,10 +112,13 @@
         <% end %>
       <% end %>
 
-      <!--退会-->
-    　<% if @user.id == current_user.id %>
-      <div><%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name) %></div>
-      <% end %>
     </div>
+  </div>
+
+  <!--退会-->
+  <div class="row justify-content-center mt-2 mb-2">
+　<% if @user.id == current_user.id %>
+  <%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name),class:"btn btn-outline-secondary" %>
+  <% end %>
   </div>
 </div>

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   # 検索
   get 'search' => 'searches#search', as: 'search'
   get 'one_tag_search/:id' => 'searches#one_tag_search', as: 'one_tag_search'
+  
   # ソート
   get 'index_sort' => 'searches#index_sort', as: 'index_sort'
   get 'result_sort' => 'searches#result_sort', as: 'result_sort'

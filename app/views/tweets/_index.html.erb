@@ -1,13 +1,15 @@
-      <div>
-      <% tweets.each do |tweet| %>
-          <p><%= tweet.user.name %></p>
-          <p><%= tweet.comment %></p>
-          <p>practice_time:<%= tweet.practice_time %>min</p>
-          <p>
-            <% if user.id == current_user.id %>
-              <%= link_to '編集', edit_user_tweet_path(user, tweet) %>
-              <%= link_to '削除', user_tweet_path(user, tweet), method: :delete %>
-            <% end %>
-          </p>
+<% tweets.each do |tweet| %>
+<div class="shadow p-3 mb-3 m-3">
+    <p><strong><%= tweet.user.name %></strong></p>
+    <p><%= tweet.comment %></p>
+    <p>練習時間: <%= tweet.practice_time %>分  /<%= tweet.created_at.strftime("%Y-%m-%d") %></p>
+
+    <p>
+      <% if user.id == current_user.id %>
+        <%= link_to '編集', edit_user_tweet_path(user, tweet), class: 'text-secondary mt-2' %>
+        <%= link_to '削除', user_tweet_path(user, tweet), method: :delete, class: 'text-secondary mt-2' %>
       <% end %>
-      </div>
+    </p>
+</div>
+<% end %>
+<%= paginate tweets %>

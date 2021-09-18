@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     @tweet = Tweet.new
-    @tweets = Tweet.where(user_id: @user.id)
+    @tweets = Tweet.where(user_id: @user.id).order(created_at: :desc).page(params[:page]).per(10)
     @user_music_genre = UserMusicGenre.new
     @user_music_genres = UserMusicGenre.where(user_id: @user.id)
     @user_instrument = UserInstrument.new
