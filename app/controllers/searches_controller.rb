@@ -73,7 +73,9 @@ class SearchesController < ApplicationController
 
   def one_tag_search
     @tag = Tag.find(params[:id])
+    @keywords = @tag.name
     @main_posts = @tag.main_posts.page(params[:page]).per(9)
+    @range = 2
     @tag_list= Tag.all.limit(6).sort {|a,b| b.post_tags.size <=> a.post_tags.size}
     @tweets = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
     render template: "main_posts/index"
