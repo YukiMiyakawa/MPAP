@@ -2,7 +2,7 @@
 <div class="shadow p-3 mb-3 m-3">
     <p><strong><%= tweet.user.name %></strong></p>
     <p><%= tweet.comment %></p>
-    <p>練習時間: <%= tweet.practice_time %>分<br><%= tweet.created_at.strftime("%Y-%m-%d") %></p>
+    <p>練習時間: <%= tweet.practice_time %>分<br><%= tweet.created_at.strftime("%Y-%m-%d %H:%M") %></p>
 
     <p>
       <% if tweet.user_id == current_user.id %>

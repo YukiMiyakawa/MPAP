@@ -48,7 +48,9 @@
     <div class="pr-4 pt-4">
       <%= link_to "タグリスト", root_path, class:"btn btn-outline-secondary"  %>
     </div>
-
+  </div>
+  <div class="row pt-4">
+  <h4 class="ml-4 mr-4"><strong>検出数: <%= @main_post_all.count %> 件</strong></h4>
   </div>
   <div class="row pt-4">
     <div class="col-md-9 pt-2">
@@ -64,7 +66,7 @@
                   <div class="ml-4 mr-4 text-dark">
                     <%= main_post.content.truncate(26, omission: '...') %><br>
                     <p class="text-danger">♡<%= main_post.favorites.count %><br></p>
-                    <%= main_post.created_at.strftime("%Y-%m-%d") %>
+                    <%= main_post.created_at.strftime("%Y-%m-%d %H:%M") %>
                   </div>
 
                 <% end %>
