@@ -1,5 +1,5 @@
 <div class="container pt-3">
-  <div class="row">
+  <div class="row border-bottom">
     <div class ="col-md-4">
 
       <!--ユーザー情報-->
@@ -35,7 +35,7 @@
       <% end %>
       <div class="pt-3">
         <div class="overflow-auto" style="height:600px;">
-          <%= render "tweets/index", tweets: @tweets, user: @user %>
+          <%= render "tweets/index", tweets: @tweets %>
         </div>
       </div>
 

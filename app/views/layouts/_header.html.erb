@@ -10,7 +10,7 @@
 
         <% if user_signed_in? %>
           <li><%= link_to ' Home',root_path,class: 'fas fa-home nav-link text-light' %></li>
-          <li><%= link_to ' Mypage',user_path(current_user),class: 'fas fa-users nav-link text-light' %></li>
+          <li><%= link_to ' Mypage',user_path(current_user),class: 'fas fa-users nav-link text-light', data: {"turbolinks" => false} %></li>
           <li><%= link_to ' Posts',main_posts_path,class: 'fas fa-book-open nav-link text-light'%></li>
           <li><%= link_to ' Post Create',new_main_post_path,class: 'fas fa-book-open nav-link text-light'%></li>
           <li><%= link_to "通知一覧", notifications_path,class: 'fas fa-book-open nav-link text-light' %></li>

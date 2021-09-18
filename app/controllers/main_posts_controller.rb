@@ -1,7 +1,8 @@
 class MainPostsController < ApplicationController
   def index
-    @main_posts = MainPost.all.order(created_at: :DESC)
-    @tag_list= Tag.all
+    @main_posts = MainPost.all.order(created_at: :DESC).page(params[:page]).per(9)
+    @tag_list= Tag.all.limit(6).sort {|a,b| b.post_tags.size <=> a.post_tags.size}
+    @tweets = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show

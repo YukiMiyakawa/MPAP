@@ -1,34 +1,79 @@
-<div class="container">
-  <div class="row">
+<div class="container pt-3">
+  <div class="row justify-content-start ml-2">
 
+    <div class="pr-4">
+    <%= render "searches/search_form" %>
+    </div>
+    <div>
     <%= form_with url: index_sort_path, method: :get, local: true do |f| %>
       <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
-
       <%= f.submit "ソート" %>
     <% end %>
+    </div>
 
-    <%= render "searches/search_form" %>
+  </div>
+  <div class="row ml-2">
 
     <!--タグリスト-->
-    <% @tag_list.each do |list|%>
-    <% if list.post_tags.count != 0 %>
-      <%= link_to one_tag_search_path(list.id) do %>
-        <%=list.name %>
-          <%="(#{list.post_tags.count})" %>
+    <div class="pr-4 pt-4">
+      <% @tag_list.each do |list|%>
+      <% if list.post_tags.count != 0 %>
+        <%= link_to one_tag_search_path(list.id), class:"btn btn-outline-secondary" do %>
+          <%=list.name %>
+            <%="(#{list.post_tags.count})" %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
+    <div class="pr-4 pt-4">
+      <%= link_to "タグリスト", root_path, class:"btn btn-outline-secondary"  %>
+    </div>
 
-    <% @main_posts.each do |main_post| %>
-      <div>
+  </div>
+  <div class="row pt-4">
+    <div class="col-md-9 pt-2">
+      <div class="row">
 
-　　　<%= link_to main_post_path(main_post.id) do %>
-      <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
-      <%= main_post.title %>
-      <%= main_post.content %>
-      <% end %>
+          <% @main_posts.each do |main_post| %>
+            <div class="col">
+            <div class="shadow">
+        　　  　<%= link_to main_post_path(main_post.id) do %>
+                <div class="ml-4 mr-4 text-dark"><strong><%= main_post.title.truncate(26, omission: '...') %></strong></div>
+                <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150", class:"ml-4" %><br>
+                <div class="ml-4 mr-4 text-dark"><%= main_post.content.truncate(26, omission: '...') %></div>
+              <% end %>
+
+              <% main_post.tags.first(3).each do |tag| %>
+                <%= link_to one_tag_search_path(tag.id), class:"btn btn-outline-secondary" do %>
+                <%= tag.name %>
+                <% end %>
+              <% end %>
+
+            </div>
+            </div>
+          <% end %>
 
       </div>
-    <% end %>
+      <div class="row justify-content-center mt-2 mb-2 pt-5">
+      <%= paginate @main_posts %>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+
+      <!--つぶやき-->
+      <div>
+        <div class="row justify-content-center mt-2 mb-2">
+          <p><strong>みんなのつぶやき</strong></p>
+        </div>
+        <div class="pt-3">
+          <div class="overflow-auto" style="height:700px;">
+            <%= render "tweets/index", tweets: @tweets, user: current_user %>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
+
