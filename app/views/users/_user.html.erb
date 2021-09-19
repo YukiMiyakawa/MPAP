@@ -20,11 +20,11 @@
     </div>
   </div>
 
-  <p class="text-center border-top mt-2 mb-2">目標練習時間 <%= user.target_time %> 分/日</p>
+  <p class="text-center border-top mt-3 mb-2">目標練習時間 <%= user.target_time %> 分/日</p>
 
   <!--チャットルーム作成-->
   <div class="border-top">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-2">
     <% if user_signed_in? %>
       <% unless user.id == current_user.id %>
         <% if is_room == true %>
