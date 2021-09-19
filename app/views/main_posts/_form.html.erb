@@ -1,8 +1,8 @@
   <%= form_with model:main_post, local:true do |f| %>
-    <%= f.label :Title %>
+    <%= f.label "タイトル" %>
     <%= f.text_field :title, class: "form-control name" %>
 
-    <%= f.label :Content %>
+    <%= f.label "本文" %>
     <%= f.text_area :content, class: "form-control introduction" %>
 
     <%= f.label :Youtube_Url %>
@@ -17,6 +17,9 @@
     <%= f.label "Tag (,で区切ると複数タグ登録できます)" %>
     <%=f.text_field :tag_name ,value: tag_list, class:"form-control book_body"%>
 
-    <%= f.submit class: 'btn btn-secondary' %>
+    <div class="row justify-content-center mt-2 mb-2 pt-5">
+      <%= f.submit "投稿", class: 'btn btn-secondary mt-2' %>
+    </div>
+
 
  <% end %>

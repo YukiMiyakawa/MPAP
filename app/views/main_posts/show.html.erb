@@ -50,8 +50,10 @@
 
         <!--メイン記事編集-->
         <% if @main_post.user_id == current_user.id %>
-          <%= link_to '編集', edit_main_post_path(@main_post), class: "text-light" %>
-          <%= link_to '削除', main_post_path(@main_post), method: :delete, class: "text-light" %>
+        <div class="d-flex justify-content-end">
+          <%= link_to '編集', edit_main_post_path(@main_post), class: 'btn-sm btn-outline-secondary mt-3' %>
+          <%= link_to '削除', main_post_path(@main_post), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
+        </div>
         <% end %>
 
       </div>
@@ -63,7 +65,7 @@
       <!--サブ記事投稿-->
       <div>
         <% if @main_post.user_id == current_user.id %>
-        <h5>サブ記事投稿</h5>
+        <h5 class="text-center pt-3">サブ記事投稿</h5>
         <%= render "sub_posts/form", main_post: @main_post, sub_post: @sub_post %>
         <% end %>
       </div>
@@ -80,8 +82,8 @@
             <div class="ml-3 mr-3"><%= comment.content %></div>
 
             <% if comment.user_id == current_user.id %>
-              <%= link_to '編集', edit_main_post_comment_path(@main_post, comment), class: "btn-sm btn-outline-secondary" %>
-              <%= link_to '削除', main_post_comment_path(@main_post, comment), method: :delete, class: "btn-sm btn-outline-secondary" %>
+              <%= link_to '編集', edit_main_post_comment_path(@main_post, comment), class: 'btn-sm btn-outline-secondary mt-3' %>
+              <%= link_to '削除', main_post_comment_path(@main_post, comment), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
             <% end %>
           <% end %>
         </div>
