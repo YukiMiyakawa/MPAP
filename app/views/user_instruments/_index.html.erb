@@ -8,8 +8,10 @@
         <% user_instruments.each do |user_instrument| %>
         <tr>
           <td class="text-center"><%= user_instrument.instrument.name %></td>
-          <% if user.id == current_user.id %>
-          <td><%= link_to '削除', user_user_instrument_path(user, user_instrument), method: :delete, class: "btn btn-outline-secondary" %></td>
+          <% if user_signed_in? %>
+            <% if user.id == current_user.id %>
+              <td><%= link_to '削除', user_user_instrument_path(user, user_instrument), method: :delete, class: "btn btn-outline-secondary" %></td>
+            <% end %>
           <% end %>
         </tr>
         <% end %>
@@ -24,10 +26,12 @@
 </div>
 
 <div class="row justify-content-center pb-3">
-  <% if user.id == current_user.id %>
-    <%= form_with url: user_user_instruments_path(user), model: user_instrument, local: true do |f| %>
-      <%= f.collection_select :instrument_id, Instrument.all, :id, :name, include_blank: "-- 楽器を選択してください --" %>
-      <%= f.submit "追加", class: "btn btn-outline-secondary" %>
+  <% if user_signed_in? %>
+    <% if user.id == current_user.id %>
+      <%= form_with url: user_user_instruments_path(user), model: user_instrument, local: true do |f| %>
+        <%= f.collection_select :instrument_id, Instrument.all, :id, :name, include_blank: "-- 楽器を選択してください --" %>
+        <%= f.submit "追加", class: "btn btn-outline-secondary" %>
+      <% end %>
     <% end %>
   <% end %>
 </div>

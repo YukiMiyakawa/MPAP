@@ -13,11 +13,13 @@
   <div><%= audio_tag sub_post.audio_was, :controls => true if sub_post.audio? %></div>
   <div><%= sub_post.content %></div>
 
-  <% if main_post.user_id == current_user.id %>
-  <div class="d-flex justify-content-end">
-    <%= link_to '編集', edit_main_post_sub_post_path(main_post, sub_post), class: 'btn-sm btn-outline-secondary mt-3' %>
-    <%= link_to '削除', main_post_sub_post_path(main_post, sub_post), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
-  </div>
+  <% if user_signed_in? %>
+    <% if main_post.user_id == current_user.id %>
+    <div class="d-flex justify-content-end">
+      <%= link_to '編集', edit_main_post_sub_post_path(main_post, sub_post), class: 'btn-sm btn-outline-secondary mt-3' %>
+      <%= link_to '削除', main_post_sub_post_path(main_post, sub_post), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
+    </div>
+    <% end %>
   <% end %>
 </div>
 <% end %>

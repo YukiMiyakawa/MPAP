@@ -8,8 +8,10 @@
         <% user_music_genres.each do |user_music_genre| %>
         <tr>
           <td class="text-center"><%= user_music_genre.music_genre.name %></td>
-          <% if user.id == current_user.id %>
-          <td><%= link_to '削除', user_user_music_genre_path(user, user_music_genre), method: :delete, class: "btn btn-outline-secondary" %></td>
+          <% if user_signed_in? %>
+            <% if user.id == current_user.id %>
+              <td><%= link_to '削除', user_user_music_genre_path(user, user_music_genre), method: :delete, class: "btn btn-outline-secondary" %></td>
+            <% end %>
           <% end %>
         </tr>
         <% end %>
@@ -24,10 +26,12 @@
 </div>
 
 <div class="row justify-content-center pb-3">
-  <% if user.id == current_user.id %>
-    <%= form_with url: user_user_music_genres_path(user), model: user_music_genre, local: true do |f| %>
-      <%= f.collection_select :music_genre_id, MusicGenre.all, :id, :name, include_blank: "-- ジャンルを選択してください --"  %>
-      <%= f.submit "追加", class: "btn btn-outline-secondary" %>
+  <% if user_signed_in? %>
+    <% if user.id == current_user.id %>
+      <%= form_with url: user_user_music_genres_path(user), model: user_music_genre, local: true do |f| %>
+        <%= f.collection_select :music_genre_id, MusicGenre.all, :id, :name, include_blank: "-- ジャンルを選択してください --"  %>
+        <%= f.submit "追加", class: "btn btn-outline-secondary" %>
+      <% end %>
     <% end %>
   <% end %>
 </div>

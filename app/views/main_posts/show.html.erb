@@ -25,7 +25,7 @@
         <!--メイン記事内容-->
         <h2><%= @main_post.title %></h2>
         <div class="d-flex justify-content-between">
-        <p>投稿者：<%= link_to @user.name, user_path(@user), data: {"turbolinks" => false} %></p>
+        <p>投稿者：<%= link_to @user.name, user_path(@user), data: {"turbolinks" => false}, class: "text-dark" %></p>
         <p>投稿日: <%= @main_post.created_at.strftime("%Y-%m-%d %H:%M") %> </p>
         </div>
 
@@ -36,24 +36,32 @@
           <div><%= attachment_image_tag @main_post, :image, format: "jpeg", size: "560x315" %></div>
         </div>
         <div><%= audio_tag @main_post.audio_was, :controls => true if @main_post.audio? %></div>
-        <div><%= @main_post.content %></div>
+        <div class="pb-3"><%= @main_post.content %></div>
 
         <!--いいね-->
-        <div id="main_post_<%= @main_post.id %>" >
-          <%= render "favorites/favorite-btn", main_post: @main_post %>
-        </div>
+        <% if user_signed_in? %>
+          <div id="main_post_<%= @main_post.id %>" >
+            <%= render "favorites/favorite-btn", main_post: @main_post %>
+          </div>
+        <% else %>
+          <p class="text-danger">♡<%= @main_post.favorites.count %><br></p>
+        <% end %>
 
         <!--ブックマーク-->
-        <div id="book_mark_<%= @main_post.id %>" >
-          <%= render "book_marks/book_mark-btn", main_post: @main_post %>
-        </div>
+        <% if user_signed_in? %>
+          <div id="book_mark_<%= @main_post.id %>" >
+            <%= render "book_marks/book_mark-btn", main_post: @main_post %>
+          </div>
+        <% end %>
 
         <!--メイン記事編集-->
-        <% if @main_post.user_id == current_user.id %>
-        <div class="d-flex justify-content-end">
-          <%= link_to '編集', edit_main_post_path(@main_post), class: 'btn-sm btn-outline-secondary mt-3' %>
-          <%= link_to '削除', main_post_path(@main_post), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
-        </div>
+        <% if user_signed_in? %>
+          <% if @main_post.user_id == current_user.id %>
+          <div class="d-flex justify-content-end">
+            <%= link_to '編集', edit_main_post_path(@main_post), class: 'btn-sm btn-outline-secondary mt-3' %>
+            <%= link_to '削除', main_post_path(@main_post), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
+          </div>
+          <% end %>
         <% end %>
 
       </div>
@@ -64,9 +72,11 @@
       </div>
       <!--サブ記事投稿-->
       <div>
-        <% if @main_post.user_id == current_user.id %>
-        <h5 class="text-center pt-3">サブ記事投稿</h5>
-        <%= render "sub_posts/form", main_post: @main_post, sub_post: @sub_post %>
+        <% if user_signed_in? %>
+          <% if @main_post.user_id == current_user.id %>
+          <h5 class="text-center pt-3">サブ記事投稿</h5>
+          <%= render "sub_posts/form", main_post: @main_post, sub_post: @sub_post %>
+          <% end %>
         <% end %>
       </div>
 
@@ -74,29 +84,35 @@
       <div class="p-5">
         <div class="text-center text-white bg-secondary"><p><strong>コメント</strong></p></div>
         <div>
-          <% @comments.each do |comment| %>
-            <div class="d-flex justify-content-between border-top">
-              <p>投稿者:<%= comment.user.name %></p>
-              <p><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-            </div>
-            <div class="ml-3 mr-3"><%= comment.content %></div>
+          <% if @comments.present? %>
+            <% @comments.each do |comment| %>
+              <div class="d-flex justify-content-between border-top">
+                <p>投稿者:<%= comment.user.name %></p>
+                <p><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+              </div>
+              <div class="ml-3 mr-3"><%= comment.content %></div>
 
-            <% if comment.user_id == current_user.id %>
-              <%= link_to '編集', edit_main_post_comment_path(@main_post, comment), class: 'btn-sm btn-outline-secondary mt-3' %>
-              <%= link_to '削除', main_post_comment_path(@main_post, comment), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
+              <% if comment.user_id == current_user.id %>
+                <%= link_to '編集', edit_main_post_comment_path(@main_post, comment), class: 'btn-sm btn-outline-secondary mt-3' %>
+                <%= link_to '削除', main_post_comment_path(@main_post, comment), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
+              <% end %>
             <% end %>
+          <% else %>
+            <div class="text-center"><p><strong>コメントがありません</strong></p></div>
           <% end %>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col bg-light p-5">
-          <%= form_with model:[@main_post, @comment], local:true do |f| %>
-            <div><%= f.text_area :content, class: "form-control-file" %></div>
-            <div class="row justify-content-center"><%= f.submit "投稿", class: 'btn-sm btn-outline-secondary mt-3' %></div>
-          <% end %>
+      <% if user_signed_in? %>
+        <div class="row">
+          <div class="col bg-light p-5">
+            <%= form_with model:[@main_post, @comment], local:true do |f| %>
+              <div><%= f.text_area :content, class: "form-control-file" %></div>
+              <div class="row justify-content-center"><%= f.submit "投稿", class: 'btn-sm btn-outline-secondary mt-3' %></div>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
 
     </div>
 
