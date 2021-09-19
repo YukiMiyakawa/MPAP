@@ -25,7 +25,7 @@
               <div class="overflow-auto" style="height:50px;">
                 <% if user.user_music_genres.present? %>
                   <% user.user_music_genres.each do |user_music_genre| %>
-                    <p class="text-center"><%= user_music_genre.music_genre.name %>></p>
+                    <p class="text-center"><%= user_music_genre.music_genre.name %></p>
                   <% end %>
                 <% else %>
                   <p class="text-center">未設定です</p>
@@ -50,6 +50,9 @@
           </div>
         <% end %>
       </div>
+        <div class="row justify-content-center mt-2 mb-2 pt-5">
+          <%= paginate @users %>
+        </div>
     </div>
   </div>
 </div>
