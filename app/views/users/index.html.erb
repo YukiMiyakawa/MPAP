@@ -21,6 +21,14 @@
               </div>
             </div>
             <div>
+              <div class="row d-flex justify-content-around">
+                <span>
+                  <strong>follow: </strong><%= link_to "#{user.followings.count}", user_followings_path(user), class: 'text-dark' %>
+                  <strong>  follower: </strong><%= link_to "#{user.followers.count}", user_followers_path(user), class: 'text-dark' %>
+                </span>
+              </div>
+            </div>
+            <div>
               <p class="text-center p-1 bg-light"><strong>得意ジャンル</strong></p>
               <div class="overflow-auto" style="height:50px;">
                 <% if user.user_music_genres.present? %>

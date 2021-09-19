@@ -27,10 +27,12 @@
       <% if is_room == true %>
         <%= link_to 'メッセージを送る', room_path(room_id), class: 'btn-sm btn-outline-secondary mt-2' %>
       <% else %>
-        <%= form_with url:rooms_path, model:entry, local:true do |f| %>
+        <div class="pt-2">
+        <%= form_with url:rooms_path, model:@entry, local:true do |f| %>
           <%= f.hidden_field :user_id, value: user.id %>
           <%= f.submit 'メッセージを送る', class: 'btn-sm btn-outline-secondary' %>
         <% end %>
+        </div>
       <% end %>
     <% end %>
 
