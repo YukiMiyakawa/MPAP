@@ -1,10 +1,12 @@
 <% sub_posts.each do |sub_post| %>
-
+<div class="border-top">
   <h2><%= sub_post.title %></h2>
-  <% if @main_post.youtube_url.present? %>
-  <div><iframe width="560" height="315" src="https://www.youtube.com/embed/<%=sub_post.youtube_url[32..42]%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-  <% end %>
-  <div><%= attachment_image_tag sub_post, :image, format: "jpeg", size: "560x315" %></div>
+  <div class="row justify-content-center">
+    <% if @main_post.youtube_url.present? %>
+      <div><iframe width="560" height="315" src="https://www.youtube.com/embed/<%=sub_post.youtube_url[32..42]%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+    <% end %>
+    <div><%= attachment_image_tag sub_post, :image, format: "jpeg", size: "560x315" %></div>
+  </div>
   <div><%= audio_tag sub_post.audio_was, :controls => true if sub_post.audio? %></div>
   <div><%= sub_post.content %></div>
 
@@ -12,5 +14,5 @@
     <%= link_to '編集', edit_main_post_sub_post_path(main_post, sub_post), class: "text-light" %>
     <%= link_to '削除', main_post_sub_post_path(main_post, sub_post), method: :delete, class: "text-light" %>
   <% end %>
-
+</div>
 <% end %>
