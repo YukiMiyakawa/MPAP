@@ -1,0 +1,51 @@
+<div class="container pt-3">
+  <div class="row pt-4">
+
+    <div class="col-md-12 pt-2">
+
+      <div class="text-center pt-3 pb-3">
+        <h5>
+          <strong>
+            <%= link_to @user.name, user_path(@user), class: "text-dark"%>
+            さんのブックマーク一覧
+          </strong>
+        </h5>
+      </div>
+
+      <div class="row d-flex justify-content-around">
+
+          <% @book_marks.each do |book_mark| %>
+            <div class="col-md-3 shadow m-1">
+              <div>
+
+          　　  　<%= link_to main_post_path(book_mark.main_post.id) do %>
+                  <div class="ml-4 mr-4 text-dark"><strong><%= book_mark.main_post.title.truncate(36, omission: '...') %></strong></div>
+                  <%= attachment_image_tag book_mark.main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150", class:"ml-4" %><br>
+                  <div class="ml-4 mr-4 text-dark">
+                    <%= book_mark.main_post.content.truncate(36, omission: '...') %><br>
+                    <p class="text-danger">♡<%= book_mark.main_post.favorites.count %><br></p>
+                    <%= book_mark.main_post.created_at.strftime("%Y-%m-%d %H:%M") %>
+                  </div>
+
+                <% end %>
+
+                <div class="ml-4 mr-4 mb-2">
+                <% book_mark.main_post.tags.first(1).each do |tag| %>
+                  <%= link_to one_tag_search_path(tag.id), class:"btn btn-outline-secondary" do %>
+                  <%= tag.name %>
+                  <% end %>
+                <% end %>
+                </div>
+
+              </div>
+            </div>
+          <% end %>
+
+      </div>
+      <div class="row justify-content-center mt-2 mb-2 pt-5">
+        <%= paginate @book_marks %>
+      </div>
+    </div>
+
+  </div>
+</div>

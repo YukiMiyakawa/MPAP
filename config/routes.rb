@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # 検索
   get 'search' => 'searches#search', as: 'search'
   get 'one_tag_search/:id' => 'searches#one_tag_search', as: 'one_tag_search'
-  
+
   # ソート
   get 'index_sort' => 'searches#index_sort', as: 'index_sort'
   get 'result_sort' => 'searches#result_sort', as: 'result_sort'
@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resource :book_marks, only: [:create, :destroy]
   end
-
+  get 'book_marks/:id' => 'book_marks#index', as: 'book_marks'
   # 会員の投稿記事一覧
   get 'user_main_post/:id' => 'main_posts#user_main_post', as: 'user_main_post'
 

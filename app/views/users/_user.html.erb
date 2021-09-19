@@ -43,8 +43,9 @@
       <% if user.id == current_user.id %><%= link_to 'チャットルーム一覧', rooms_path, class: 'text-dark mt-2' %><% end %>
     <% end %>
     </div>
-    <div class="border-top pt-2">
-      <p class="text-center"><%= link_to "投稿一覧", user_main_post_path(user), class: 'text-dark' %></p>
+    <div class="border-top pt-2 d-flex justify-content-around">
+      <p><%= link_to "投稿一覧", user_main_post_path(user), class: 'text-dark' %></p>
+      <p><%= link_to "ブックマーク", book_marks_path(user), class: 'text-dark' %></p>
     </div>
   </div>
 
