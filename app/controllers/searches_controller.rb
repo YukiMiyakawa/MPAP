@@ -56,6 +56,7 @@ class SearchesController < ApplicationController
       negative_keywords.each do |keyword|
         @users.where!("name NOT LIKE ?", "%#{keyword.delete_prefix('-')}%")
       end
+      render template: "users/index"
 
     # ユーザー音楽ジャンル & 使用楽器検索
     elsif @range == '4'
@@ -67,9 +68,11 @@ class SearchesController < ApplicationController
 
       @user_id = @instrument_user_id & @music_genre_user_id
       @users = User.find(@user_id)
+      render template: "users/index"
     else
       @main_posts = MainPost.all
       @users = User.all
+      render template: "users/index"
     end
   end
 

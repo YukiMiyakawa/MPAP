@@ -1,4 +1,5 @@
 <div class="container pt-3">
+
   <div class="row justify-content-start ml-2">
 
     <div class="pr-4">
@@ -30,8 +31,8 @@
       </div>
     <% end %>
 
-
   </div>
+
   <div class="row ml-2">
 
     <!--タグリスト-->
@@ -45,20 +46,25 @@
         <% end %>
       <% end %>
     </div>
+
     <div class="pr-4 pt-4">
       <%= link_to "タグリスト", root_path, class:"btn btn-outline-secondary"  %>
     </div>
+
   </div>
+
   <div class="row pt-4">
-  <h4 class="ml-4 mr-4"><strong>検出数: <%= @main_post_all.count %> 件</strong></h4>
+    <h4 class="ml-4 mr-4"><strong>検出数: <%= @main_post_all.count %> 件</strong></h4>
   </div>
+
   <div class="row pt-4">
+
     <div class="col-md-9 pt-2">
       <div class="row">
 
           <% @main_posts.each do |main_post| %>
-            <div class="col">
-              <div id="post_index" class="shadow">
+            <div id="post_index" class="col shadow m-1">
+              <div>
 
           　　  　<%= link_to main_post_path(main_post.id) do %>
                   <div class="ml-4 mr-4 text-dark"><strong><%= main_post.title.truncate(26, omission: '...') %></strong></div>
@@ -102,8 +108,8 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
+
 </div>
 
