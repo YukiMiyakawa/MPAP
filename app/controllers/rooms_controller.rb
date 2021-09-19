@@ -18,7 +18,7 @@ class RoomsController < ApplicationController
       my_room_ids << entry.room.id
     end
     # さらにuser_idがログインユーザーでは無いレコードを抽出
-    @another_entries = Entry.where(room_id: my_room_ids).where.not(user_id: current_user.id)
+    @another_entries = Entry.where(room_id: my_room_ids).where.not(user_id: current_user.id).page(params[:page]).per(10)
   end
 
   def show

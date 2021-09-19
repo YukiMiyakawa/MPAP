@@ -86,7 +86,8 @@ class MainPostsController < ApplicationController
   end
 
   def user_main_post
-    @main_posts = MainPost.where(user_id: params[:id])
+    @main_posts = MainPost.where(user_id: params[:id]).page(params[:page]).per(9)
+    @user = User.find(params[:id])
   end
 
   private
