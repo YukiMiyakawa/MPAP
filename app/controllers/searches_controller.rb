@@ -20,7 +20,7 @@ class SearchesController < ApplicationController
         @main_posts.where!("title NOT LIKE ?", "%#{keyword.delete_prefix('-')}%").order(created_at: :DESC)
       end
       @main_post_all = @main_posts
-      @main_posts = @main_posts.order(created_at: :desc).page(params[:page]).per(9)
+      @main_posts = @main_posts.order(created_at: :desc).page(params[:page]).per(8)
       @keywords = params[:keyword]
       @range = 1
       render template: "main_posts/index"
@@ -35,7 +35,7 @@ class SearchesController < ApplicationController
       @post_tags = PostTag.where(tag_id: @tags.pluck(:id)).group(:main_post_id).having("count(distinct tag_id)=?",@tags.size)
       @main_posts = MainPost.where(id: @post_tags.pluck(:main_post_id))
       @main_post_all = @main_posts
-      @main_posts = @main_posts.order(created_at: :desc).page(params[:page]).per(9)
+      @main_posts = @main_posts.order(created_at: :desc).page(params[:page]).per(8)
       @keywords = params[:keyword]
       @range = 2
       render template: "main_posts/index"
@@ -83,7 +83,7 @@ class SearchesController < ApplicationController
     @tag = Tag.find(params[:id])
     @keywords = @tag.name
     @main_post_all = @tag.main_posts
-    @main_posts = @tag.main_posts.page(params[:page]).per(9)
+    @main_posts = @tag.main_posts.page(params[:page]).per(8)
     @range = 2
     @tag_list= Tag.all.limit(6).sort {|a,b| b.post_tags.size <=> a.post_tags.size}
     @tweets = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
@@ -97,11 +97,11 @@ class SearchesController < ApplicationController
 
     if selection == "new" || selection == "old"
       @main_post_all = @main_posts
-      @main_posts = @main_posts.post_sort(selection).page(params[:page]).per(9)
+      @main_posts = @main_posts.post_sort(selection).page(params[:page]).per(8)
     else
       @main_posts = @main_posts.post_sort(selection)
       @main_post_all = @main_posts
-      @main_posts = Kaminari.paginate_array(@main_posts).page(params[:page]).per(9)
+      @main_posts = Kaminari.paginate_array(@main_posts).page(params[:page]).per(8)
     end
 
     @tweets = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
@@ -127,11 +127,11 @@ class SearchesController < ApplicationController
 
     if selection == "new" || selection == "old"
       @main_post_all = @main_posts
-      @main_posts = @main_posts.post_sort(selection).page(params[:page]).per(9)
+      @main_posts = @main_posts.post_sort(selection).page(params[:page]).per(8)
     else
       @main_posts = @main_posts.post_sort(selection)
       @main_post_all = @main_posts
-      @main_posts = Kaminari.paginate_array(@main_posts).page(params[:page]).per(9)
+      @main_posts = Kaminari.paginate_array(@main_posts).page(params[:page]).per(8)
     end
 
     @keywords = params[:keyword]
@@ -154,12 +154,12 @@ class SearchesController < ApplicationController
 
     if selection == "new" || selection == "old"
       @main_post_all = @main_posts
-      @main_posts = @main_posts.post_sort(selection).page(params[:page]).per(9)
+      @main_posts = @main_posts.post_sort(selection).page(params[:page]).per(8)
     else
       # byebug
       @main_posts = @main_posts.post_sort(selection)
       @main_post_all = @main_posts
-      @main_posts = Kaminari.paginate_array(@main_posts).page(params[:page]).per(9)
+      @main_posts = Kaminari.paginate_array(@main_posts).page(params[:page]).per(8)
     end
     @keywords = params[:keyword]
     @tag_list= Tag.all.limit(6).sort {|a,b| b.post_tags.size <=> a.post_tags.size}

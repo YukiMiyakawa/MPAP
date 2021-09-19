@@ -60,24 +60,24 @@
   <div class="row pt-4">
 
     <div class="col-md-9 pt-2">
-      <div class="row">
+      <div class="row d-flex justify-content-around">
 
           <% @main_posts.each do |main_post| %>
-            <div id="post_index" class="col shadow m-1">
+            <div class="col-md-5 shadow m-1">
               <div>
 
           　　  　<%= link_to main_post_path(main_post.id) do %>
-                  <div class="ml-4 mr-4 text-dark"><strong><%= main_post.title.truncate(26, omission: '...') %></strong></div>
+                  <div class="ml-4 mr-4 text-dark"><strong><%= main_post.title.truncate(36, omission: '...') %></strong></div>
                   <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150", class:"ml-4" %><br>
                   <div class="ml-4 mr-4 text-dark">
-                    <%= main_post.content.truncate(26, omission: '...') %><br>
+                    <%= main_post.content.truncate(36, omission: '...') %><br>
                     <p class="text-danger">♡<%= main_post.favorites.count %><br></p>
                     <%= main_post.created_at.strftime("%Y-%m-%d %H:%M") %>
                   </div>
 
                 <% end %>
 
-                <div class="ml-4 mr-4">
+                <div class="ml-4 mr-4 mb-2">
                 <% main_post.tags.first(1).each do |tag| %>
                   <%= link_to one_tag_search_path(tag.id), class:"btn btn-outline-secondary" do %>
                   <%= tag.name %>
