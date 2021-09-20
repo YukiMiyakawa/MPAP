@@ -73,6 +73,7 @@ gem 'cloudinary'
 gem 'simple_calendar', '~> 2.0'
 gem 'chartkick'
 gem 'bootstrap-select-rails'
+gem 'rails-i18n'
 
 # デプロイ用
 gem 'dotenv-rails'

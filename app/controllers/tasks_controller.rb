@@ -1,13 +1,13 @@
 class TasksController < ApplicationController
   def create
-    @task = Task.new(task_params)
-    @task.user_id = current_user.id
-      if Task.exists?(user_id: @task.user_id, name: @task.name)
+    @new_task = Task.new(task_params)
+    @new_task.user_id = current_user.id
+      if Task.exists?(user_id: @new_task.user_id, name: @new_task.name)
         redirect_to request.referer,notice:"追加できませんでした"
-      elsif @task.save
+      elsif @new_task.save
         redirect_to user_path(current_user)
       else
-        redirect_to request.referer,notice:"追加できませんでした"
+        redirect_to request.referer, flash: { task_error: @new_task.errors.full_messages }
       end
   end
 

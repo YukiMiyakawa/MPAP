@@ -7,8 +7,9 @@
 
             <div class="col-md-6 shadow m-1 p-5">
 
-
+              <p class="alert"><%= alert %></p>
               <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
                 <div class="field">
                   <%= f.label "ユーザーネーム" %><br />
                   <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>

@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col">
       <h5 class="text-center pt-3">メイン記事編集</h5>
+      <%= render 'layouts/error_messages', model: @main_post %>
 
       <%= render 'form', main_post: @main_post, tag_list: @tag_list %>
 

@@ -25,11 +25,31 @@
     <div class="col-md-4">
 
       <!--タスク-->
-      <div class="shadow-sm bg-light p-3 mb-3"><%= render "tasks/index", user: @user, task: @task, tasks: @tasks %></div>
+      <div class="shadow-sm bg-light p-3 mb-3">
+
+      <% if flash[:task_error].present? %>
+        <ul class="errors">
+          <% flash[:task_error].each do |e| %>
+            <li><%= e %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+        <%= render "tasks/index", user: @user, task: @task, tasks: @tasks, new_task: @new_task %>
+      </div>
 
       <!--Tweet部分-->
       <% if user_signed_in? %>
         <% if @user.id == current_user.id %>
+
+          <% if flash[:tweet_error].present? %>
+            <ul class="errors">
+              <% flash[:tweet_error].each do |e| %>
+                <li><%= e %></li>
+              <% end %>
+            </ul>
+          <% end %>
+
           <div class="border border-secondary-top-bottom rounded p-4">
             <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
           </div>
