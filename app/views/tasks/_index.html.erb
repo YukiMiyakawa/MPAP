@@ -1,23 +1,34 @@
-<a>練習項目一覧</a>
-<% if user.id == current_user.id %>
-  <%= form_with url: user_tasks_path(user), model: task, local: true do |f| %>
-    <%= f.text_field :name %>
-    <%= f.submit "追加", class: "btn btn-outline-dark ml-3" %>
-  <% end %>
-<% end %>
-
-<table>
-  <thead>
-    <tr><th>練習項目</th><th></th></tr>
-  </thead>
-  <tbody>
-    <% tasks.each do |task| %>
-    <tr>
-      <td><%= task.name %></td>
-      <% if user.id == current_user.id %>
-      <td><%= link_to '削除', user_task_path(user, task), method: :delete %></td>
+<div class="table-responsive">
+  <table class="table table-dark">
+    <thead>
+      <tr class="table-active"><th class="text-center">練習項目</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% if tasks.present? %>
+        <% tasks.each do |task| %>
+          <tr>
+            <td class="text-center"><%= task.name %></td>
+            <% if user_signed_in? %>
+              <% if user.id == current_user.id %>
+                <td><%= link_to '削除', user_task_path(user, task), method: :delete, class: "btn btn-outline-secondary" %></td>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr><td class="text-center">未入力</td></tr>
       <% end %>
-    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row justify-content-center pb-3">
+  <% if user_signed_in? %>
+    <% if user.id == current_user.id %>
+      <%= form_with url: user_tasks_path(user), model: task, local: true do |f| %>
+        <%= f.text_field :name, :placeholder => "練習項目" %>
+        <%= f.submit "追加", class: "btn btn-outline-dark ml-3" %>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
+</div>

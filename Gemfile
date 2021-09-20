@@ -72,6 +72,7 @@ gem 'audiojs-rails'
 gem 'cloudinary'
 gem 'simple_calendar', '~> 2.0'
 gem 'chartkick'
+gem 'bootstrap-select-rails'
 
 # デプロイ用
 gem 'dotenv-rails'

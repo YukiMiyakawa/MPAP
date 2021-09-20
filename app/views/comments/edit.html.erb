@@ -1,13 +1,15 @@
-<div class="container">
+<div class="container pt-3">
   <div class="row">
     <div class="col">
-      
+
     <%= form_with model:[@main_post, @comment], local:true do |f| %>
     <%= f.label :Content %>
-    <%= f.text_area :content %>
-    <%= f.submit class: 'btn btn-secondary' %>
+    <%= f.text_area :content, class: "form-control content" %>
+    <div class="row justify-content-center mt-2 mb-2 pt-5">
+    <%= f.submit "編集", class: 'btn btn-secondary p-2' %>
+    </div>
     <% end %>
-      
+
     </div>
   </div>
 </div>

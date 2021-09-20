@@ -7,30 +7,30 @@
         <h5>
           <strong>
             <%= link_to @user.name, user_path(@user), class: "text-dark"%>
-            さんの投稿一覧
+            さんのブックマーク一覧
           </strong>
         </h5>
       </div>
 
       <div class="row d-flex justify-content-around">
 
-          <% @main_posts.each do |main_post| %>
+          <% @book_marks.each do |book_mark| %>
             <div class="col-md-3 shadow m-1">
               <div>
 
-          　　  　<%= link_to main_post_path(main_post.id) do %>
-                  <div class="ml-4 mr-4 text-dark"><strong><%= main_post.title.truncate(36, omission: '...') %></strong></div>
-                  <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150", class:"ml-4" %><br>
+          　　  　<%= link_to main_post_path(book_mark.main_post.id) do %>
+                  <div class="ml-4 mr-4 text-dark"><strong><%= book_mark.main_post.title.truncate(36, omission: '...') %></strong></div>
+                  <%= attachment_image_tag book_mark.main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150", class:"ml-4" %><br>
                   <div class="ml-4 mr-4 text-dark">
-                    <%= main_post.content.truncate(36, omission: '...') %><br>
-                    <p class="text-danger">♡<%= main_post.favorites.count %><br></p>
-                    <%= main_post.created_at.strftime("%Y-%m-%d %H:%M") %>
+                    <%= book_mark.main_post.content.truncate(36, omission: '...') %><br>
+                    <p class="text-danger">♡<%= book_mark.main_post.favorites.count %><br></p>
+                    <%= book_mark.main_post.created_at.strftime("%Y-%m-%d %H:%M") %>
                   </div>
 
                 <% end %>
 
                 <div class="ml-4 mr-4 mb-2">
-                <% main_post.tags.first(1).each do |tag| %>
+                <% book_mark.main_post.tags.first(1).each do |tag| %>
                   <%= link_to one_tag_search_path(tag.id), class:"btn btn-outline-secondary" do %>
                   <%= tag.name %>
                   <% end %>
@@ -43,7 +43,7 @@
 
       </div>
       <div class="row justify-content-center mt-2 mb-2 pt-5">
-        <%= paginate @main_posts %>
+        <%= paginate @book_marks %>
       </div>
     </div>
 

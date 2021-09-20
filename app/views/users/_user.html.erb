@@ -1,0 +1,59 @@
+<!--ユーザー情報-->
+<div class="shadow p-3 mb-3">
+  <%= attachment_image_tag user, :image, format: "jpeg", fallback: "no_user_image.jpg", size: "200x150", class:"d-block mx-auto" %>
+  <H5 class="text-center"><strong><%= user.name %></strong></H5>
+  <p class="text-center border-top"><strong>introduction</strong></p>
+  <p class="text-center"><%= user.introduction %></p>
+
+　　  <!--フォロー-->
+　　  <div class=" border-top">
+    <div class="row justify-content-center mt-2 mb-2">
+      <div id="following-count_<%= user.id %>"><span><strong>follow: </strong><%= link_to "#{user.followings.count}", user_followings_path(user) %>  </span></div>
+      <div id="follower-count_<%= user.id %>", class="ml-3"><span><strong>  follower: </strong><%= link_to "#{user.followers.count}", user_followers_path(user) %></span></div>
+      <% if user_signed_in? %>
+        <% if user.id != current_user.id %>
+          <div id="follow-button_<%= user.id %>", class="ml-3" >
+          <%= render "relationships/follow-btn", user: user %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <p class="text-center border-top mt-3 mb-2">目標練習時間 <%= user.target_time %> 分/日</p>
+
+  <!--チャットルーム作成-->
+  <div class="border-top">
+    <div class="row justify-content-center mb-2">
+    <% if user_signed_in? %>
+      <% unless user.id == current_user.id %>
+        <% if is_room == true %>
+          <%= link_to 'メッセージを送る', room_path(room_id), class: 'btn-sm btn-outline-secondary mt-2' %>
+        <% else %>
+          <div class="pt-2">
+          <%= form_with url:rooms_path, model:@entry, local:true do |f| %>
+            <%= f.hidden_field :user_id, value: user.id %>
+            <%= f.submit 'メッセージを送る', class: 'btn-sm btn-outline-secondary' %>
+          <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% if user_signed_in? %>
+      <% if user.id == current_user.id %><%= link_to 'チャットルーム一覧', rooms_path, class: 'text-dark mt-2' %><% end %>
+    <% end %>
+    </div>
+    <div class="border-top pt-2 d-flex justify-content-around">
+      <p><%= link_to "投稿一覧", user_main_post_path(user), class: 'text-dark' %></p>
+      <p><%= link_to "ブックマーク", book_marks_path(user), class: 'text-dark' %></p>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <% if user_signed_in? %>
+      <% if user.id == current_user.id %>
+        <%= link_to '編集', edit_user_path(user),class:"btn btn-outline-secondary" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

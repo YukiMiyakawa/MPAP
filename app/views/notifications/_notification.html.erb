@@ -3,7 +3,7 @@
 
 <div class="container">
 
-  <%= link_to user_path(visitor) do %>
+  <%= link_to user_path(visitor), class: "text-dark" do %>
     <strong>
       <%= visitor.name %>
     </strong>
@@ -14,13 +14,13 @@
   <% when 'follow' then %>
     <span>あなたをフォローしました</span>
   <% when 'like' then %>
-    <%= link_to 'あなたの投稿', main_post_path(notification.main_post), style: "font-weight: bold;" %>
+    <%= link_to 'あなたの投稿', main_post_path(notification.main_post), style: "font-weight: bold;", class: "text-dark" %>
     <span>にいいねしました</span>
   <% when 'comment' then %>
     <% if notification.main_post.user_id == visited.id %>
-      <%= link_to "あなたの投稿", main_post_path(notification.main_post), style: "font-weight: bold;" %>
+      <%= link_to "あなたの投稿", main_post_path(notification.main_post), style: "font-weight: bold;", class: "text-dark" %>
     <% else %>
-      <%= link_to main_post_path(notification.post) do %>
+      <%= link_to main_post_path(notification.post), class: "text-dark" do %>
         <strong>
           <%= notification.post.user.name + 'さんの投稿' %>
         </strong>
@@ -28,7 +28,7 @@
     <% end %>
     <span>にコメントしました:<%= Comment.find_by(id: notification.comment_id)&.content %></span>
   <% when 'message' then %>
-    <span>あなたに<strong><%= link_to 'チャット', room_path(notification.room_id) %></strong>を送りました : <%= Message.find_by(id: notification.message_id)&.body %></span>
+    <span>あなたに<strong><%= link_to 'チャット', room_path(notification.room_id), class: "text-dark" %></strong>を送りました : <%= Message.find_by(id: notification.message_id)&.body %></span>
   <% end %>
 
 </div>

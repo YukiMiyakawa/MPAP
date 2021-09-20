@@ -1,16 +1,37 @@
-      <h3 class="my-5 under">練習合計時間</h3>
+<script>
+(function() {
+  window.addEventListener("load", function () {
+    $('[data-toggle="popover"]').popover();
+  });
+})();
+</script>
 
-      <table class="table">
-        <thead>
-          <tr class="table-active">
-            <th>Day</th><th>Month</th><th>All</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= today_min %></td>
-            <td><%= month_min %></td>
-            <td><%= sum_min %></td>
-          </tr>
-        </tbody>
-      </table>
+<table class="table">
+  <thead>
+    <tr class="table-active table-active bg-dark text-light">
+      <th></th>
+      <th class="text-center">
+        練習合計時間(分)
+
+        <button type="button" class="btn btn-outline-secondary rounded-pill"
+            data-toggle="popover"
+            title="あなたの練習を記録しよう！"
+            data-content="プロフィールの目標練習時間を設定し練習時間を入力してつぶやきを投稿しましょう！練習時間やその達成度が表示されます！">
+          ？
+        </button>
+
+      </th>
+      <th></th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr class="bg-dark text-light">
+      <td class="text-center">Day</td><td class="text-center">Month</td><td class="text-center">All</td>
+    </tr>
+    <tr>
+      <td class="text-center"><%= today_min %></td>
+      <td class="text-center"><%= month_min %></td>
+      <td class="text-center"><%= sum_min %></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,24 +1,30 @@
-<div class="container">
+<div class="container pt-3">
   <div class="row">
-    <table class="table">
-       <thead>
-        <tr>
-          <th>メッセージ相手</th><th>メッセージ内容</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @another_entries.each do |entry| %>
-          <tr>
-            <td><%= link_to entry.user.name, user_path(entry.user) %></td>
-            <td>
-              <%= link_to room_path(entry.room) do %>
-                <!--最後に送られたメッセージを表示-->
-                <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
-              <% end %>
-            </td>
+    <div class="col-md-12">
+      <div class="text-center"><h5><strong>メッセージ一覧</strong></h5></div>
+      <table class="table table-dark">
+         <thead>
+          <tr class="table-active">
+            <th class="text-center">メッセージ相手</th><th class="text-center">メッセージ内容</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @another_entries.each do |entry| %>
+            <tr>
+              <td class="text-center"><%= link_to entry.user.name, user_path(entry.user), class: "text-light" %></td>
+              <td class="text-center">
+                <%= link_to room_path(entry.room), class: "text-light" do %>
+                  <!--最後に送られたメッセージを表示-->
+                  <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="row justify-content-center mt-2 mb-2 pt-5">
+        <%= paginate @another_entries %>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,16 +1,42 @@
 class MainPostsController < ApplicationController
   def index
-    @main_posts = MainPost.all.order(created_at: :DESC)
-    @tag_list= Tag.all
+    @main_posts = MainPost.all.order(created_at: :DESC).page(params[:page]).per(8)
+    @main_post_all = MainPost.all
+    @tag_list= Tag.all.limit(6).sort {|a,b| b.post_tags.size <=> a.post_tags.size}
+    @tweets = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show
     @main_post = MainPost.find(params[:id])
+    @user = @main_post.user
+    @tweets = @user.tweets.order(created_at: :desc).page(params[:page]).per(10)
     @sub_post = SubPost.new
     @sub_posts = SubPost.where(main_post_id: @main_post.id)
     @comments = Comment.where(main_post_id: @main_post.id)
     @comment = Comment.new
     @post_tags = @main_post.tags
+
+    if user_signed_in?
+      @current_entry = Entry.where(user_id: current_user.id)
+      # Entryモデルからメッセージ相手のレコードを抽出
+      @another_entry = Entry.where(user_id: @user.id)
+      unless @user.id == current_user.id
+        @current_entry.each do |current|
+          @another_entry.each do |another|
+            # ルームが存在する場合
+            if current.room_id == another.room_id
+              @is_room = true
+              @room_id = current.room_id
+            end
+          end
+        end
+        # ルームが存在しない場合は新規作成
+        unless @is_room
+          @room = Room.new
+          @entry = Entry.new
+        end
+      end
+    end
   end
 
   def new
@@ -26,8 +52,8 @@ class MainPostsController < ApplicationController
       @main_post.save_tag(tag_list)
       redirect_to main_post_path(@main_post), notice: "You have created book successfully."
     else
-      @main_posts = MainPost.all.order(created_at: :DESC)
-      render 'index'
+      @main_post = MainPost.new
+      render 'new'
     end
   end
 
@@ -60,7 +86,8 @@ class MainPostsController < ApplicationController
   end
 
   def user_main_post
-    @main_posts = MainPost.where(user_id: params[:id])
+    @main_posts = MainPost.where(user_id: params[:id]).page(params[:page]).per(9)
+    @user = User.find(params[:id])
   end
 
   private

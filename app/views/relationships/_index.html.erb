@@ -7,7 +7,7 @@
   <% users.each do |user| %>
   <tbody>
     <tr>
-      <td><%= link_to user.name, edit_admins_user_path(user) %></td>
+      <td><%= link_to user.name, user_path(user), data: {"turbolinks" => false} %></td>
       <td>
         <% user.user_music_genres.each do |user_music_genre| %>
           <%= user_music_genre.music_genre.name %><br>
