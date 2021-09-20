@@ -86,4 +86,8 @@ Rails.application.routes.draw do
     resources :music_genres, only: [:create, :destroy, :edit, :update]
   end
 
+  get 'admins/instruments/:id' => 'admins/instruments#edit'
+  get 'admins/music_genres/:id' => 'admins/music_genres#edit'
+  get 'admins/users/:id' => 'admins/users#edit'
+
 end

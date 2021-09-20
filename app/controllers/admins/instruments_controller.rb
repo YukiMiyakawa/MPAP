@@ -7,11 +7,15 @@ class Admins::InstrumentsController < ApplicationController
   end
 
   def create
-    instrument = Instrument.new(instrument_params)
-    if instrument.save
+    @new_instrument = Instrument.new(instrument_params)
+    if @new_instrument.save
       redirect_to admins_instruments_path
     else
-      redirect_to request.referer,notice:"追加できませんでした"
+      @instruments = Instrument.all
+      @instrument = Instrument.new
+      @music_genres = MusicGenre.all
+      @music_genre = MusicGenre.new
+      render "index"
     end
   end
 
@@ -21,10 +25,11 @@ class Admins::InstrumentsController < ApplicationController
 
   def update
     @instrument = Instrument.find(params[:id])
+    # byebug
     if @instrument.update(instrument_params)
       redirect_to admins_instruments_path
     else
-      redirect_to request.referer,notice:"追加できませんでした"
+      render "edit"
     end
   end
 

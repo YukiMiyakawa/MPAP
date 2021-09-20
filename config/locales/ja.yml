@@ -6,7 +6,13 @@ ja:
       task: 練習項目
       tweet: つぶやき
       user: ユーザー
+      instrument: 使用楽器
+      music_genre: 音楽ジャンル
     attributes:
+      music_genre:
+        name: ジャンル名
+      instrument:
+        name: 楽器名
       main_post:
         title: タイトル
         content: 本文
