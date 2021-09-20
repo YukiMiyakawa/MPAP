@@ -59,7 +59,7 @@
 
   <div class="row pt-4">
 
-    <div class="col-md-9 pt-2">
+    <div class="col-md-9 pt-2 border-right">
       <div class="row d-flex justify-content-around">
 
           <% @main_posts.each do |main_post| %>
@@ -84,6 +84,12 @@
                   <% end %>
                 <% end %>
                 </div>
+
+                <% if admin_signed_in? %>
+                  <div>
+                    <%= link_to "管理者編集はこちら", admins_main_post_path(main_post) %>
+                  </div>
+                <% end %>
 
               </div>
             </div>

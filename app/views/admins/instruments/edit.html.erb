@@ -1,11 +1,14 @@
-<div class="container">
+<div class="container pt-3">
+  <div class="text-center p-2"><h5><strong>得意音楽ジャンル編集</strong></h5></div>
   <div class="row">
-    <div class="col">
-      <%= form_with url: admins_instrument_path(@instrument), model: @instrument, local: true do |f| %>
-        <%= f.label :ジャンル名 ,class:"mr-3" %>
-        <%= f.text_field :name, placeholder: "ジャンル名" %>
-        <%= f.submit "変更を保存", class: "btn btn-outline-dark ml-3" %>
-      <% end %>
+    <div class="col pt-5">
+      <div class="row justify-content-center">
+        <%= form_with url: admins_instrument_path(@instrument), model: @instrument, local: true do |f| %>
+          <strong><%= f.label :楽器名 ,class:"mr-3" %></strong>
+          <%= f.text_field :name, placeholder: "ジャンル名" %>
+          <%= f.submit "変更を保存", class: "btn btn-outline-dark ml-3" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
