@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    models:
+      main_post: メイン記事
+      sub_post: サブ記事
+      task: 練習項目
+      tweet: つぶやき
+      user: ユーザー
+    attributes:
+      main_post:
+        title: タイトル
+        content: 本文
+      sub_post:
+        title: タイトル
+        content: 本文
+      task:
+        name: 練習項目名
+      tweet:
+        practice_time: 練習時間
+        comment: 練習つぶやき
+      user:
+        name: ユーザー名
+        introduction: introduction(紹介文)
+        target_time: 目標練習時間(分/日)
+        email: メールアドレス
+        password: パスワード

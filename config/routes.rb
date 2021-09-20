@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     resources :tasks, only: [:create, :destroy]
   end
 
+  get 'users/:user_id/tweets/:id' => 'tweets#edit'
+
   # 検索
   get 'search' => 'searches#search', as: 'search'
   get 'one_tag_search/:id' => 'searches#one_tag_search', as: 'one_tag_search'
@@ -49,6 +51,8 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resource :book_marks, only: [:create, :destroy]
   end
+
+  get 'main_posts/:id/sub_posts' => 'main_posts#show'
 
   # ブックマーク一覧
   get 'book_marks/:id' => 'book_marks#index', as: 'book_marks'

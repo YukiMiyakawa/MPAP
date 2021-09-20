@@ -52,7 +52,6 @@ class MainPostsController < ApplicationController
       @main_post.save_tag(tag_list)
       redirect_to main_post_path(@main_post), notice: "You have created book successfully."
     else
-      @main_post = MainPost.new
       render 'new'
     end
   end

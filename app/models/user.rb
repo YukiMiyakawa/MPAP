@@ -1,12 +1,14 @@
 class User < ApplicationRecord
-  #認証キーに[:name]追加
-  devise :database_authenticatable, authentication_keys: [:name]
+  #認証キー追加
+  devise :database_authenticatable, authentication_keys: [:name, :target_time, :introduction]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :name, presence: true
+  validates :name, length: { minimum: 1, maximum: 20 }, presence: true
+  validates :introduction, length: { minimum: 1, maximum: 80 }, presence: true
+  validates :target_time, presence: true, numericality: { only_integer: true }
 
   attachment :image
 
@@ -81,7 +83,7 @@ class User < ApplicationRecord
   # 通知
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
-  
+
   # フォロー時通知
   def create_notification_follow!(current_user)
     temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])

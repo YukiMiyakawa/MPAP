@@ -1,11 +1,21 @@
-<div class="container">
-  <%= form_with model:[@user, @tweet], local:true do |f| %>
-    <%= f.label :Tweet %>
-    <%= f.text_area :comment, class: "form-control name" %>
+<div class="container pt-3">
+  <div class="row">
+    <div class="col">
+      <h5 class="text-center pt-3">つぶやき編集</h5>
+      <% if @edit_tweet.present? %>
+        <%= render 'layouts/error_messages', model: @edit_tweet %>
+      <% end %>
+      <%= form_with model:[@user, @tweet], local:true do |f| %>
+        <%= f.label "練習つぶやき" %>
+        <%= f.text_area :comment, class: "form-control name" %>
 
-    <%= f.label :'PracticeTime(min)' %>
-    <%= f.text_field :practice_time, class: "form-control introduction" %>
+        <%= f.label "練習時間（分）※半角数字" %>
+        <%= f.text_field :practice_time, class: "form-control introduction", :placeholder => "半角数字で入力してください" %>
 
-    <%= f.submit class: 'btn btn-secondary' %>
-  <% end %>
+        <div class="row justify-content-center mt-2 mb-2 pt-5">
+          <%= f.submit "更新", class: 'btn btn-secondary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

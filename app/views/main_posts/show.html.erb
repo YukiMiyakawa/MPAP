@@ -74,8 +74,11 @@
       <div>
         <% if user_signed_in? %>
           <% if @main_post.user_id == current_user.id %>
-          <h5 class="text-center pt-3">サブ記事投稿</h5>
-          <%= render "sub_posts/form", main_post: @main_post, sub_post: @sub_post %>
+            <h5 class="text-center pt-3">サブ記事投稿</h5>
+          <% if @new_sub_post.present? %>
+            <%= render 'layouts/error_messages', model: @new_sub_post %>
+          <% end %>
+            <%= render "sub_posts/form", main_post: @main_post, sub_post: @sub_post %>
           <% end %>
         <% end %>
       </div>

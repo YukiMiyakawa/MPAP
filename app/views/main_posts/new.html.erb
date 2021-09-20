@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col">
       <h5 class="text-center pt-3">メイン記事投稿</h5>
+      <%= render 'layouts/error_messages', model: @main_post %>
 
       <%= form_with model: @main_post, local:true do |f| %>
         <%= f.label "タイトル" %>
