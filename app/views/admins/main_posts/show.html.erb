@@ -1,38 +1,75 @@
-<div class="container">
+<% @user = @main_post.user %>
 
-  <div class="bg-secondary">
-    <div class="col-8">
-      <%= form_with url: admins_main_post_path(@main_post), model: @main_post, local: true do |f| %>
-      <span>記事公開ステータス：</span>
-      <%= f.radio_button :public_status, false ,class:"ml-3" %>
-      <%= f.label :public_status, '公開中', value: false %>
-      <%= f.radio_button :public_status, true %>
-      <%= f.label :public_status, '公開停止中', value: true %>
-    　<%= f.submit "変更を保存", class: "btn btn-outline-dark" %>
-      <% end %>
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <%= form_with url: admins_main_post_path(@main_post), model: @main_post, local: true do |f| %>
+        <span>記事公開ステータス：</span>
+        <%= f.radio_button :public_status, false ,class:"ml-3" %>
+        <%= f.label :public_status, '公開中', value: false %>
+        <%= f.radio_button :public_status, true %>
+        <%= f.label :public_status, '公開停止中', value: true %>
+      　<%= f.submit "変更を保存", class: "btn btn-outline-dark" %>
+        <% end %>
+      </div>
+
+    <!--メイン記事-->
+      <div class="bg-light p-5">
+
+        <!--メイン記事内容-->
+        <h2><%= @main_post.title %></h2>
+        <div class="d-flex justify-content-between border-top">
+        <p>投稿者：<%= link_to @user.name, edit_admins_user_path(@user), data: {"turbolinks" => false}, class: "text-dark" %></p>
+        <p>投稿日: <%= @main_post.created_at.strftime("%Y-%m-%d %H:%M") %> </p>
+        </div>
+
+        <div class="row justify-content-center">
+          <% if @main_post.youtube_url.present? %>
+          <div><iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@main_post.youtube_url[32..42]%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <% end %>
+          <div><%= attachment_image_tag @main_post, :image, format: "jpeg", size: "560x315" %></div>
+          <div><%= audio_tag @main_post.audio_was, :controls => true if @main_post.audio? %></div>
+        </div>
+        <div class="pb-3 border-top mt-2"><%= @main_post.content %></div>
+
+
+        <!--メイン記事編集-->
+          <div class="d-flex justify-content-end">
+            <%= link_to '削除', admins_main_post_path(@main_post), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
+          </div>
+
+      </div>
+    <!--サブ記事-->
+      <!--サブ記事内容-->
+      <div class="bg-light p-5">
+        <%= render "sub_posts/index", main_post: @main_post, sub_posts: @sub_posts %>
+      </div>
+
+      </div>
+
+    <!--コメント-->
+      <div class="col">
+        <div class="text-center text-white bg-secondary"><p><strong>コメント</strong></p></div>
+        <div>
+          <% if @comments.present? %>
+            <% @comments.each do |comment| %>
+              <div class="d-flex justify-content-between border-top">
+                <p>投稿者:<%= comment.user.name %></p>
+                <p><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+              </div>
+              <div class="ml-3 mr-3"><p><%= comment.content %></p></div>
+
+                <%= link_to '削除', admins_main_post_comment_path(@main_post, comment), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
+
+            <% end %>
+          <% else %>
+            <div class="text-center"><p><strong>コメントがありません</strong></p></div>
+          <% end %>
+        </div>
+      </div>
+
     </div>
-    <h2><%= @main_post.title %></h2>
-    <div><%= attachment_image_tag @main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
-    <div><%= @main_post.content %></div>
 
-    <div><%= @main_post.favorites.count %></div>
-
-    <div><%= link_to '削除', admins_main_post_path(@main_post), method: :delete, class: "text-light" %></div>
-
-  <div class="bg-secondary">
-    <% @sub_posts.each do |sub_post| %>
-      <h2><%= sub_post.title %></h2>
-      <div><%= attachment_image_tag sub_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %></div>
-      <div><%= sub_post.content %></div>
-    <% end %>
-  </div>
-
-  <div>
-    <h5>コメント</h5>
-    <% @comments.each do |comment| %>
-      <div><%= comment.user.name %></div>
-      <div><%= comment.content %></div>
-      <%= link_to '削除', admins_main_post_comment_path(@main_post, comment), method: :delete, class: "text-dark" %>
-    <% end %>
   </div>
 </div>
