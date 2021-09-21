@@ -4,7 +4,7 @@ class MainPostsController < ApplicationController
     @main_posts = MainPost.all.order(created_at: :DESC).page(params[:page]).per(8)
     @main_post_all = MainPost.all
     @tag_list= Tag.all.limit(6).sort {|a,b| b.post_tags.size <=> a.post_tags.size}
-    @tweets = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
+    @tweets = Tweet.all.limit(15).order(created_at: :desc)
   end
 
   def show

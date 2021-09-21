@@ -1,27 +1,29 @@
-<div class="container pt-3">
-  <div class="row">
-    <div class="col-md-12">
+<div class="instruments-3-visual content_height">
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-12">
 
-      <div class="text-center pt-3 pb-3">
-        <h5>
-          <strong>
-            タグ一覧
-          </strong>
-        </h5>
-      </div>
+        <div class="text-center pt-3 pb-3">
+          <h5>
+            <strong>
+              タグ一覧
+            </strong>
+          </h5>
+        </div>
 
-      <!--タグリスト-->
-      <div class="pr-4 pt-4">
-        <% @tag_list.each do |list|%>
-        <% if list.post_tags.count != 0 %>
-          <%= link_to one_tag_search_path(list.id), class:"btn btn-outline-secondary m-2" do %>
-            <%=list.name %>
-              <%="(#{list.post_tags.count})" %>
+        <!--タグリスト-->
+        <div class="pr-4 pt-4">
+          <% @tag_list.each do |list|%>
+          <% if list.post_tags.count != 0 %>
+            <%= link_to one_tag_search_path(list.id), class:"btn btn-outline-secondary m-2" do %>
+              <%=list.name %>
+                <%="(#{list.post_tags.count})" %>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
 
+      </div>
     </div>
   </div>
 </div>
