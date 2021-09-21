@@ -1,4 +1,12 @@
-<div class="instruments-3-visual">
+<div class="instruments-3-visual content_height">
+
+  <% if @user.user_status? %>
+
+
+
+
+
+
   <div class="container pt-3">
     <div class="row border-bottom">
       <div class ="col-md-4">
@@ -107,3 +115,11 @@
       </div>
     <% end %>
   </div>
+
+  <% else %>
+  <div class="container pt-3">
+    <div class="row"><div class="col">退会済ユーザー</div></div>
+  </div>
+  <% end %>
+
+</div>

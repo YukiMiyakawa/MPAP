@@ -67,15 +67,33 @@ class SearchesController < ApplicationController
       @instrument_user_id = @user_instruments.pluck(:user_id)
       @music_genre_user_id = @user_music_genres.pluck(:user_id)
 
-      @user_id = @instrument_user_id & @music_genre_user_id
-      @users = User.find(@user_id)
-      @users = Kaminari.paginate_array(@users).page(params[:page]).per(6)
-      render template: "users/index"
-    else
-      @main_posts = MainPost.all
-      @users = User.all
-      @users = @users.page(params[:page]).per(6)
-      render template: "users/index"
+      if params[:instrument_id].blank? && params[:music_genre_id].blank?
+
+        @main_posts = MainPost.all
+        @users = User.all
+        @users = @users.page(params[:page]).per(6)
+        render template: "users/index"
+
+      elsif @instrument_user_id.empty?
+
+        @users = User.find(@music_genre_user_id)
+        @users = Kaminari.paginate_array(@users).page(params[:page]).per(6)
+        render template: "users/index"
+
+      elsif @music_genre_user_id.empty?
+
+        @users = User.find(@instrument_user_id)
+        @users = Kaminari.paginate_array(@users).page(params[:page]).per(6)
+        render template: "users/index"
+
+      else
+
+        @user_id = @instrument_user_id & @music_genre_user_id
+        @users = User.find(@user_id)
+        @users = Kaminari.paginate_array(@users).page(params[:page]).per(6)
+        render template: "users/index"
+
+      end
     end
   end
 
