@@ -8,6 +8,7 @@ ja:
       user: ユーザー
       instrument: 使用楽器
       music_genre: 音楽ジャンル
+      tag: タグ
     attributes:
       music_genre:
         name: ジャンル名
@@ -30,6 +31,8 @@ ja:
         target_time: 目標練習時間(分/日)
         email: メールアドレス
         password: パスワード
+      tag:
+        name: タグ名
   devise:
     confirmations:
       confirmed: 'アカウントを登録しました。'

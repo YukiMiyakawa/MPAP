@@ -1,4 +1,5 @@
 class Admins::InstrumentsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @instruments = Instrument.all
     @instrument = Instrument.new

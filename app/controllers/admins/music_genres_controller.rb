@@ -1,4 +1,5 @@
 class Admins::MusicGenresController < ApplicationController
+  before_action :authenticate_admin!
   def create
     music_genre = MusicGenre.new(music_genre_params)
     if music_genre.save

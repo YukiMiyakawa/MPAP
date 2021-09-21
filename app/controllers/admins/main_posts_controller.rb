@@ -1,4 +1,5 @@
 class Admins::MainPostsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @main_posts = MainPost.all
   end
