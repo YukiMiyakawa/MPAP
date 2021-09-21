@@ -1,4 +1,5 @@
 class MainPostsController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index, :user_main_post]
   def index
     @main_posts = MainPost.all.order(created_at: :DESC).page(params[:page]).per(8)
     @main_post_all = MainPost.all

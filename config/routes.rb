@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'inquirys/index'
-  get 'inquirys/confirm'
-  get 'inquirys/thanks'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #deviseルーティング
   devise_for :users, controllers: {
@@ -30,6 +27,11 @@ Rails.application.routes.draw do
   end
 
   get 'users/:user_id/tweets/:id' => 'tweets#edit'
+
+  # 問い合わせ
+  get 'inquirys/index'
+  get 'inquirys/confirm'
+  get 'inquirys/thanks'
 
   # 検索
   get 'search' => 'searches#search', as: 'search'
@@ -85,5 +87,9 @@ Rails.application.routes.draw do
     resources :instruments, only: [:index, :create, :destroy, :edit, :update]
     resources :music_genres, only: [:create, :destroy, :edit, :update]
   end
+
+  get 'admins/instruments/:id' => 'admins/instruments#edit'
+  get 'admins/music_genres/:id' => 'admins/music_genres#edit'
+  get 'admins/users/:id' => 'admins/users#edit'
 
 end

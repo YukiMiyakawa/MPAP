@@ -36,7 +36,7 @@
 
         <!--メイン記事編集-->
           <div class="d-flex justify-content-end">
-            <%= link_to '削除', admins_main_post_path(@main_post), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
+            <%= link_to '削除', admins_main_post_path(@main_post), "data-confirm" => "本当に削除しますか？", method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
           </div>
 
       </div>
@@ -60,7 +60,7 @@
               </div>
               <div class="ml-3 mr-3"><p><%= comment.content %></p></div>
 
-                <%= link_to '削除', admins_main_post_comment_path(@main_post, comment), method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
+                <%= link_to '削除', admins_main_post_comment_path(@main_post, comment),"data-confirm" => "本当に削除しますか？", method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
 
             <% end %>
           <% else %>

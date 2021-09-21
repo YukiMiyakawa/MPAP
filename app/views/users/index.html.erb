@@ -1,66 +1,68 @@
-<div class="container pt-3">
+<div class="instruments-2-visual">
+  <div class="container pt-3">
 
-  <div class="row">
-    <div class="pr-4">
-    <%= render "searches/search_form" %>
-    </div>
-    <%= render "searches/search_user" %>
-  </div>
-
-  <div class="row pt-3">
-    <div class="col-md-12">
-      <div class="row d-flex justify-content-around">
-        <% @users.each do |user| %>
-          <div class="col-md-3 shadow p-3 m-4">
-            <div>
-              <div>
-                <%= link_to user_path(user), data: {"turbolinks" => false} do %>
-                  <%= attachment_image_tag user, :image, format: "jpeg", fallback: "no_user_image.jpg", size: "200x150", class:"d-block mx-auto" %>
-                  <H5 class="text-center text-dark"><strong><%= user.name %></strong></H5>
-                <% end %>
-              </div>
-            </div>
-            <div>
-              <div class="row d-flex justify-content-around">
-                <span>
-                  <strong>follow: </strong><%= link_to "#{user.followings.count}", user_followings_path(user), class: 'text-dark' %>
-                  <strong>  follower: </strong><%= link_to "#{user.followers.count}", user_followers_path(user), class: 'text-dark' %>
-                </span>
-              </div>
-            </div>
-            <div>
-              <p class="text-center p-1 bg-light"><strong>得意ジャンル</strong></p>
-              <div class="overflow-auto" style="height:50px;">
-                <% if user.user_music_genres.present? %>
-                  <% user.user_music_genres.each do |user_music_genre| %>
-                    <p class="text-center"><%= user_music_genre.music_genre.name %></p>
-                  <% end %>
-                <% else %>
-                  <p class="text-center">未設定です</p>
-                <% end %>
-              </div>
-            </div>
-            <div>
-              <p class="text-center p-1 bg-light"><strong>得意楽器</strong></p>
-              <div class="overflow-auto" style="height:50px;">
-                <% if user.user_instruments.present? %>
-                  <% user.user_instruments.each do |user_instrument| %>
-                    <p class="text-center"><%= user_instrument.instrument.name %></p>
-                  <% end %>
-                <% else %>
-                  <p class="text-center">未設定です</p>
-                <% end %>
-              </div>
-            </div>
-            <div class="pt-2">
-              <p class="text-center"><strong><%= link_to "投稿一覧", user_main_post_path(user), class: 'text-dark' %></strong></p>
-            </div>
-          </div>
-        <% end %>
+    <div class="row">
+      <div class="pr-4">
+      <%= render "searches/search_form" %>
       </div>
-        <div class="row justify-content-center mt-2 mb-2 pt-5">
-          <%= paginate @users %>
+      <%= render "searches/search_user" %>
+    </div>
+
+    <div class="row pt-3">
+      <div class="col-md-12">
+        <div class="row d-flex justify-content-start">
+          <% @users.each do |user| %>
+            <div class="col-md-3 shadow p-3 m-4 bg-white">
+              <div>
+                <div>
+                  <%= link_to user_path(user), data: {"turbolinks" => false} do %>
+                    <%= attachment_image_tag user, :image, format: "jpeg", fallback: "no_user_image.jpg", size: "200x150", class:"d-block mx-auto" %>
+                    <H5 class="text-center text-dark"><strong><%= user.name %></strong></H5>
+                  <% end %>
+                </div>
+              </div>
+              <div>
+                <div class="row d-flex justify-content-around">
+                  <span>
+                    <strong>follow: </strong><%= link_to "#{user.followings.count}", user_followings_path(user), class: 'text-dark' %>
+                    <strong>  follower: </strong><%= link_to "#{user.followers.count}", user_followers_path(user), class: 'text-dark' %>
+                  </span>
+                </div>
+              </div>
+              <div>
+                <p class="text-center p-1 bg-light"><strong>得意ジャンル</strong></p>
+                <div class="overflow-auto" style="height:50px;">
+                  <% if user.user_music_genres.present? %>
+                    <% user.user_music_genres.each do |user_music_genre| %>
+                      <p class="text-center"><%= user_music_genre.music_genre.name %></p>
+                    <% end %>
+                  <% else %>
+                    <p class="text-center">未設定です</p>
+                  <% end %>
+                </div>
+              </div>
+              <div>
+                <p class="text-center p-1 bg-light"><strong>得意楽器</strong></p>
+                <div class="overflow-auto" style="height:50px;">
+                  <% if user.user_instruments.present? %>
+                    <% user.user_instruments.each do |user_instrument| %>
+                      <p class="text-center"><%= user_instrument.instrument.name %></p>
+                    <% end %>
+                  <% else %>
+                    <p class="text-center">未設定です</p>
+                  <% end %>
+                </div>
+              </div>
+              <div class="pt-2">
+                <p class="text-center"><strong><%= link_to "投稿一覧", user_main_post_path(user), class: 'text-dark' %></strong></p>
+              </div>
+            </div>
+          <% end %>
         </div>
+          <div class="row justify-content-center mt-2 mb-2 pt-5">
+            <div class="mt-2 mb-2 shadow bg-white"><%= paginate @users %></div>
+          </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 class UserMusicGenresController < ApplicationController
+  before_action :authenticate_user!
   def create
     @user_music_genre = UserMusicGenre.new(user_music_genre_params)
     @user_music_genre.user_id = current_user.id

@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  
   def create
     @new_tweet = Tweet.new(tweet_params)
     @new_tweet.user_id = current_user.id

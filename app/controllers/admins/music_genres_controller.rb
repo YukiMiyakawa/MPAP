@@ -1,10 +1,11 @@
 class Admins::MusicGenresController < ApplicationController
+  before_action :authenticate_admin!
   def create
     music_genre = MusicGenre.new(music_genre_params)
     if music_genre.save
       redirect_to admins_instruments_path
     else
-      redirect_to request.referer,notice:"追加できませんでした"
+      redirect_to request.referer, flash: { error: "ジャンル名が入力されていません。" }
     end
   end
 
@@ -17,7 +18,7 @@ class Admins::MusicGenresController < ApplicationController
     if @music_genre.update(music_genre_params)
       redirect_to admins_instruments_path
     else
-      redirect_to request.referer,notice:"追加できませんでした"
+      render "edit"
     end
   end
 
@@ -26,7 +27,7 @@ class Admins::MusicGenresController < ApplicationController
     if music_genre.destroy
       redirect_to admins_instruments_path
     else
-      redirect_to request.referer,notice:"削除できませんでした"
+      redirect_to request.referer
     end
   end
 

@@ -27,9 +27,10 @@ class MainPost < ApplicationRecord
   #タグ機能
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+
   #タグ編集
   def save_tag(sent_tags)
-    current_tags = tags.pluck(:name) unless tags.nil?
+    current_tags = self.tags.pluck(:name) unless self.tags.nil?
     old_tags = current_tags - sent_tags
     new_tags = sent_tags - current_tags
 

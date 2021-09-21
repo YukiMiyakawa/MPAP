@@ -1,4 +1,5 @@
 class UserInstrumentsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @user_instrument = UserInstrument.new(user_instrument_params)
     @user_instrument.user_id = current_user.id

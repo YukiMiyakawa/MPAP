@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
   def create
     main_post = MainPost.find(params[:main_post_id])
     @comment = Comment.new(main_post_params)
@@ -8,7 +9,7 @@ class CommentsController < ApplicationController
     if  @comment.save
       # コメント通知
       @main_post.create_notification_comment!(current_user, @comment.id)
-      
+
       redirect_to main_post_path(params[:main_post_id]), notice: "You have created book successfully."
     else
       @comments = Comment.all

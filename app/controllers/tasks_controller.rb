@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!
   def create
     @new_task = Task.new(task_params)
     @new_task.user_id = current_user.id

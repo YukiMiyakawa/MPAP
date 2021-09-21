@@ -1,108 +1,109 @@
-<div class="container pt-3">
-  <div class="row border-bottom">
-    <div class ="col-md-4">
+<div class="instruments-2-visual">
+  <div class="container pt-3">
+    <div class="row border-bottom">
+      <div class ="col-md-4">
 
-      <!--ユーザー情報-->
-      <%= render "user", user: @user, is_room: @is_room, room_id: @room_id %>
+        <!--ユーザー情報-->
+        <%= render "user", user: @user, is_room: @is_room, room_id: @room_id %>
 
-    </div>
-
-    <div class ="col-md-4">
-
-      <!--得意音楽ジャンル-->
-      <div class="shadow-sm bg-light p-3 mb-3"><%= render "user_music_genres/index", user: @user, user_music_genre: @user_music_genre, user_music_genres: @user_music_genres %></div>
-
-    </div>
-    <div class ="col-md-4">
-
-      <!--得意楽器-->
-      <div class="shadow-sm bg-light p-3 mb-3"><%= render "user_instruments/index", user: @user, user_instrument: @user_instrument, user_instruments: @user_instruments %></div>
-
-    </div>
-  </div>
-
-  <div class="row pt-3">
-    <div class="col-md-4">
-
-      <!--タスク-->
-      <div class="shadow-sm bg-light p-3 mb-3">
-
-      <% if flash[:task_error].present? %>
-        <ul class="errors">
-          <% flash[:task_error].each do |e| %>
-            <li><%= e %></li>
-          <% end %>
-        </ul>
-      <% end %>
-
-        <%= render "tasks/index", user: @user, task: @task, tasks: @tasks, new_task: @new_task %>
       </div>
 
-      <!--Tweet部分-->
-      <% if user_signed_in? %>
-        <% if @user.id == current_user.id %>
+      <div class ="col-md-4">
 
-          <% if flash[:tweet_error].present? %>
-            <ul class="errors">
-              <% flash[:tweet_error].each do |e| %>
-                <li><%= e %></li>
-              <% end %>
-            </ul>
-          <% end %>
+        <!--得意音楽ジャンル-->
+        <div class=" bg-light p-3 mb-3"><%= render "user_music_genres/index", user: @user, user_music_genre: @user_music_genre, user_music_genres: @user_music_genres %></div>
 
-          <div class="border border-secondary-top-bottom rounded p-4">
-            <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
-          </div>
+      </div>
+      <div class ="col-md-4">
+
+        <!--得意楽器-->
+        <div class="shadow-lg bg-light p-3 mb-3"><%= render "user_instruments/index", user: @user, user_instrument: @user_instrument, user_instruments: @user_instruments %></div>
+
+      </div>
+    </div>
+
+    <div class="row pt-3">
+      <div class="col-md-4">
+
+        <!--タスク-->
+        <div class="shadow-lg bg-light p-3 mb-3">
+
+        <% if flash[:task_error].present? %>
+          <ul class="errors">
+            <% flash[:task_error].each do |e| %>
+              <li><%= e %></li>
+            <% end %>
+          </ul>
         <% end %>
-      <% end %>
-      <div class="pt-3">
-        <div class="overflow-auto" style="height:600px;">
-          <%= render "tweets/index", tweets: @tweets %>
+
+          <%= render "tasks/index", user: @user, task: @task, tasks: @tasks, new_task: @new_task %>
         </div>
-      </div>
 
+        <!--Tweet部分-->
+        <% if user_signed_in? %>
+          <% if @user.id == current_user.id %>
 
-    </div>
+            <% if flash[:tweet_error].present? %>
+              <ul class="errors">
+                <% flash[:tweet_error].each do |e| %>
+                  <li><%= e %></li>
+                <% end %>
+              </ul>
+            <% end %>
 
-    <div class="col-md-8">
-
-      <!--合計練習時間-->
-      <div class="shadow-sm bg-light p-3 mb-3"><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
-
-      <div class="row">
-        <div class="col-md-6 text-center shadow-sm bg-light p-3 mb-3">
-          <a><strong>週間練習時間</strong></a>
-          <%= area_chart @practice_sum_chart, empty: "目標練習時間を設定し練習時間をつぶやいて下さい", colors: ["#993333"] %>
-        </div>
-        <div class="col-md-6 text-center shadow-sm bg-light p-3 mb-3">
-          <a><strong>週間練習時間達成度</strong></a>
-          <%= pie_chart @achievement_rate, donut: true, suffix: "%", min: 0, max: 100, colors: ["#993333", "#808080"], empty: "目標練習時間を設定し練習時間をつぶやいて下さい" %>
-        </div>
-      </div>
-
-      <!--カレンダー-->
-      <div class="text-center shadow-sm bg-light p-3 mb-3">
-      <a><strong>練習記録カレンダー</strong></a>
-      <%= month_calendar events: @tweets do |date, tweets| %>
-        <%= date.day %>
-
-        <% tweets.each do |tweet| %>
-          <div>
-            <%= tweet.comment %>
-          </div>
+            <div class="border border-secondary-top-bottom rounded p-4">
+              <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+        <div class="pt-3">
+          <div class="overflow-auto" style="height:600px;">
+            <%= render "tweets/index", tweets: @tweets %>
+          </div>
+        </div>
+
+
       </div>
 
-    </div>
-  </div>
+      <div class="col-md-8">
 
-  <!--退会-->
-  <% if user_signed_in? %>
-    <div class="row justify-content-center mt-2 mb-2">
-  　  <% if @user.id == current_user.id %>
-        <%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name),class:"btn btn-outline-secondary" %>
-      <% end %>
+        <!--合計練習時間-->
+        <div class="shadow-lg bg-light p-3 mb-3"><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
+
+        <div class="row">
+          <div class="col-md-6 text-center shadow-lg bg-light p-3 mb-3">
+            <a><strong>週間練習時間</strong></a>
+            <%= area_chart @practice_sum_chart, empty: "目標練習時間を設定し練習時間をつぶやいて下さい", colors: ["#993333"] %>
+          </div>
+          <div class="col-md-6 text-center shadow-lg bg-light p-3 mb-3">
+            <a><strong>週間練習時間達成度</strong></a>
+            <%= pie_chart @achievement_rate, donut: true, suffix: "%", min: 0, max: 100, colors: ["#993333", "#808080"], empty: "目標練習時間を設定し練習時間をつぶやいて下さい" %>
+          </div>
+        </div>
+
+        <!--カレンダー-->
+        <div class="text-center shadow-lg bg-light p-3 mb-3">
+        <a><strong>練習記録カレンダー</strong></a>
+        <%= month_calendar events: @tweets do |date, tweets| %>
+          <%= date.day %>
+
+          <% tweets.each do |tweet| %>
+            <div>
+              <%= tweet.comment %>
+            </div>
+          <% end %>
+        <% end %>
+        </div>
+
+      </div>
     </div>
-  <% end %>
-</div>
+
+    <!--退会-->
+    <% if user_signed_in? %>
+      <div class="row justify-content-center mt-2 mb-2">
+    　  <% if @user.id == current_user.id %>
+          <%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name),class:"btn btn-outline-secondary" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>

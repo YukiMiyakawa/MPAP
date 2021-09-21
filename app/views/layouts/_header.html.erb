@@ -1,29 +1,39 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="/"><span>MPAP</span></a>
+      <a class="navbar-brand" href="/"><span><i class="fas fa-music text-light">MPAP</i></span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
 
+        <% if admin_signed_in? %>
+          <li>
+          <div class="dropdown">
+            <button type="button" id="dropdown1"
+                class="btn btn-secondary dropdown-toggle bg-dark"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+              管理者メニュー
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdown1">
+              <p class="dropdown-item" href="#"><%= link_to 'ユーザー一覧', admins_users_path, class: "text-dark" %></p>
+              <p class="dropdown-item" href="#"><%= link_to '音楽ジャンル・楽器一覧', admins_instruments_path, class: "text-dark" %></p>
+              <p class="dropdown-item" href="#"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "text-dark" %></p>
+            </div>
+          </div>
+          </li>
+        <% end %>
         <% if user_signed_in? %>
-          <li><%= link_to ' Home',root_path,class: 'fas fa-home nav-link text-light' %></li>
-          <li><%= link_to ' Mypage',user_path(current_user),class: 'fas fa-users nav-link text-light', data: {"turbolinks" => false} %></li>
+          <li><%= link_to ' Mypage',user_path(current_user),class: 'fas fa-user nav-link text-light', data: {"turbolinks" => false} %></li>
           <li><%= link_to ' Users',users_path,class: 'fas fa-users nav-link text-light', data: {"turbolinks" => false} %></li>
           <li><%= link_to ' Posts',main_posts_path,class: 'fas fa-book-open nav-link text-light'%></li>
-          <li><%= link_to ' Post Create',new_main_post_path,class: 'fas fa-book-open nav-link text-light'%></li>
-          <li><%= link_to "通知一覧", notifications_path,class: 'fas fa-book-open nav-link text-light' %></li>
+          <li><%= link_to ' Post Create',new_main_post_path,class: 'fas fa-pen-nib nav-link text-light'%></li>
+          <li><%= link_to ' Notice', notifications_path,class: 'fas fa-bell nav-link text-light' %></li>
           <li><%= link_to ' logout', destroy_user_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
-        <% elsif admin_signed_in? %>
-          <li><%= link_to ' Home',root_path,class: 'fas fa-home nav-link text-light' %></li>
-          <li><%= link_to ' Users',admins_users_path,class: 'fas fa-users nav-link text-light' %></li>
-          <li><%= link_to ' Posts',main_posts_path,class: 'fas fa-book-open nav-link text-light'%></li>
-          <li><%= link_to ' Instrument',admins_instruments_path,class: 'fas fa-book-open nav-link text-light'%></li>
-          <li><%= link_to ' logout', destroy_admin_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
         <% else %>
-          <li><%= link_to ' Home',root_path,class: 'fas fa-home nav-link text-light' %></li>
           <li><%= link_to ' Users',users_path,class: 'fas fa-users nav-link text-light', data: {"turbolinks" => false} %></li>
           <li><%= link_to ' Posts',main_posts_path,class: 'fas fa-book-open nav-link text-light'%></li>
           <li><%= link_to ' sign up', new_user_registration_path,class: 'fas fa-user-plus nav-link text-light' %></li>

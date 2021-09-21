@@ -1,4 +1,5 @@
 class SubPostsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @new_sub_post = SubPost.new(sub_post_params)
     @new_sub_post.main_post_id = params[:main_post_id]

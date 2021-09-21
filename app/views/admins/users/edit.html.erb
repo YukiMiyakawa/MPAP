@@ -6,31 +6,32 @@
       <div class="row d-flex justify-content-around">
 
             <div class="col-md-6 shadow m-1 p-5">
+            <div class="text-center p-2"><%= flash[:notice] %></div>
 
-      <%= form_with model: @user, url: admins_user_path(@user), local: true do |f| %>
+            <%= form_with model: @user, url: admins_user_path(@user), local: true do |f| %>
 
-        <div><span>会員ID: <%= @user.id %></span></div>
+              <div><span>会員ID: <%= @user.id %></span></div>
 
-        <div><%= f.label :ユーザー名 %></div>
-        <div><%= f.text_field :name,class:"form-control" %></div>
+              <div><%= f.label :ユーザー名 %></div>
+              <div><%= f.text_field :name,class:"form-control" %></div>
 
-        <div><%= f.label :メールアドレス %></div>
-        <div><%= f.email_field :email,class:"form-control" %></div>
+              <div><%= f.label :メールアドレス %></div>
+              <div><%= f.email_field :email,class:"form-control" %></div>
 
 
-        <div><%= f.label :会員ステータス %></div>
-        <div>
-          <%= f.radio_button :user_status,true %>
-          <%= f.label "有効" %>
-          <%= f.radio_button :user_status,false %>
-          <%= f.label "退会",class:"mr-3" %>
-        </div>
+              <div><%= f.label :会員ステータス %></div>
+              <div>
+                <%= f.radio_button :user_status,true %>
+                <%= f.label :user_status, "有効", value: true %>
+                <%= f.radio_button :user_status,false %>
+                <%= f.label :user_status, "退会", value: false, class:"mr-3" %>
+              </div>
 
-      <div class="row justify-content-center mt-2 mb-2 pt-5">
-        <%= f.submit "変更を保存",class:"btn btn-outline-dark" %>
-      </div>
+            <div>
+              <%= f.submit "変更を保存",class:"btn btn-outline-dark" %>
+            </div>
 
-      <% end %>
+            <% end %>
 
             </div>
 
@@ -40,3 +41,5 @@
     </div>
   </div>
 </div>
+
+
