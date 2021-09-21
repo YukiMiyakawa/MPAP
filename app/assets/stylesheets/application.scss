@@ -68,8 +68,21 @@ footer {
   background-repeat: no-repeat;
 }
 
+.instruments-3-visual {
+  background-image: image-url("instruments-3.jpg");
+  background-size: 100% auto;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+
 .guitar-1-visual {
   background-image: image-url("guitar-1.jpg");
-  background-size: auto;
-  background-position: bottom right;
+  background-size: 100% auto;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+.bg-rgba {
+  color: rgba(0, 0, 0, 0.5);
 }
