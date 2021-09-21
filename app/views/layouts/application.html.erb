@@ -14,14 +14,39 @@
       <main>
 
         <div id="header" class="sticky-top">
+
           <%= render "layouts/header" %>
+          <% if user_signed_in? %>
+            <% if !current_user.user_music_genres.exists? %>
+
+              <div class="alert alert-warning alert-dismissible fade show m-0" role="alert">
+                <strong>得意音楽ジャンルが設定されていません</strong>　マイページから設定できます。
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+            <% end %>
+            <% if !current_user.user_instruments.exists? %>
+
+              <div class="alert alert-warning alert-dismissible fade show m-0" role="alert">
+                <strong>使用楽器が設定されていません</strong>　マイページから設定できます。
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+            <% end %>
+          <% end %>
+
         </div>
+
         <%= yield %>
 
       </main>
 
       <footer>
-  
+
         <div class="container">
           <div class="row">
             <div class="col mt-5">
@@ -29,10 +54,10 @@
               <p class="text-center"><%= link_to 'お問い合わせはこちら', inquirys_path, class: "text-dark" %></p>
               <p class="text-center"><%= link_to '管理者はこちら', new_admin_session_path, class: "text-dark" %></p>
             </div>
-  
+
           </div>
         </div>
-  
+
       </footer>
 
     </div>
