@@ -1,4 +1,4 @@
-<div class="guitar-1-visual">
+<div class="guitar-1-visual content_height">
   <div class="container pt-3">
 
     <div class="row">
@@ -12,7 +12,7 @@
       <div class="col-md-12">
         <div class="row d-flex justify-content-start">
           <% @users.each do |user| %>
-            <div class="col-md-3 shadow p-3 m-4 bg-white">
+            <div class="col-md-3 shadow p-3 m-4 pb-5 bg-white rounded-pill">
               <div>
                 <div>
                   <%= link_to user_path(user), data: {"turbolinks" => false} do %>
@@ -60,7 +60,7 @@
           <% end %>
         </div>
           <div class="row justify-content-center mt-2 mb-2 pt-5">
-            <div class="mt-2 mb-2 shadow bg-white"><%= paginate @users %></div>
+            <div class="mt-2 mb-2 shadow bg-white p-2 rounded-pill"><%= paginate @users %></div>
           </div>
       </div>
     </div>
