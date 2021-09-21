@@ -9,16 +9,20 @@
           </tr>
         </thead>
         <tbody>
-          <% @another_entries.each do |entry| %>
-            <tr>
-              <td class="text-center"><%= link_to entry.user.name, user_path(entry.user), class: "text-light" %></td>
-              <td class="text-center">
-                <%= link_to room_path(entry.room), class: "text-light" do %>
-                  <!--最後に送られたメッセージを表示-->
-                  <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
-                <% end %>
-              </td>
-            </tr>
+          <% if @another_entries.present? %>
+            <% @another_entries.each do |entry| %>
+              <tr>
+                <td class="text-center"><%= link_to entry.user.name, user_path(entry.user), class: "text-light" %></td>
+                <td class="text-center">
+                  <%= link_to room_path(entry.room), class: "text-light" do %>
+                    <!--最後に送られたメッセージを表示-->
+                    <%= Message.find_by(id: entry.room.message_ids.last)&.body %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr><td></td><td class="text-center">メッセージはありません</td></tr>
           <% end %>
         </tbody>
       </table>

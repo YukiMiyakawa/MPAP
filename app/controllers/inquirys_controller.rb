@@ -1,5 +1,4 @@
 class InquirysController < ApplicationController
-  before_action :authenticate_user!
   def index
     # 入力画面を表示
     @inquiry = Inquiry.new

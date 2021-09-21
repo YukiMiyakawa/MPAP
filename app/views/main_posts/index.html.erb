@@ -1,121 +1,122 @@
-<div class="container pt-3">
+<div class="instruments-2-visual">
+  <div class="container pt-3">
 
-  <div class="row justify-content-start ml-2">
+    <div class="row justify-content-start ml-2">
 
-    <div class="pr-4">
-    <%= render "searches/search_form" %>
-    </div>
-
-    <% if @range == 1 %>
-      <div>
-        <%= form_with url: result_sort_path, method: :get, local: true do |f| %>
-          <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
-          <%= hidden_field_tag :keyword, @keywords %>
-          <%= f.submit "ソート" %>
-        <% end %>
+      <div class="pr-4">
+      <%= render "searches/search_form" %>
       </div>
-    <% elsif @range == 2 %>
-      <div>
-        <%= form_with url: result_tag_sort_path, method: :get, local: true do |f| %>
-          <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
-          <%= hidden_field_tag :keyword, @keywords %>
-          <%= f.submit "ソート" %>
-        <% end %>
-      </div>
-    <% else %>
-      <div>
-      <%= form_with url: index_sort_path, method: :get, local: true do |f| %>
-        <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
-        <%= f.submit "ソート" %>
-      <% end %>
-      </div>
-    <% end %>
 
-  </div>
-
-  <div class="row ml-2">
-
-    <!--タグリスト-->
-    <div class="pr-4 pt-4">
-      <% @tag_list.each do |list|%>
-      <% if list.post_tags.count != 0 %>
-        <%= link_to one_tag_search_path(list.id), class:"btn btn-outline-secondary" do %>
-          <%=list.name %>
-            <%="(#{list.post_tags.count})" %>
+      <% if @range == 1 %>
+        <div>
+          <%= form_with url: result_sort_path, method: :get, local: true do |f| %>
+            <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
+            <%= hidden_field_tag :keyword, @keywords %>
+            <%= f.submit "ソート" %>
           <% end %>
-        <% end %>
-      <% end %>
-    </div>
-
-    <div class="pr-4 pt-4">
-      <%= link_to "タグリスト", tags_path, class:"btn btn-outline-secondary"  %>
-    </div>
-
-  </div>
-
-  <div class="row pt-4">
-    <h4 class="ml-4 mr-4"><strong>検出数: <%= @main_post_all.count %> 件</strong></h4>
-  </div>
-
-  <div class="row pt-4">
-
-    <div class="col-md-9 pt-2 border-right">
-      <div class="row d-flex justify-content-start">
-
-          <% @main_posts.each do |main_post| %>
-            <div class="col-md-5 shadow m-3">
-              <div>
-
-          　　  　<%= link_to main_post_path(main_post.id) do %>
-                  <div class="ml-4 mr-4 text-dark"><strong><%= main_post.title.truncate(36, omission: '...') %></strong></div>
-                  <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150", class:"ml-4" %><br>
-                  <div class="ml-4 mr-4 text-dark">
-                    <%= main_post.content.truncate(36, omission: '...') %><br>
-                    <p class="text-danger">♡<%= main_post.favorites.count %><br></p>
-                    <%= main_post.created_at.strftime("%Y-%m-%d %H:%M") %>
-                  </div>
-
-                <% end %>
-
-                <div class="ml-4 mr-4 mb-2">
-                <% main_post.tags.first(1).each do |tag| %>
-                  <%= link_to one_tag_search_path(tag.id), class:"btn btn-outline-secondary" do %>
-                  <%= tag.name %>
-                  <% end %>
-                <% end %>
-                </div>
-
-                <% if admin_signed_in? %>
-                  <div>
-                    <%= link_to "管理者編集はこちら", admins_main_post_path(main_post) %>
-                  </div>
-                <% end %>
-
-              </div>
-            </div>
-          <% end %>
-
-      </div>
-      <div class="row justify-content-center mt-2 mb-2 pt-5">
-        <%= paginate @main_posts %>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-
-      <!--つぶやき-->
-      <div>
-        <div class="row justify-content-center mt-2 mb-2">
-          <p><strong>みんなのつぶやき</strong></p>
         </div>
-        <div class="pt-3">
-          <div class="overflow-auto" style="height:1130px;">
-            <%= render "tweets/index", tweets: @tweets, user: current_user %>
+      <% elsif @range == 2 %>
+        <div>
+          <%= form_with url: result_tag_sort_path, method: :get, local: true do |f| %>
+            <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
+            <%= hidden_field_tag :keyword, @keywords %>
+            <%= f.submit "ソート" %>
+          <% end %>
+        </div>
+      <% else %>
+        <div>
+        <%= form_with url: index_sort_path, method: :get, local: true do |f| %>
+          <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
+          <%= f.submit "ソート" %>
+        <% end %>
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="row ml-2">
+
+      <!--タグリスト-->
+      <div class="pr-4 pt-4">
+        <% @tag_list.each do |list|%>
+        <% if list.post_tags.count != 0 %>
+          <%= link_to one_tag_search_path(list.id), class:"btn btn-outline-secondary" do %>
+            <%=list.name %>
+              <%="(#{list.post_tags.count})" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="pr-4 pt-4">
+        <%= link_to "タグリスト", tags_path, class:"btn btn-outline-secondary"  %>
+      </div>
+
+    </div>
+
+    <div class="row pt-4">
+      <h4 class="ml-4 mr-4"><strong>検出数: <%= @main_post_all.count %> 件</strong></h4>
+    </div>
+
+    <div class="row pt-4">
+
+      <div class="col-md-9 pt-2 border-right">
+        <div class="row d-flex justify-content-start">
+
+            <% @main_posts.each do |main_post| %>
+              <div class="col-md-5 shadow m-3 bg-white">
+                <div>
+
+            　　  　<%= link_to main_post_path(main_post.id) do %>
+                    <div class="ml-4 mr-4 text-dark"><strong><%= main_post.title.truncate(36, omission: '...') %></strong></div>
+                    <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150", class:"ml-4" %><br>
+                    <div class="ml-4 mr-4 text-dark">
+                      <%= main_post.content.truncate(36, omission: '...') %><br>
+                      <p class="text-danger">♡<%= main_post.favorites.count %><br></p>
+                      <%= main_post.created_at.strftime("%Y-%m-%d %H:%M") %>
+                    </div>
+
+                  <% end %>
+
+                  <div class="ml-4 mr-4 mb-2">
+                  <% main_post.tags.first(1).each do |tag| %>
+                    <%= link_to one_tag_search_path(tag.id), class:"btn btn-outline-secondary" do %>
+                    <%= tag.name %>
+                    <% end %>
+                  <% end %>
+                  </div>
+
+                  <% if admin_signed_in? %>
+                    <div>
+                      <%= link_to "管理者編集はこちら", admins_main_post_path(main_post) %>
+                    </div>
+                  <% end %>
+
+                </div>
+              </div>
+            <% end %>
+
+        </div>
+        <div class="row justify-content-center mt-2 mb-2 pt-5">
+          <div class="mt-2 mb-2 shadow bg-white"><%= paginate @main_posts %></div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+
+        <!--つぶやき-->
+        <div>
+          <div class="row justify-content-center mt-2 mb-2">
+            <p><strong>みんなのつぶやき</strong></p>
+          </div>
+          <div class="pt-3">
+            <div class="overflow-auto bg-white" style="height:1130px;">
+              <%= render "tweets/index", tweets: @tweets, user: current_user %>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
-
 </div>
-
