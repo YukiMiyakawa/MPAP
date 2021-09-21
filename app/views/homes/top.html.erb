@@ -132,22 +132,9 @@
     </div>
   </div>
     <div class="row pt-5"><div class="col text-center"><h2 class="text-dark"><strong>新規登録はこちら</strong></h2></div></div>
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-5 mb-5">
       <%= link_to '新規登録', new_user_registration_path, class: "btn btn-success mr-4" %>
       <%= link_to 'ログイン', new_user_session_path, class: "btn btn-dark ml-4" %>
     </div>
 
 </div>
-
-
-
-<h4>Top</h4>
-<%= link_to 'ログイン', new_user_session_path %>
-<%= link_to '新規登録', new_user_registration_path %>
-<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-<%= link_to '問い合わせ', inquirys_path %>
-<%= link_to '管理者ログイン', new_admin_session_path %>
-<%= link_to '管理者Posts', admins_main_posts_path %>
-<%= link_to '管理者ユーザー一覧', admins_users_path %>
-<%= link_to '管理者楽器一覧', admins_instruments_path %>
-<%= link_to '管理者ログアウト', destroy_admin_session_path, method: :delete %>

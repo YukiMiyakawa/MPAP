@@ -19,12 +19,14 @@
         <%= yield %>
 
       </main>
+
     <footer>
 
       <div class="container">
         <div class="row">
           <div class="col mt-5">
             <p class="text-center">ⒸMPAP 2021</p>
+            <p class="text-center"><%= link_to 'お問い合わせはこちら', inquirys_path, class: "text-dark" %></p>
             <p class="text-center"><%= link_to '管理者はこちら', new_admin_session_path, class: "text-dark" %></p>
           </div>
 
@@ -32,6 +34,7 @@
       </div>
 
     </footer>
+
     </div>
   </body>
 </html>
