@@ -95,7 +95,7 @@
                   <p><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></p>
                 </div>
                 <div class="ml-3 mr-3"><p><%= comment.content %></p></div>
-  　　　　　　  <% if user_signed_in? %>
+  　　　　      　　  <% if user_signed_in? %>
                   <% if comment.user_id == current_user.id %>
                     <%= link_to '編集', edit_main_post_comment_path(@main_post, comment), class: 'btn-sm btn-outline-secondary mt-3' %>
                     <%= link_to '削除', main_post_comment_path(@main_post, comment),"data-confirm" => "本当に削除しますか？", method: :delete, class: 'btn-sm btn-outline-secondary mt-3' %>
@@ -109,14 +109,14 @@
         </div>
 
         <% if user_signed_in? %>
-          <div class="row">
-            <div class="col bg-light p-5">
-              <%= form_with model:[@main_post, @comment], local:true do |f| %>
-                <div><%= f.text_area :content, class: "form-control-file" %></div>
-                <div class="row justify-content-center"><%= f.submit "投稿", class: 'btn-sm btn-outline-secondary mt-3' %></div>
-              <% end %>
-            </div>
+
+          <div class="bg-light p-5">
+            <%= form_with model:[@main_post, @comment], local:true do |f| %>
+              <div><%= f.text_area :content, class: "form-control-file" %></div>
+              <div class="row justify-content-center"><%= f.submit "投稿", class: 'btn-sm btn-outline-secondary mt-3' %></div>
+            <% end %>
           </div>
+
         <% end %>
 
       </div>
