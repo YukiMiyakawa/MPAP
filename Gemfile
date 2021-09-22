@@ -67,8 +67,17 @@ gem 'kaminari','~> 1.2.1'
 gem 'bootstrap', '~> 4.5'
 gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.13'
-
+gem 'carrierwave'
+gem 'audiojs-rails'
+gem 'cloudinary'
+gem 'simple_calendar', '~> 2.0'
+gem 'chartkick'
+gem 'bootstrap-select-rails'
+gem 'rails-i18n'
 gem 'dotenv-rails'
+
+# デプロイ用
+
 group :production do
   gem 'mysql2'
 end

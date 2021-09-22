@@ -30,6 +30,7 @@ class Users::SessionsController < Devise::SessionsController
     @user = User.find_by(name: params[:user][:name])
     if @user
       if (@user.valid_password?(params[:user][:password]) && (!@user.user_status))
+        flash[:alert] = "退会済みです。"
         redirect_to new_user_session_path
       end
     end

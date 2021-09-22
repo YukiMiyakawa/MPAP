@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   }
 
   root to: 'homes#top'
-  get 'home/about' => 'homes#about'
 
   #ユーザールーティング
   resources :users, only: [:index, :show, :edit, :update] do
@@ -26,6 +25,23 @@ Rails.application.routes.draw do
     resources :tasks, only: [:create, :destroy]
   end
 
+  get 'users/:user_id/tweets/:id' => 'tweets#edit'
+
+  # 問い合わせ
+  get 'inquirys/index'
+  get 'inquirys/confirm'
+  get 'inquirys/thanks'
+
+  # 検索
+  get 'search' => 'searches#search', as: 'search'
+  get 'one_tag_search/:id' => 'searches#one_tag_search', as: 'one_tag_search'
+
+  # ソート
+  get 'index_sort' => 'searches#index_sort', as: 'index_sort'
+  get 'result_sort' => 'searches#result_sort', as: 'result_sort'
+  get 'result_tag_sort' => 'searches#result_tag_sort', as: 'result_tag_sort'
+
+  # 退会ルーティング
   get 'unsubscribe/:name' => 'users#unsubscribe', as: 'confirm_unsubscribe'
   patch ':id/withdraw/:name' => 'users#withdraw', as: 'withdraw_user'
   put 'withdraw/:name' => 'users#withdraw'
@@ -37,6 +53,29 @@ Rails.application.routes.draw do
     resource :book_marks, only: [:create, :destroy]
   end
 
+  get 'main_posts/:id/sub_posts' => 'main_posts#show'
+
+  # ブックマーク一覧
+  get 'book_marks/:id' => 'book_marks#index', as: 'book_marks'
+
+  # タグ一覧
+  resources :tags, only: [:index]
+
+  # 会員の投稿記事一覧
+  get 'user_main_post/:id' => 'main_posts#user_main_post', as: 'user_main_post'
+
+  # 問い合わせ
+  get   'inquirys'         => 'inquirys#index'     # 入力画面
+  post  'inquirys/confirm' => 'inquirys#confirm'   # 確認画面
+  post  'inquirys/thanks'  => 'inquirys#thanks'    # 送信完了画面
+
+  # DM機能
+  resources :messages, only: [:create, :destroy]
+  resources :rooms, only: [:create, :index, :show]
+
+  # 通知一覧
+  resources :notifications, only: :index
+
   #管理者ルーティング
   namespace :admins do
     root to: "homes#top"
@@ -47,5 +86,9 @@ Rails.application.routes.draw do
     resources :instruments, only: [:index, :create, :destroy, :edit, :update]
     resources :music_genres, only: [:create, :destroy, :edit, :update]
   end
+
+  get 'admins/instruments/:id' => 'admins/instruments#edit'
+  get 'admins/music_genres/:id' => 'admins/music_genres#edit'
+  get 'admins/users/:id' => 'admins/users#edit'
 
 end

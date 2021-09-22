@@ -1,0 +1,8 @@
+<%= form_with url: search_path, method: :get, local: true do |f| %>
+  <%= f.hidden_field :range, :value => '4' %>
+
+  <%= f.collection_select :music_genre_id, MusicGenre.all, :id, :name, include_blank: "-- 得意ジャンル --"  %>
+  <%= f.collection_select :instrument_id, Instrument.all, :id, :name, include_blank: "-- 使用楽器 --"  %>
+
+  <%= f.submit "検索" %>
+<% end %>

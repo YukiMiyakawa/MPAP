@@ -1,9 +1,9 @@
       <% if main_post.book_mark_by?(current_user) %>
         <p>
-          <%= link_to "BookMark解除", main_post_book_marks_path(main_post), method: :delete, remote: true %>
+          <%= link_to "BookMark解除", main_post_book_marks_path(main_post), method: :delete, remote: true, class: "text-dark" %>
         </p>
         <% else %>
         <p>
-          <%= link_to "BookMark登録", main_post_book_marks_path(main_post), method: :post, remote: true %>
+          <%= link_to "BookMark登録", main_post_book_marks_path(main_post), method: :post, remote: true, class: "text-dark" %>
         </p>
       <% end %>

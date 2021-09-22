@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+
+      <%= form_with url: result_tag_sort_path, method: :get, local: true do |f| %>
+        <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
+        <%= hidden_field_tag :keyword, @keywords %>
+        <%= f.submit "ソート" %>
+      <% end %>
+
+    <%= render "searches/search_form" %>
+
+    <!--タグリスト-->
+    <% @tag_list.each do |list|%>
+    <% if list.post_tags.count != 0 %>
+      <%= link_to one_tag_search_path(list.id) do %>
+        <%=list.name %>
+          <%="(#{list.post_tags.count})" %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% @main_posts.each do |main_post| %>
+      <div>
+
+      <%= link_to main_post_path(main_post.id) do %>
+      <%= attachment_image_tag main_post, :image, format: "jpeg", fallback: "no_image.jpg", size: "200x150" %>
+      <%= main_post.title %>
+      <%= main_post.content %>
+      <% end %>
+
+      </div>
+    <% end %>
+  </div>
+</div>

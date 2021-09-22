@@ -1,14 +1,25 @@
-<div class="container">
+<div class="container pt-3 pb-3">
   <div class="row">
-    <h3>使用楽器・得意ジャンル一覧</h3>
-  </div>
-  <div class="row">
-
     <div class="col">
-      <%= render "index", instrument: @instrument, instruments: @instruments %>
+      <div class="text-center p-2"><h5><strong>使用楽器・得意音楽ジャンル追加・編集</strong></h5></div>
+
+      <div class="row justify-content-center mt-2 mb-2 pt-5">
+      <% if flash[:error].present? %>
+        <ul class="text-center p-2">
+          <li><strong><%= flash[:error] %></strong></li>
+        </ul>
+      <% end %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= render "index", instrument: @instrument, instruments: @instruments, instrument: @instrument %>
     </div>
 
-    <div class="col">
+    <div class="col-md-6">
       <%= render "admins/music_genres/index", music_genre: @music_genre, music_genres: @music_genres %>
     </div>
 

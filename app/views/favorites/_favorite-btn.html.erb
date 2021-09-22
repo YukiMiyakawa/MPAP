@@ -1,9 +1,9 @@
       <% if main_post.favorited_by?(current_user) %>
         <p>
-          <%= link_to main_post.favorites.count, main_post_favorites_path(main_post), method: :delete, remote: true, class: "fas fa-heart heart_red" %>
+          <%= link_to main_post.favorites.count, main_post_favorites_path(main_post), method: :delete, remote: true, class: "fas fa-heart text-danger" %>
         </p>
         <% else %>
         <p>
-          <%= link_to main_post.favorites.count, main_post_favorites_path(main_post), method: :post, remote: true, class: "fas fa-heart heart_white" %>
+          <%= link_to main_post.favorites.count, main_post_favorites_path(main_post), method: :post, remote: true, class: "fas fa-heart text-secondary" %>
         </p>
       <% end %>

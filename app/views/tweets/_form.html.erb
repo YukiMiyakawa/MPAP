@@ -1,11 +1,13 @@
-      <div>
-      <%= form_with model:[user, tweet], local:true do |f| %>
-        <%= f.label :Tweet %>
-        <%= f.text_area :comment, class: "form-control name" %>
+<div>
+<%= form_with model:[user, tweet], local:true do |f| %>
+  <strong><%= f.label "練習つぶやき" %></strong>
+  <%= f.text_area :comment, class: "form-control name" %>
 
-        <%= f.label :'PracticeTime(min)' %>
-        <%= f.text_field :practice_time, class: "form-control introduction" %>
+  <strong><%= f.label "練習時間（分）" %></strong>
+  <%= f.text_field :practice_time, class: "form-control introduction", :placeholder => "半角数字で入力してください" %>
 
-        <%= f.submit class: 'btn btn-secondary' %>
-      <% end %>
-      </div>
+  <%= f.hidden_field :start_time, :value => Time.now, class: "form-control start_time" %>
+
+  <div class="row justify-content-center pt-3"><%= f.submit "つぶやく", class: 'btn btn-outline-secondary text-right' %></div>
+<% end %>
+</div>

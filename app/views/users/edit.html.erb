@@ -1,17 +1,22 @@
-<div class="container">
+<div class="container pt-3">
   <div class="row">
     <div class="col">
-      <h1>Edit</h1>
+      <h5 class="text-center pt-3">ユーザー情報編集</h5>
+      <% if @user.present? %>
+        <%= render 'layouts/error_messages', model: @user %>
+      <% end %>
       <%= form_with model:@user, local:true do |f| %>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-        <%= f.label :introduction %>
-        <%= f.text_area :introduction %>
-        <%= f.label :target_time %>
-        <%= f.text_area :target_time %>
+        <%= f.label "ユーザー名" %>
+        <%= f.text_field :name, class: "form-control name" %>
+        <%= f.label "introduction(紹介文)" %>
+        <%= f.text_area :introduction, class: "form-control introduction" %>
+        <%= f.label "目標練習時間(分/日)※半角数字" %>
+        <%= f.text_field :target_time, class: "form-control target_time", :placeholder => "半角数字で入力してください" %>
         <%= f.label :image %>
         <%= f.attachment_field :image, class: "form-control-file user_image" %>
-      <%= f.submit %>
+        <div class="row justify-content-center mt-2 mb-2 pt-5">
+          <%= f.submit "更新", class: 'btn btn-secondary' %>
+        </div>
       <% end %>
     </div>
   </div>

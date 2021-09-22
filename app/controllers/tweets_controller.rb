@@ -1,11 +1,12 @@
 class TweetsController < ApplicationController
+  
   def create
-    @tweet = Tweet.new(tweet_params)
-    @tweet.user_id = current_user.id
-    if  @tweet.save
+    @new_tweet = Tweet.new(tweet_params)
+    @new_tweet.user_id = current_user.id
+    if  @new_tweet.save
       redirect_to request.referrer, notice: "You have created book successfully."
     else
-      redirect_to request.referrer
+      redirect_to request.referrer, flash: { tweet_error: @new_tweet.errors.full_messages }
     end
   end
 
@@ -15,11 +16,13 @@ class TweetsController < ApplicationController
   end
 
   def update
-    @tweet = Tweet.find(params[:id])
-    if  @tweet.update(tweet_params)
-      redirect_to user_path(@tweet.user_id), notice: "You have updated book successfully."
+    @edit_tweet = Tweet.find(params[:id])
+    if  @edit_tweet.update(tweet_params)
+      redirect_to user_path(@edit_tweet.user_id), notice: "You have updated book successfully."
     else
-      redirect_to request.referrer
+      @tweet = Tweet.find(params[:id])
+      @user = User.find(params[:user_id])
+      render "edit"
     end
   end
 
@@ -30,6 +33,6 @@ class TweetsController < ApplicationController
   end
 
   def tweet_params
-    params.require(:tweet).permit(:comment, :practice_time)
+    params.require(:tweet).permit(:comment, :practice_time, :start_time)
   end
 end

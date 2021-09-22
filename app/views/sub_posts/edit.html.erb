@@ -1,15 +1,5 @@
-<div class="container">
-  <%= form_with model:[@main_post, @sub_post], local:true do |f| %>
-    <%= f.label :Title %>
-    <%= f.text_field :title, class: "form-control name" %>
-
-    <%= f.label :Content %>
-    <%= f.text_area :content, class: "form-control introduction" %>
-
-    <%= f.label :image %>
-    <%= f.attachment_field :image, class: "form-control-file user_image" %>
-
-    <%= f.submit class: 'btn btn-secondary' %>
-
-  <% end %>
+<div class="container pt-3">
+  <h5 class="text-center pt-3">サブ記事編集</h5>
+  <%= render 'layouts/error_messages', model: @sub_post %>
+  <%= render "sub_posts/form", main_post: @main_post, sub_post: @sub_post %>
 </div>

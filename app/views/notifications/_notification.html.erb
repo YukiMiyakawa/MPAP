@@ -1,0 +1,34 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+
+<div class="container">
+
+  <%= link_to user_path(visitor), class: "text-dark" do %>
+    <strong>
+      <%= visitor.name %>
+    </strong>
+  <% end %>
+  <span>さんが</span>
+
+  <% case notification.action %>
+  <% when 'follow' then %>
+    <span>あなたをフォローしました</span>
+  <% when 'like' then %>
+    <%= link_to 'あなたの投稿', main_post_path(notification.main_post), style: "font-weight: bold;", class: "text-dark" %>
+    <span>にいいねしました</span>
+  <% when 'comment' then %>
+    <% if notification.main_post.user_id == visited.id %>
+      <%= link_to "あなたの投稿", main_post_path(notification.main_post), style: "font-weight: bold;", class: "text-dark" %>
+    <% else %>
+      <%= link_to main_post_path(notification.post), class: "text-dark" do %>
+        <strong>
+          <%= notification.post.user.name + 'さんの投稿' %>
+        </strong>
+      <% end %>
+    <% end %>
+    <span>にコメントしました %></span>
+  <% when 'message' then %>
+    <span>あなたに<strong><%= link_to 'チャット', room_path(notification.room_id), class: "text-dark" %></strong>を送りました %></span>
+  <% end %>
+
+</div>

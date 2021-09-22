@@ -1,24 +1,32 @@
-
-<div class="container">
+<div class="container pt-3 pb-3">
   <div class="row">
     <div class="col">
-      <h3 class="my-5 under">会員一覧</h3>
+      <div class="text-center p-2"><h5><strong>ユーザー一覧</strong></h5></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
 
-      <table class="table">
+      <table class="table table-dark">
         <thead>
           <tr class="table-active">
-            <th>会員ID</th><th>会員名</th><th>メールアドレス</th><th>会員ステータス</th>
+            <th class="text-center">ユーザーID</th>
+            <th class="text-center">ユーザー名</th>
+            <th class="text-center">メールアドレス</th>
+            <th class="text-center">投稿一覧</th>
+            <th class="text-center">ユーザーステータス</th>
           </tr>
         </thead>
         <% @users.each do |user| %>
         <tbody>
           <tr>
-            <td><%= user.id %></td>
-            <td><%= link_to user.name, edit_admins_user_path(user) %></td>
-            <td nowrap><%= user.email %></td>
-            <td>
+            <td class="text-center"><%= user.id %></td>
+            <td class="text-center"><%= link_to user.name, edit_admins_user_path(user), class: "text-info" %></td>
+            <td class="text-center"><%= user.email %></td>
+            <td class="text-center"><%= link_to "こちら", user_main_post_path(user), class: 'text-info' %></th>
+            <td class="text-center">
               <% if user.user_status? %>
-                <span class="text-secondary font-weight-bold">有効</span>
+                <span class="text-secondary font-weight-bold text-light">有効</span>
               <% else %>
                 <span class="text-success font-weight-bold">退会</span>
               <% end %>

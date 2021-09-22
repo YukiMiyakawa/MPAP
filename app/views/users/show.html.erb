@@ -1,49 +1,125 @@
-<div class="container">
-  <h1>Show</h1>
+<div class="instruments-3-visual content_height">
 
-  <div class="row">
-    <div class="col">
-      <!--ユーザー情報-->
-      <%= attachment_image_tag @user, :image, format: "jpeg", fallback: "no_user_image.jpg", size: "200x150" %>
-      <p>ユーザー名</p><%= @user.name %>
-      <p>紹介文</p><%= @user.introduction %>
-      <p>目標練習時間min/day</p><%= @user.target_time %>
+  <% if @user.user_status? %>
 
-      <% if @user.id == current_user.id %>
-      <p><%= link_to '編集', edit_user_path(@user) %></p>
-      <% end %>
 
-      <!--得意音楽ジャンル-->
-      <div><%= render "user_music_genres/index", user: @user, user_music_genre: @user_music_genre, user_music_genres: @user_music_genres %></div>
 
-      <!--得意楽器-->
-      <div><%= render "user_instruments/index", user: @user, user_instrument: @user_instrument, user_instruments: @user_instruments %></div>
 
-　　　<!--フォロー-->
-      <p>follows <%= link_to @user.followings.count, user_followings_path(@user) %></p>
-      <p>followers <%= link_to @user.followers.count, user_followers_path(@user) %></p>
-      <% if @user.id != current_user.id %>
-        <% if current_user.following?(@user) %>
-          <%= link_to "フォロー外す", user_relationships_path(@user), method: :delete, class: "btn btn-primary" %>
-        <% else %>
-          <%= link_to "フォローする", user_relationships_path(@user), method: :post, class: "btn btn-success" %>
-        <% end %>
-      <% end %>
 
-      <!--タスク-->
-      <div><%= render "tasks/index", user: @user, task: @task, tasks: @tasks %></div>
 
+  <div class="container pt-3">
+    <div class="row border-bottom">
+      <div class ="col-md-4">
+
+        <!--ユーザー情報-->
+        <%= render "user", user: @user, is_room: @is_room, room_id: @room_id %>
+
+      </div>
+
+      <div class ="col-md-4">
+
+        <!--得意音楽ジャンル-->
+        <div class=" bg-light p-3 mb-3"><%= render "user_music_genres/index", user: @user, user_music_genre: @user_music_genre, user_music_genres: @user_music_genres %></div>
+
+      </div>
+      <div class ="col-md-4">
+
+        <!--得意楽器-->
+        <div class="shadow-sm bg-light p-3 mb-3"><%= render "user_instruments/index", user: @user, user_instrument: @user_instrument, user_instruments: @user_instruments %></div>
+
+      </div>
     </div>
+
+    <div class="row pt-3">
+      <div class="col-md-4">
+
+        <!--タスク-->
+        <div class="shadow-sm bg-light p-3 mb-3">
+
+        <% if flash[:task_error].present? %>
+          <ul class="errors">
+            <% flash[:task_error].each do |e| %>
+              <li><%= e %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+          <%= render "tasks/index", user: @user, task: @task, tasks: @tasks, new_task: @new_task %>
+        </div>
+
+        <!--Tweet部分-->
+        <% if user_signed_in? %>
+          <% if @user.id == current_user.id %>
+
+            <% if flash[:tweet_error].present? %>
+              <ul class="errors">
+                <% flash[:tweet_error].each do |e| %>
+                  <li><%= e %></li>
+                <% end %>
+              </ul>
+            <% end %>
+
+            <div class="border border-secondary-top-bottom rounded p-4">
+              <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
+            </div>
+          <% end %>
+        <% end %>
+        <div class="pt-3">
+          <div class="overflow-auto" style="height:600px;">
+            <%= render "tweets/index", tweets: @tweets %>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="col-md-8">
+
+        <!--合計練習時間-->
+        <div class="shadow-sm bg-light p-3 mb-3"><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
+
+        <div class="row">
+          <div class="col-md-6 text-center shadow-sm bg-light p-3 mb-3">
+            <a><strong>週間練習時間(分)</strong></a>
+            <%= area_chart @practice_sum_chart, empty: "目標練習時間を設定し練習時間をつぶやいて下さい", colors: ["#993333"] %>
+          </div>
+          <div class="col-md-6 text-center shadow-sm bg-light p-3 mb-3">
+            <a><strong>週間練習時間達成度</strong></a>
+            <%= pie_chart @achievement_rate, donut: true, suffix: "%", min: 0, max: 100, colors: ["#993333", "#808080"], empty: "目標練習時間を設定し練習時間をつぶやいて下さい" %>
+          </div>
+        </div>
+
+        <!--カレンダー-->
+        <div class="text-center shadow-sm bg-light p-3 mb-3">
+        <a><strong>練習記録カレンダー</strong></a>
+        <%= month_calendar events: @tweets do |date, tweets| %>
+          <%= date.day %>
+
+          <% tweets.each do |tweet| %>
+            <div>
+              <%= tweet.comment %>
+            </div>
+          <% end %>
+        <% end %>
+        </div>
+
+      </div>
+    </div>
+
+    <!--退会-->
+    <% if user_signed_in? %>
+      <div class="row justify-content-center mt-2 mb-2">
+    　  <% if @user.id == current_user.id %>
+          <%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name),class:"btn btn-outline-secondary" %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
-  <!--Tweet部分-->
-  <div class="row">
-    <div><%= render "tweets/form", tweet: @tweet, user: @user %></div>
-    <div><%= render "tweets/index", tweets: @tweets, user: @user %></div>
+  <% else %>
+  <div class="container pt-3">
+    <div class="row"><div class="col">退会済ユーザー</div></div>
   </div>
-
-  <!--退会-->
-　<% if @user.id == current_user.id %>
-  <div><%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name) %></div>
   <% end %>
+
 </div>

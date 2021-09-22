@@ -1,4 +1,5 @@
 class Admins::MainPostsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @main_posts = MainPost.all
   end
@@ -12,7 +13,7 @@ class Admins::MainPostsController < ApplicationController
   def destroy
      @main_post = MainPost.find(params[:id])
      @main_post.destroy
-    redirect_to admins_main_posts_path
+    redirect_to main_posts_path
   end
 
   def update
@@ -20,7 +21,7 @@ class Admins::MainPostsController < ApplicationController
     if @main_post.update(main_post_params)
       redirect_to admins_main_post_path(@main_post)
     else
-      redirect_to admins_main_posts_path,notice:"変更を保存できませんでした"
+      redirect_to main_posts_path,notice:"変更を保存できませんでした"
     end
   end
 
