@@ -1,16 +1,32 @@
-<h2>Resend confirmation instructions</h2>
+<div class="container pt-3">
+  <div class="row">
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+    <div class="col-md-12">
+      <div class="text-center p-2"><h5><strong>パスワード再発行</strong></h5></div>
+      <div class="row d-flex justify-content-around">
+        <div class="col-md-6 shadow m-1 p-5">
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+          <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
+
+            <div class="field">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control" %>
+            </div>
+
+            <div class="actions">
+              <div class="row justify-content-center mt-2 mb-2 pt-5">
+                <%= f.submit "再発行", class: 'btn btn-secondary mt-2' %>
+              </div>
+            </div>
+          <% end %>
+
+          <%= render "users/shared/links" %>
+
+        </div>
+
+      </div>
+
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

@@ -74,9 +74,10 @@ gem 'simple_calendar', '~> 2.0'
 gem 'chartkick'
 gem 'bootstrap-select-rails'
 gem 'rails-i18n'
+gem 'dotenv-rails'
 
 # デプロイ用
-gem 'dotenv-rails'
-# group :production do
-#   gem 'mysql2'
-# end
+
+group :production do
+  gem 'mysql2'
+end
