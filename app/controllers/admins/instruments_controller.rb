@@ -12,11 +12,7 @@ class Admins::InstrumentsController < ApplicationController
     if @new_instrument.save
       redirect_to admins_instruments_path
     else
-      @instruments = Instrument.all
-      @instrument = Instrument.new
-      @music_genres = MusicGenre.all
-      @music_genre = MusicGenre.new
-      render "index"
+      redirect_to request.referer, flash: { error: "ジャンル名が入力されていません。もしくは既に使用されています。" }
     end
   end
 

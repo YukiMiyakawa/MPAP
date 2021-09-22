@@ -9,9 +9,6 @@
           <li><strong><%= flash[:error] %></strong></li>
         </ul>
       <% end %>
-      <% if @new_instrument.present? %>
-        <%= render 'layouts/error_messages', model: @new_instrument %>
-      <% end %>
       </div>
     </div>
   </div>
