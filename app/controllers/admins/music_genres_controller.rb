@@ -1,11 +1,12 @@
 class Admins::MusicGenresController < ApplicationController
   before_action :authenticate_admin!
+
   def create
     music_genre = MusicGenre.new(music_genre_params)
     if music_genre.save
       redirect_to admins_instruments_path
     else
-      redirect_to request.referer, flash: { error: "ジャンル名が入力されていません。" }
+      redirect_to request.referer, flash: { error: "ジャンル名が入力されていません。もしくは既に使用されています。" }
     end
   end
 
