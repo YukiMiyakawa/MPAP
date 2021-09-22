@@ -16,6 +16,21 @@
         <div id="header" class="sticky-top">
 
           <%= render "layouts/header" %>
+
+          <% if user_signed_in? %>
+            <div class="bg-secondary text-white text-center">
+              <p class="m-0">ようこそ<strong><%= current_user.name %></strong>さん！</p>
+            </div>
+          <% end %>
+
+          <% if flash.present? %>
+            <div class="alert alert-primary m-0" role="alert">
+              <% flash.each do |key, value| %>
+                <%= content_tag(:div, value, class: "#{key}") %>
+              <% end %>
+            </div>
+          <% end %>
+
           <% if user_signed_in? %>
             <% if !current_user.user_music_genres.exists? %>
 
