@@ -102,22 +102,31 @@
                   <% end %>
                 <% end %>
               <% end %>
+
             <% else %>
               <div class="text-center"><p><strong>コメントがありません</strong></p></div>
             <% end %>
           </div>
         </div>
 
-        <% if user_signed_in? %>
+
 
           <div class="bg-light p-5">
-            <%= form_with model:[@main_post, @comment], local:true do |f| %>
-              <div><%= f.text_area :content, class: "form-control-file" %></div>
-              <div class="row justify-content-center"><%= f.submit "投稿", class: 'btn-sm btn-outline-secondary mt-3' %></div>
-            <% end %>
-          </div>
 
-        <% end %>
+            <% if user_signed_in? %>
+
+              <%= form_with model:[@main_post, @comment], local:true do |f| %>
+                <div><%= f.text_area :content, class: "form-control-file" %></div>
+                <div class="row justify-content-center"><%= f.submit "投稿", class: 'btn-sm btn-outline-secondary mt-3' %></div>
+              <% end %>
+
+            <% end %>
+
+            <div class="row justify-content-center mt-2 mb-2 pt-5">
+              <div class="mt-2 mb-2 shadow bg-white p-2 rounded-pill"><%= paginate @comments %></div>
+            </div>
+
+          </div>
 
       </div>
 
