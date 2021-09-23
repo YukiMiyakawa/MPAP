@@ -93,10 +93,12 @@
               </div>
             <% end %>
 
-        </div>
         <div class="row justify-content-center mt-2 mb-2 pt-5">
           <div class="mt-2 mb-2 shadow bg-white p-2 rounded-pill"><%= paginate @main_posts %></div>
         </div>
+
+        </div>
+
       </div>
 
       <div class="col-md-3">
@@ -108,10 +110,10 @@
           </div>
           <div class="pt-3">
             <% if @tweets.present? %>
-              <div class="overflow-auto bg-white" style="height:1130px;">
+              <div class="overflow-auto" style="max-height:1130px;">
 
                 <% @tweets.each do |tweet| %>
-                  <div class="shadow p-3 mb-3 m-3">
+                  <div class="shadow bg-white p-3 mb-3 m-3">
                       <p><strong><%= tweet.user.name %></strong></p>
                       <p><%= tweet.comment %></p>
                       <p>練習時間: <%= tweet.practice_time %>分<br><%= tweet.created_at.strftime("%Y-%m-%d %H:%M") %></p>

@@ -5,8 +5,8 @@
   <p class="text-center border-top"><strong>introduction</strong></p>
   <p class="text-center"><%= user.introduction %></p>
 
-　　  <!--フォロー-->
-　　  <div class=" border-top">
+　<!--フォロー-->
+　<div class=" border-top">
     <div class="row justify-content-center mt-2 mb-2">
       <div id="following-count_<%= user.id %>"><span><strong>follow: </strong><%= link_to "#{user.followings.count}", user_followings_path(user) %>  </span></div>
       <div id="follower-count_<%= user.id %>", class="ml-3"><span><strong>  follower: </strong><%= link_to "#{user.followers.count}", user_followers_path(user) %></span></div>

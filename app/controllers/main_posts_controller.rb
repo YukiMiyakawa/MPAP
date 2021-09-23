@@ -13,7 +13,7 @@ class MainPostsController < ApplicationController
     @tweets = @user.tweets.order(created_at: :desc).page(params[:page]).per(10)
     @sub_post = SubPost.new
     @sub_posts = SubPost.where(main_post_id: @main_post.id)
-    @comments = Comment.where(main_post_id: @main_post.id)
+    @comments = Comment.where(main_post_id: @main_post.id).order(created_at: :desc).page(params[:page]).per(5)
     @comment = Comment.new
     @post_tags = @main_post.tags
 
