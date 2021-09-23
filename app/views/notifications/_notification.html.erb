@@ -28,7 +28,7 @@
     <% end %>
     <span>にコメントしました %></span>
   <% when 'message' then %>
-    <span>あなたに<strong><%= link_to 'チャット', room_path(notification.room_id), class: "text-dark" %></strong>を送りました %></span>
+    <span>あなたに<strong><%= link_to 'チャット', room_path(notification.room_id), class: "text-dark" %></strong>を送りました</span>
   <% end %>
 
 </div>

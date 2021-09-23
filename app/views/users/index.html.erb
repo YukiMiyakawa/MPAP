@@ -16,7 +16,7 @@
               <div>
                 <div>
                   <%= link_to user_path(user), data: {"turbolinks" => false} do %>
-                    <%= attachment_image_tag user, :image, format: "jpeg", fallback: "no_user_image.jpg", size: "200x150", class:"d-block mx-auto" %>
+                    <%= attachment_image_tag user, :image, format: "jpeg", fallback: "no_user_image.jpg", class:"d-block mx-auto w-50 h-50 rounded" %>
                     <H5 class="text-center text-dark"><strong><%= user.name %></strong></H5>
                   <% end %>
                 </div>
