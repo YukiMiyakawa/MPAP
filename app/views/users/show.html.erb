@@ -2,13 +2,8 @@
 
   <% if @user.user_status? %>
 
-
-
-
-
-
-  <div class="container pt-3">
-    <div class="row border-bottom">
+  <div class="container">
+    <div class="row border-bottom pt-3">
       <div class ="col-md-4">
 
         <!--ユーザー情報-->
@@ -78,7 +73,7 @@
         <!--合計練習時間-->
         <div class="shadow-sm bg-light p-3 mb-3"><%= render "tweets/practice_time", today_min: @today_min, month_min: @month_min, sum_min: @sum_min %></div>
 
-        <div class="row">
+        <div class="row p-3">
           <div class="col-md-6 text-center shadow-sm bg-light p-3 mb-3">
             <a><strong>週間練習時間(分)</strong></a>
             <%= area_chart @practice_sum_chart, empty: "目標練習時間を設定し練習時間をつぶやいて下さい", colors: ["#993333"] %>
@@ -108,7 +103,7 @@
 
     <!--退会-->
     <% if user_signed_in? %>
-      <div class="row justify-content-center mt-2 mb-2">
+      <div class="row justify-content-center mt-2 mb-2 pb-3">
     　  <% if @user.id == current_user.id %>
           <%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name),class:"btn btn-outline-secondary" %>
         <% end %>
