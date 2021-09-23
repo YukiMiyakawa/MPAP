@@ -94,6 +94,12 @@ class SearchesController < ApplicationController
         render template: "users/index"
 
       end
+    else
+
+      @main_post_all = MainPost.all
+      @main_posts = MainPost.all.order(created_at: :DESC).page(params[:page]).per(8)
+      render template: "main_posts/index"
+
     end
   end
 
