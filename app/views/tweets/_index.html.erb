@@ -1,5 +1,5 @@
 <% tweets.each do |tweet| %>
-<div class="shadow p-3 mb-3 m-3">
+  <div class="shadow p-3 mb-3 m-3 bg-white">
     <p><strong><%= tweet.user.name %></strong></p>
     <p><%= tweet.comment %></p>
     <p>練習時間: <%= tweet.practice_time %>分<br><%= tweet.created_at.strftime("%Y-%m-%d %H:%M") %></p>
@@ -11,8 +11,8 @@
           <%= link_to '削除', user_tweet_path(tweet.user_id, tweet), method: :delete, class: 'text-secondary mt-2' %>
         <% end %>
       <% end %>
-    </p>
-</div>
+      </p>
+  </div>
 <% end %>
 <div class="row justify-content-center">
   <%= paginate tweets %>
