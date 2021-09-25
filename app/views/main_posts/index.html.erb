@@ -4,33 +4,12 @@
     <div class="row justify-content-start ml-2">
 
       <div class="pr-4">
+
       <%= render "searches/search_form" %>
+
       </div>
 
-      <% if @range == 1 %>
-        <div>
-          <%= form_with url: result_sort_path, method: :get, local: true do |f| %>
-            <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
-            <%= hidden_field_tag :keyword, @keywords %>
-            <%= f.submit "ソート" %>
-          <% end %>
-        </div>
-      <% elsif @range == 2 %>
-        <div>
-          <%= form_with url: result_tag_sort_path, method: :get, local: true do |f| %>
-            <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
-            <%= hidden_field_tag :keyword, @keywords %>
-            <%= f.submit "ソート" %>
-          <% end %>
-        </div>
-      <% else %>
-        <div>
-        <%= form_with url: index_sort_path, method: :get, local: true do |f| %>
-          <%= f.select :sort,  [ ['投稿が新しい順', 'new'],['投稿が古い順', 'old'],['いいねが多い順', 'likes'],['いいねが少ない順', 'dislikes'],]%>
-          <%= f.submit "ソート" %>
-        <% end %>
-        </div>
-      <% end %>
+      <%= render "searches/sort", range: @range, keywords: @keywords %>
 
     </div>
 
@@ -93,7 +72,6 @@
 
               </div>
             <% end %>
-
 
         </div>
         <div class="row justify-content-center mt-2 mb-2 pt-5">
