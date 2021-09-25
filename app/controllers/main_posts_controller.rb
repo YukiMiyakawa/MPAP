@@ -51,7 +51,7 @@ class MainPostsController < ApplicationController
     # byebug
     if @main_post.save
       @main_post.save_tag(tag_list)
-      redirect_to main_post_path(@main_post), notice: "You have created book successfully."
+      redirect_to main_post_path(@main_post), notice: "投稿が完了しました"
     else
       render 'new'
     end
@@ -73,7 +73,7 @@ class MainPostsController < ApplicationController
         relation.delete
       end
       @main_post.save_tag(tag_list)
-      redirect_to main_post_path(@main_post), notice: "You have updated book successfully."
+      redirect_to main_post_path(@main_post), notice: "編集が完了しました"
     else
       render "edit"
     end

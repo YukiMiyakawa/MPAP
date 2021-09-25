@@ -10,10 +10,10 @@ class CommentsController < ApplicationController
       # コメント通知
       @main_post.create_notification_comment!(current_user, @comment.id)
 
-      redirect_to main_post_path(params[:main_post_id]), notice: "You have created book successfully."
+      redirect_to main_post_path(params[:main_post_id]), notice: "投稿が完了しました"
     else
-      @comments = Comment.all
-      redirect_to main_post_path(params[:main_post_id])
+
+      redirect_to main_post_path(params[:main_post_id]), alert: 'コメント投稿に失敗しました、1~200文字で投稿して下さい'
     end
   end
 
@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if @comment.update(main_post_params)
-      redirect_to main_post_path(@comment), notice: "You have updated book successfully."
+      redirect_to main_post_path(@comment), notice: "編集が完了しました."
     else
       render "edit"
     end
