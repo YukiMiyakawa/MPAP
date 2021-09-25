@@ -35,7 +35,7 @@
             <div><iframe class="youtube" src="https://www.youtube.com/embed/<%=@main_post.youtube_url[32..42]%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
             <% end %>
             <div><%= attachment_image_tag @main_post, :image, format: "jpeg", class: "w-100" %></div>
-            <div><%= audio_tag @main_post.audio_was, :controls => true if @main_post.audio? %></div>
+            <div><%= audio_tag @main_post.audio_url, :controls => true if @main_post.audio? %></div>
           </div>
           <div class="pb-3 border-top mt-2"><%= @main_post.content %></div>
 
@@ -114,6 +114,14 @@
           <div class="bg-light p-5">
 
             <% if user_signed_in? %>
+
+             <% if flash[:comment_error].present? %>
+              <ul class="errors">
+                <% flash[:comment_error].each do |e| %>
+                  <li><%= e %></li>
+                <% end %>
+              </ul>
+            <% end %>
 
               <%= form_with model:[@main_post, @comment], local:true do |f| %>
                 <div><%= f.text_area :content, class: "form-control-file" %></div>

@@ -1,14 +1,16 @@
 <div class="container pt-3">
   <div class="row">
     <div class="col">
+      <h5 class="text-center pt-3">コメント記事編集</h5>
+      <%= render 'layouts/error_messages', model: @comment %>
 
-    <%= form_with model:[@main_post, @comment], local:true do |f| %>
-    <%= f.label :Content %>
-    <%= f.text_area :content, class: "form-control content" %>
-    <div class="row justify-content-center mt-2 mb-2 pt-5">
-    <%= f.submit "編集", class: 'btn btn-secondary p-2' %>
-    </div>
-    <% end %>
+      <%= form_with model:[@main_post, @comment], local:true do |f| %>
+      <%= f.label "本文" %>
+      <%= f.text_area :content, class: "form-control content" %>
+      <div class="row justify-content-center mt-2 mb-2 pt-5">
+      <%= f.submit "編集", class: 'btn btn-secondary p-2' %>
+      </div>
+      <% end %>
 
     </div>
   </div>

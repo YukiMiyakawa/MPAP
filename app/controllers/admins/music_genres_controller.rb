@@ -33,7 +33,8 @@ class Admins::MusicGenresController < ApplicationController
   end
 
   private
-    def music_genre_params
-       params.require(:music_genre).permit(:name)
-    end
+
+  def music_genre_params
+    params.require(:music_genre).permit(:name)
+  end
 end

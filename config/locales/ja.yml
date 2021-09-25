@@ -33,6 +33,8 @@ ja:
         password: パスワード
       tag:
         name: タグ名
+      comment:
+        content: コメント
   devise:
     confirmations:
       confirmed: 'アカウントを登録しました。'
