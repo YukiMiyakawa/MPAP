@@ -17,7 +17,7 @@ class TweetsController < ApplicationController
   def update
     @edit_tweet = Tweet.find(params[:id])
     if @edit_tweet.update(tweet_params)
-      redirect_to user_path(@edit_tweet.user_id), notice: "You have updated book successfully."
+      redirect_to user_path(@edit_tweet.user_id), notice: "つぶやき更新に成功しました"
     else
       @tweet = Tweet.find(params[:id])
       @user = User.find(params[:user_id])

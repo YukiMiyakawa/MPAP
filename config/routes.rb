@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   end
 
   get 'main_posts/:id/sub_posts' => 'main_posts#show'
+  get 'main_posts/:main_post_id/comments/:id' => 'comments#edit'
 
   # ブックマーク一覧
   get 'book_marks/:id' => 'book_marks#index', as: 'book_marks'

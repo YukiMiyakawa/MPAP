@@ -2,18 +2,18 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def create
     main_post = MainPost.find(params[:main_post_id])
-    @comment = Comment.new(main_post_params)
-    @comment.user_id = current_user.id
-    @comment.main_post_id = main_post.id
-    @main_post = @comment.main_post
-    if @comment.save
+    @new_comment = Comment.new(main_post_params)
+    @new_comment.user_id = current_user.id
+    @new_comment.main_post_id = main_post.id
+    @main_post = @new_comment.main_post
+    if @new_comment.save
       # コメント通知
-      @main_post.create_notification_comment!(current_user, @comment.id)
+      @main_post.create_notification_comment!(current_user, @new_comment.id)
 
       redirect_to main_post_path(params[:main_post_id]), notice: "投稿が完了しました"
     else
 
-      redirect_to main_post_path(params[:main_post_id]), alert: 'コメント投稿に失敗しました、1~200文字で投稿して下さい'
+      redirect_to main_post_path(params[:main_post_id]), flash: { comment_error: @new_comment.errors.full_messages }
     end
   end
 
@@ -27,6 +27,7 @@ class CommentsController < ApplicationController
     if @comment.update(main_post_params)
       redirect_to main_post_path(@comment), notice: "編集が完了しました."
     else
+      @main_post = MainPost.find(params[:main_post_id])
       render "edit"
     end
   end

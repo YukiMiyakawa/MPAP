@@ -114,8 +114,14 @@
           <div class="bg-light p-5">
 
             <% if user_signed_in? %>
-            
- 
+
+             <% if flash[:comment_error].present? %>
+              <ul class="errors">
+                <% flash[:comment_error].each do |e| %>
+                  <li><%= e %></li>
+                <% end %>
+              </ul>
+            <% end %>
 
               <%= form_with model:[@main_post, @comment], local:true do |f| %>
                 <div><%= f.text_area :content, class: "form-control-file" %></div>

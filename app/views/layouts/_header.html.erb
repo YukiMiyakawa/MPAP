@@ -52,9 +52,8 @@
 
   <% if flash.present? %>
     <div class="alert alert-primary m-0" role="alert">
-      <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "#{key}") %>
-      <% end %>
+      <%= notice %>
+      <%= alert %>
     </div>
   <% end %>
 
