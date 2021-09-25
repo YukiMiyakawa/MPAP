@@ -3,7 +3,9 @@ class MainPost < ApplicationRecord
   validates :content, length: { minimum: 1, maximum: 30000 }, presence: true
 
   mount_uploader :audio, AudioUploader
+  
   attachment :image
+  
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :sub_posts, dependent: :destroy
