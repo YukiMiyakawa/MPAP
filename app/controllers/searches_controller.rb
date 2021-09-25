@@ -161,6 +161,7 @@ class SearchesController < ApplicationController
     @keywords = params[:keyword]
     @tag_list = Tag.all.limit(6).sort { |a, b| b.post_tags.size <=> a.post_tags.size }
     @tweets = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
+    @range = 1
     render template: "main_posts/index"
   end
 
