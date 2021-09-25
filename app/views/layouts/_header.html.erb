@@ -50,7 +50,7 @@
     </div>
   <% end %>
 
-  <% if flash.present? %>
+  <% if flash[:notice].present? || flash[:alert].present? %>
     <div class="alert alert-primary m-0" role="alert">
       <%= notice %>
       <%= alert %>

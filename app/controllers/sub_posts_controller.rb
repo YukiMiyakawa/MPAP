@@ -50,7 +50,7 @@ class SubPostsController < ApplicationController
     @main_post = MainPost.find(params[:main_post_id])
     @sub_post = SubPost.find(params[:id])
     if @sub_post.update(sub_post_params)
-      redirect_to main_post_path(@sub_post.main_post_id), notice: "You have updated book successfully."
+      redirect_to main_post_path(@sub_post.main_post_id), notice: "更新に成功しました"
     else
       render "edit"
     end
