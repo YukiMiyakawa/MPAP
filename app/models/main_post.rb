@@ -24,13 +24,13 @@ class MainPost < ApplicationRecord
     book_marks.where(user_id: user.id).exists?
   end
 
-  #タグ機能
+  # タグ機能
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
 
-  #タグ編集
+  # タグ編集
   def save_tag(sent_tags)
-    current_tags = self.tags.pluck(:name) unless self.tags.nil?
+    current_tags = tags.pluck(:name) unless tags.nil?
     old_tags = current_tags - sent_tags
     new_tags = sent_tags - current_tags
 
@@ -48,13 +48,13 @@ class MainPost < ApplicationRecord
   def self.post_sort(selection)
     case selection
     when 'new'
-      return all.order(created_at: :DESC)
+      all.order(created_at: :DESC)
     when 'old'
-      return all.order(created_at: :ASC)
+      all.order(created_at: :ASC)
     when 'likes'
-      return includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+      includes(:favorited_users).sort { |a, b| b.favorited_users.size <=> a.favorited_users.size }
     when 'dislikes'
-      return includes(:favorited_users).sort {|a,b| a.favorited_users.size <=> b.favorited_users.size}
+      includes(:favorited_users).sort { |a, b| a.favorited_users.size <=> b.favorited_users.size }
     end
   end
 

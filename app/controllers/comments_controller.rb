@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     @comment.main_post_id = main_post.id
     @main_post = @comment.main_post
-    if  @comment.save
+    if @comment.save
       # コメント通知
       @main_post.create_notification_comment!(current_user, @comment.id)
 
@@ -18,13 +18,13 @@ class CommentsController < ApplicationController
   end
 
   def edit
-     @main_post = MainPost.find(params[:main_post_id])
-     @comment = Comment.find(params[:id])
+    @main_post = MainPost.find(params[:main_post_id])
+    @comment = Comment.find(params[:id])
   end
 
   def update
-     @comment = Comment.find(params[:id])
-    if  @comment.update(main_post_params)
+    @comment = Comment.find(params[:id])
+    if @comment.update(main_post_params)
       redirect_to main_post_path(@comment), notice: "You have updated book successfully."
     else
       render "edit"

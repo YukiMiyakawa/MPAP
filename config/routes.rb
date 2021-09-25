@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  #deviseルーティング
+  # deviseルーティング
   devise_for :users, controllers: {
-    sessions:      'users/sessions',
-    passwords:     'users/passwords',
-    registrations: 'users/registrations'
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations',
   }
   devise_for :admins, controllers: {
-    sessions:      'admins/sessions',
-    passwords:     'admins/passwords',
-    registrations: 'admins/registrations'
+    sessions: 'admins/sessions',
+    passwords: 'admins/passwords',
+    registrations: 'admins/registrations',
   }
 
   root to: 'homes#top'
 
-  #ユーザールーティング
+  # ユーザールーティング
   resources :users, only: [:index, :show, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
     resources :tweets, only: [:create, :destroy, :edit, :update]
@@ -76,7 +76,7 @@ Rails.application.routes.draw do
   # 通知一覧
   resources :notifications, only: :index
 
-  #管理者ルーティング
+  # 管理者ルーティング
   namespace :admins do
     root to: "homes#top"
     resources :main_posts, only: [:index, :show, :update, :destroy] do
@@ -90,5 +90,4 @@ Rails.application.routes.draw do
   get 'admins/instruments/:id' => 'admins/instruments#edit'
   get 'admins/music_genres/:id' => 'admins/music_genres#edit'
   get 'admins/users/:id' => 'admins/users#edit'
-
 end

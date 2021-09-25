@@ -35,12 +35,13 @@ class Admins::InstrumentsController < ApplicationController
     if instrument.destroy
       redirect_to admins_instruments_path
     else
-      redirect_to request.referer,notice:"削除できませんでした"
+      redirect_to request.referer, notice: "削除できませんでした"
     end
   end
 
   private
-    def instrument_params
-       params.require(:instrument).permit(:name)
-    end
+
+  def instrument_params
+    params.require(:instrument).permit(:name)
+  end
 end

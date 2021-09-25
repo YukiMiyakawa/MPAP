@@ -3,7 +3,7 @@ class SubPostsController < ApplicationController
   def create
     @new_sub_post = SubPost.new(sub_post_params)
     @new_sub_post.main_post_id = params[:main_post_id]
-    if  @new_sub_post.save
+    if @new_sub_post.save
       redirect_to main_post_path(@new_sub_post.main_post_id), notice: "You have created book successfully."
     else
 
@@ -49,7 +49,7 @@ class SubPostsController < ApplicationController
   def update
     @main_post = MainPost.find(params[:main_post_id])
     @sub_post = SubPost.find(params[:id])
-    if  @sub_post.update(sub_post_params)
+    if @sub_post.update(sub_post_params)
       redirect_to main_post_path(@sub_post.main_post_id), notice: "You have updated book successfully."
     else
       render "edit"

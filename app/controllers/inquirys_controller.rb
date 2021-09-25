@@ -35,5 +35,4 @@ class InquirysController < ApplicationController
       render action: :index
     end
   end
-
 end

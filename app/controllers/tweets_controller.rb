@@ -1,9 +1,8 @@
 class TweetsController < ApplicationController
-  
   def create
     @new_tweet = Tweet.new(tweet_params)
     @new_tweet.user_id = current_user.id
-    if  @new_tweet.save
+    if @new_tweet.save
       redirect_to request.referrer, notice: "You have created book successfully."
     else
       redirect_to request.referrer, flash: { tweet_error: @new_tweet.errors.full_messages }
@@ -17,7 +16,7 @@ class TweetsController < ApplicationController
 
   def update
     @edit_tweet = Tweet.find(params[:id])
-    if  @edit_tweet.update(tweet_params)
+    if @edit_tweet.update(tweet_params)
       redirect_to user_path(@edit_tweet.user_id), notice: "You have updated book successfully."
     else
       @tweet = Tweet.find(params[:id])

@@ -11,8 +11,8 @@ class Admins::MainPostsController < ApplicationController
   end
 
   def destroy
-     @main_post = MainPost.find(params[:id])
-     @main_post.destroy
+    @main_post = MainPost.find(params[:id])
+    @main_post.destroy
     redirect_to main_posts_path
   end
 
@@ -21,12 +21,13 @@ class Admins::MainPostsController < ApplicationController
     if @main_post.update(main_post_params)
       redirect_to admins_main_post_path(@main_post)
     else
-      redirect_to main_posts_path,notice:"変更を保存できませんでした"
+      redirect_to main_posts_path, notice: "変更を保存できませんでした"
     end
   end
 
   private
-    def main_post_params
-      params.require(:main_post).permit(:public_status)
-    end
+
+  def main_post_params
+    params.require(:main_post).permit(:public_status)
+  end
 end
