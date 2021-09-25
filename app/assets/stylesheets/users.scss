@@ -1,3 +1,22 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user_index_image {
+  width: 200px;
+  height: 150px;
+}
+
+@media screen and (max-width:983px) {
+  .user_index_image {
+    width: 160px;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width:773px) {
+  .user_index_image {
+    width: 200px;
+    height: 150px;
+  }
+}
