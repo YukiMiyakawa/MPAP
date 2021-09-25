@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @task = Task.new
     @tasks = Task.where(user_id: @user.id)
 
-    #合計練習時間
+    # 合計練習時間
     today = Date.today
     now = Time.current
     @today_min = @tweets.where(created_at: now.all_day).sum(:practice_time)
@@ -29,16 +29,16 @@ class UsersController < ApplicationController
     @practice_sum_chart = @user.microposts_period("week")
     # 週間練習達成率円グラフ
     unless @user.target_time.nil?
-      week_target_time = @user.target_time*7
-      @target_time_rate = @week_min.to_i*100/week_target_time.to_i
+      week_target_time = @user.target_time * 7
+      @target_time_rate = @week_min.to_i * 100 / week_target_time.to_i
     end
     if @target_time_rate.nil?
       @achievement_rate = {}
     elsif @target_time_rate > 100
-      @achievement_rate = {"達成率"=>@target_time_rate}
+      @achievement_rate = { "達成率" => @target_time_rate }
     elsif @target_time_rate < 100
       @un_target_time_rate = 100 - @target_time_rate
-      @achievement_rate = {"達成率"=>@target_time_rate, "未達成率"=>@un_target_time_rate}
+      @achievement_rate = { "達成率" => @target_time_rate, "未達成率" => @un_target_time_rate }
     else
       @achievement_rate = {}
     end
@@ -64,7 +64,6 @@ class UsersController < ApplicationController
         end
       end
     end
-
   end
 
   def edit

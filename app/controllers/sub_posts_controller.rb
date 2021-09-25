@@ -3,8 +3,8 @@ class SubPostsController < ApplicationController
   def create
     @new_sub_post = SubPost.new(sub_post_params)
     @new_sub_post.main_post_id = params[:main_post_id]
-    if  @new_sub_post.save
-      redirect_to main_post_path(@new_sub_post.main_post_id), notice: "You have created book successfully."
+    if @new_sub_post.save
+      redirect_to main_post_path(@new_sub_post.main_post_id), notice: "投稿に成功しました"
     else
 
       @main_post = MainPost.find(params[:main_post_id])
@@ -12,7 +12,7 @@ class SubPostsController < ApplicationController
       @tweets = @user.tweets.order(created_at: :desc).page(params[:page]).per(10)
       @sub_post = SubPost.new
       @sub_posts = SubPost.where(main_post_id: @main_post.id)
-      @comments = Comment.where(main_post_id: @main_post.id)
+      @comments = Comment.where(main_post_id: @main_post.id).order(created_at: :desc).page(params[:page]).per(5)
       @comment = Comment.new
       @post_tags = @main_post.tags
 
@@ -49,8 +49,8 @@ class SubPostsController < ApplicationController
   def update
     @main_post = MainPost.find(params[:main_post_id])
     @sub_post = SubPost.find(params[:id])
-    if  @sub_post.update(sub_post_params)
-      redirect_to main_post_path(@sub_post.main_post_id), notice: "You have updated book successfully."
+    if @sub_post.update(sub_post_params)
+      redirect_to main_post_path(@sub_post.main_post_id), notice: "更新に成功しました"
     else
       render "edit"
     end

@@ -8,12 +8,29 @@
   padding-top: 10px;
 }
 
+.main_post_index_image {
+  width: 250px;
+  height: 150px;
+}
+
 .youtube {
   width: 560px;
   height: 315px;
 }
 
 @media screen and (max-width:983px) {
+  .main_post_index_image {
+    width: 200px;
+    height: 120px;
+  }
+
+  .youtube {
+    width: 400px;
+    height: 225px;
+  }
+}
+
+@media screen and (max-width:773px) {
   .youtube {
     width: 400px;
     height: 225px;
