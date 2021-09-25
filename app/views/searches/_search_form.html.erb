@@ -1,5 +1,5 @@
-  <%= form_with url: search_path, method: :get, local: true do |f| %>
-    <%= f.select :range, {'記事タイトル': 1, 'タグ': 2, 'ユーザー名': 3}, { include_blank: '検索対象選択'} %>
-    <%= f.text_field :keyword %>
-    <%= f.submit "検索" %>
-  <% end %>
+<%= form_with url: search_path, method: :get, local: true do |f| %>
+  <%= f.select :range, {'記事タイトル': 1, 'タグ': 2, 'ユーザー名': 3}, { include_blank: '検索対象選択'} %>
+  <%= f.text_field :keyword %>
+  <%= f.submit "検索" %>
+<% end %>
