@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
     @new_tweet = Tweet.new(tweet_params)
     @new_tweet.user_id = current_user.id
     if @new_tweet.save
-      redirect_to request.referrer, notice: "You have created book successfully."
+      redirect_to request.referrer, notice: "つぶやき投稿に成功しました"
     else
       redirect_to request.referrer, flash: { tweet_error: @new_tweet.errors.full_messages }
     end
