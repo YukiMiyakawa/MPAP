@@ -6,7 +6,11 @@
       <div class="row d-flex justify-content-around">
 
             <div class="col-md-6 shadow m-1 p-5">
-            <div class="text-center p-2"><%= flash[:notice] %></div>
+            <% if flash[:error].present? %>
+              <ul class="text-center p-2">
+                <li><strong><%= flash[:error] %></strong></li>
+              </ul>
+            <% end %>
 
             <%= form_with model: @user, url: admins_user_path(@user), local: true do |f| %>
 

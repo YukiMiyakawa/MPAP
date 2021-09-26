@@ -4,7 +4,7 @@ class Admins::MusicGenresController < ApplicationController
   def create
     music_genre = MusicGenre.new(music_genre_params)
     if music_genre.save
-      redirect_to admins_instruments_path
+      redirect_to admins_instruments_path, notice: "ジャンル追加に成功しました"
     else
       redirect_to request.referer, flash: { error: "ジャンル名が入力されていません。もしくは既に使用されています。" }
     end

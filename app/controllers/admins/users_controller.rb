@@ -12,9 +12,9 @@ class Admins::UsersController < ApplicationController
     # byebug
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to admins_users_path
+      redirect_to admins_users_path, notice: "プロフィール更新に成功しました"
     else
-      redirect_to edit_admins_user_path(@user), notice: "変更を保存できませんでした、名前もしくはメールアドレスが空白の可能性があります"
+      redirect_to edit_admins_user_path(@user), flash: { error: "変更を保存できませんでした、名前もしくはメールアドレスが空白の可能性があります" }
     end
   end
 
