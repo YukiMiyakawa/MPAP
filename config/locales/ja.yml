@@ -17,9 +17,13 @@ ja:
       main_post:
         title: タイトル
         content: 本文
+        audio: 音声ファイル
+        image: 画像ファイル
       sub_post:
         title: タイトル
         content: 本文
+        audio: 音声ファイル
+        image: 画像ファイル
       task:
         name: 練習項目名
       tweet:
@@ -31,6 +35,7 @@ ja:
         target_time: 目標練習時間(分/日)
         email: メールアドレス
         password: パスワード
+        image: 画像ファイル
       tag:
         name: タグ名
       comment:

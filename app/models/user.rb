@@ -94,4 +94,11 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+
+  # ファイル形式バリデーション
+  def check_image(name)
+    if !['.jpg', '.png', '.gif'].include?(File.extname(name).downcase)
+        errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
+    end
+  end
 end
