@@ -50,14 +50,14 @@ class MainPostsController < ApplicationController
     tag_list = params[:main_post][:tag_name].split(',')
     # byebug
 
-    # pp params[:main_post][:image].original_filename
-    if params[:main_post][:image] != "{}"
-      @main_post.check_image(params[:main_post][:image].original_filename)
-      if @main_post.errors.any?
-        render 'new'
-        return
-      end
-    end
+
+    # if params[:main_post][:image] != "{}"
+    #   @main_post.check_image(params[:main_post][:image].original_filename)
+    #   if @main_post.errors.any?
+    #     render 'new'
+    #     return
+    #   end
+    # end
     # pp @main_post.errors
 
     if @main_post.save
@@ -77,13 +77,15 @@ class MainPostsController < ApplicationController
     @main_post = MainPost.find(params[:id])
     tag_list = params[:main_post][:tag_name].split(',')
 
-    if params[:main_post][:image] != "{}"
-      @main_post.check_image(params[:main_post][:image].original_filename)
-      if @main_post.errors.any?
-        render 'edit'
-        return
-      end
-    end
+    # if params[:main_post][:image] != "{}"
+    #   if params[:main_post][:image].original_filename
+    #   @main_post.check_image(params[:main_post][:image].original_filename)
+    #   if @main_post.errors.any?
+    #     render 'edit'
+    #     return
+    #   end
+    #   end
+    # end
 
     if @main_post.update(main_post_params)
       # このpost_idに紐づいていたタグを@oldに入れる
