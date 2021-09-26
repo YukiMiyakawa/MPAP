@@ -24,7 +24,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @messages = @room.messages
+    @messages = @room.messages.order(created_at: :desc).page(params[:page]).per(10)
     @message = Message.new
     # メッセージ相手を抽出
     @another_entry = @room.entries.find_by('user_id != ?', current_user.id)
