@@ -24,9 +24,9 @@ class MessagesController < ApplicationController
       # byebug
       notification.save if notification.valid?
 
-      redirect_to room_path(message.room)
+      redirect_to room_path(message.room), notice: "メッセージ送信に成功しました"
     else
-      redirect_back(fallback_location: root_path)
+      redirect_to request.referer, flash: { messege_error: "メッセージは1～200文字で送信してください" }
     end
   end
 
