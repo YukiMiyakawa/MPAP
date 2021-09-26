@@ -32,6 +32,13 @@
 
     <div class="row pt-4">
       <h4 class="ml-4 mr-4"><strong>検出数: <%= @main_post_all.count %> 件</strong></h4>
+      <% if @keywords.present? %>
+        <% if @range == 1 %>
+        <h4 class="ml-4 mr-4"><strong>記事検索 "<%= @keywords %>"</strong></h4>
+        <% elsif @range == 2 %>
+        <h4 class="ml-4 mr-4"><strong>タグ検索 "<%= @keywords %>"</strong></h4>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="row pt-4 pb-4">
