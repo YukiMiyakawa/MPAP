@@ -31,6 +31,8 @@ class MainPost < ApplicationRecord
   def check_image(name)
     if !['.jpg', '.png', '.gif'].include?(File.extname(name).downcase)
         errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
+      else
+        errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
     end
   end
 

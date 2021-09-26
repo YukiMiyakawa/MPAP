@@ -4,13 +4,13 @@ class SubPostsController < ApplicationController
     @new_sub_post = SubPost.new(sub_post_params)
     @new_sub_post.main_post_id = params[:main_post_id]
 
-    if params[:sub_post][:image] != "{}"
-      @new_sub_post.check_image(params[:sub_post][:image].original_filename)
-      if @new_sub_post.errors.any?
-        redirect_to request.referer, flash: { sub_error: "JPG, PNG, GIFのみアップロードできます。" }
-        return
-      end
-    end
+    # if params[:sub_post][:image] != "{}"
+    #   @new_sub_post.check_image(params[:sub_post][:image].original_filename)
+    #   if @new_sub_post.errors.any?
+    #     redirect_to request.referer, flash: { sub_error: "JPG, PNG, GIFのみアップロードできます。" }
+    #     return
+    #   end
+    # end
 
     if @new_sub_post.save
       redirect_to main_post_path(@new_sub_post.main_post_id), notice: "投稿に成功しました"
@@ -59,13 +59,13 @@ class SubPostsController < ApplicationController
     @main_post = MainPost.find(params[:main_post_id])
     @sub_post = SubPost.find(params[:id])
 
-    if params[:sub_post][:image] != "{}"
-      @sub_post.check_image(params[:sub_post][:image].original_filename)
-      if @sub_post.errors.any?
-        render "edit"
-        return
-      end
-    end
+    # if params[:sub_post][:image] != "{}"
+    #   @sub_post.check_image(params[:sub_post][:image].original_filename)
+    #   if @sub_post.errors.any?
+    #     render "edit"
+    #     return
+    #   end
+    # end
 
     if @sub_post.update(sub_post_params)
       redirect_to main_post_path(@sub_post.main_post_id), notice: "更新に成功しました"
