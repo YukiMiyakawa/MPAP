@@ -26,6 +26,7 @@
 </div>
 
 <div class="row justify-content-center pb-3">
+  <%= flash[:instrument_error] %>
   <% if user_signed_in? %>
     <% if user.id == current_user.id %>
       <%= form_with url: user_user_instruments_path(user), model: user_instrument, local: true do |f| %>
