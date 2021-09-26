@@ -105,7 +105,7 @@
     <% if user_signed_in? %>
       <div class="row justify-content-center mt-2 mb-2 pb-3">
     　  <% if @user.id == current_user.id %>
-          <%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name),class:"btn btn-outline-secondary" %>
+          <%= link_to '退会はこちら', confirm_unsubscribe_path(@user.name),class:"btn btn-light" %>
         <% end %>
       </div>
     <% end %>
