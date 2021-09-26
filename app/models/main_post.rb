@@ -26,6 +26,29 @@ class MainPost < ApplicationRecord
     book_marks.where(user_id: user.id).exists?
   end
 
+  # ファイル形式バリデーション
+
+  def check_image(name)
+    if !['.jpg', '.png', '.gif'].include?(File.extname(name).downcase)
+        errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
+    end
+  end
+
+  validate :check_audio
+
+  def check_audio
+    # キャリアウェーブのクラスが割り当てられてカラムとしてaudio以下にメソッド等がある
+    # ppメソッド @がこのクラスのメソッド
+    if audio.filename
+      pp audio.file.file
+      if !['.mp3'].include?(File.extname(audio.filename).downcase)
+          errors.add(:audio, "はmp3のみアップロードできます。")
+      elsif File.size(audio.file.file) > 30.megabyte
+          errors.add(:audio, "は30MBまでアップロードできます")
+      end
+    end
+  end
+
   # タグ機能
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
@@ -105,4 +128,6 @@ class MainPost < ApplicationRecord
     end
     notification.save if notification.valid?
   end
+
+
 end

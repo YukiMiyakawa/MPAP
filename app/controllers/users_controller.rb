@@ -72,6 +72,15 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+
+    if params[:user][:image] != "{}"
+      @user.check_image(params[:user][:image].original_filename)
+      if @user.errors.any?
+        render 'edit'
+        return
+      end
+    end
+    
     if @user.update(user_params)
       redirect_to user_path(@user), notice: "プロフィール更新に成功しました"
     else
