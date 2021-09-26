@@ -76,6 +76,15 @@
           <% if user_signed_in? %>
             <% if @main_post.user_id == current_user.id %>
               <h5 class="text-center pt-3">サブ記事投稿</h5>
+
+              <div class="row justify-content-center mt-2 mb-2 pt-5">
+              <% if flash[:sub_error].present? %>
+                <ul class="text-center p-2">
+                  <li><strong><%= flash[:sub_error] %></strong></li>
+                </ul>
+              <% end %>
+              </div>
+
             <% if @new_sub_post.present? %>
               <%= render 'layouts/error_messages', model: @new_sub_post %>
             <% end %>

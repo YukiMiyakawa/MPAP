@@ -17,9 +17,11 @@ ja:
       main_post:
         title: タイトル
         content: 本文
+        audio: 音声ファイル
       sub_post:
         title: タイトル
         content: 本文
+        audio: 音声ファイル
       task:
         name: 練習項目名
       tweet:
