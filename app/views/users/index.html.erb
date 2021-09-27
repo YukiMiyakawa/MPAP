@@ -16,7 +16,7 @@
         <h4 class="ml-4 mr-4"><strong>ユーザー検索 "<%= @keywords %>"</strong></h4>
         <% end %>
       <% elsif @range == 4 %>
-        <h4 class="ml-4 mr-4"><strong>楽器/ジャンル検索 "<%= @instrument.name %>/<%= @music_genre.name %>"</strong></h4>
+        <h4 class="ml-4 mr-4"><strong>楽器/ジャンル検索 "<%= @instrument.name if @instrument.present? %>/<%= @music_genre.name if @music_genre.present? %>"</strong></h4>
       <% end %>
 
     </div>
