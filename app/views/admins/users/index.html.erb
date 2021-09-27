@@ -15,6 +15,7 @@
             <th class="text-center">メールアドレス</th>
             <th class="text-center">投稿一覧</th>
             <th class="text-center">ユーザーステータス</th>
+            <th></th>
           </tr>
         </thead>
         <% @users.each do |user| %>
@@ -29,6 +30,11 @@
                 <span class="text-secondary font-weight-bold text-light">有効</span>
               <% else %>
                 <span class="text-success font-weight-bold">退会</span>
+              <% end %>
+            </td>
+            <td class="text-center">
+              <% if !user.name.in?(['みかわや','ゲスト','ゲスト2','簡易ゲスト']) %>
+                <%= link_to '削除', user_destroy_path(user), method: :delete, class: "btn btn-outline-secondary","data-confirm" => "本当に削除しますか？" %>
               <% end %>
             </td>
           </tr>

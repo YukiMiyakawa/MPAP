@@ -101,4 +101,15 @@ class User < ApplicationRecord
         errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
     end
   end
+  
+  # ゲストログイン
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.confirmed_at = Time.now
+      user.name = "簡易ゲスト"
+      user.introduction = "Hello!"
+      user.target_time = 40
+    end
+  end
 end
