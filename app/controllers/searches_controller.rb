@@ -56,7 +56,10 @@ class SearchesController < ApplicationController
       negative_keywords.each do |keyword|
         @users.where!("name NOT LIKE ?", "%#{keyword.delete_prefix('-')}%")
       end
+      @users_all = @users
       @users = @users.page(params[:page]).per(6)
+      @keywords = params[:keyword]
+      @range = 3
       render template: "users/index"
 
     # ユーザー音楽ジャンル & 使用楽器検索
@@ -64,12 +67,17 @@ class SearchesController < ApplicationController
       @user_instruments = UserInstrument.where(instrument_id: params[:instrument_id])
       @user_music_genres = UserMusicGenre.where(music_genre_id: params[:music_genre_id])
 
+      @instrument = Instrument.find(params[:instrument_id]) if params[:instrument_id].present?
+      @music_genre = MusicGenre.find(params[:music_genre_id]) if params[:music_genre_id].present?
+      # byebug
+
       @instrument_user_id = @user_instruments.pluck(:user_id)
       @music_genre_user_id = @user_music_genres.pluck(:user_id)
-
+      @range = 4
       if params[:instrument_id].blank? && params[:music_genre_id].blank?
 
         @main_posts = MainPost.all
+        @users_all = User.all
         @users = User.all
         @users = @users.page(params[:page]).per(6)
         render template: "users/index"
@@ -77,12 +85,14 @@ class SearchesController < ApplicationController
       elsif @instrument_user_id.empty?
 
         @users = User.find(@music_genre_user_id)
+        @users_all = @users
         @users = Kaminari.paginate_array(@users).page(params[:page]).per(6)
         render template: "users/index"
 
       elsif @music_genre_user_id.empty?
 
         @users = User.find(@instrument_user_id)
+        @users_all = @users
         @users = Kaminari.paginate_array(@users).page(params[:page]).per(6)
         render template: "users/index"
 
@@ -90,6 +100,7 @@ class SearchesController < ApplicationController
 
         @user_id = @instrument_user_id & @music_genre_user_id
         @users = User.find(@user_id)
+        @users_all = @users
         @users = Kaminari.paginate_array(@users).page(params[:page]).per(6)
         render template: "users/index"
 

@@ -8,6 +8,19 @@
       <%= render "searches/search_user" %>
     </div>
 
+    <div class="row pt-4">
+
+      <h4 class="ml-4 mr-4"><strong>検出数: <%= @users_all.count %> 件</strong></h4>
+      <% if @range == 3 %>
+        <% if @keywords.present? %>
+        <h4 class="ml-4 mr-4"><strong>ユーザー検索 "<%= @keywords %>"</strong></h4>
+        <% end %>
+      <% elsif @range == 4 %>
+        <h4 class="ml-4 mr-4"><strong>楽器/ジャンル検索 "<%= @instrument.name %>/<%= @music_genre.name %>"</strong></h4>
+      <% end %>
+
+    </div>
+
     <div class="row pt-3">
       <div class="col-md-12">
         <div class="row d-flex justify-content-start">
