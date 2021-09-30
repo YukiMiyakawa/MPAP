@@ -32,10 +32,10 @@
 
           <div class="row justify-content-center">
             <% if @main_post.youtube_url.present? %>
-            <div class="col-md-12"><iframe class="youtube" src="https://www.youtube.com/embed/<%=@main_post.youtube_url[32..42]%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div><iframe class="youtube" src="https://www.youtube.com/embed/<%=@main_post.youtube_url[32..42]%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
             <% end %>
-            <div class="col-md-12"><%= attachment_image_tag @main_post, :image, format: "jpeg", class: "w-100" %></div>
-            <div class="col-md-12"><%= audio_tag @main_post.audio_url, :controls => true if @main_post.audio? %></div>
+            <div><%= attachment_image_tag @main_post, :image, format: "jpeg", class: "w-100" %></div>
+            <div><%= audio_tag @main_post.audio_url, :controls => true if @main_post.audio? %></div>
           </div>
           <div class="pb-3 border-top mt-2"><%= @main_post.content %></div>
 
