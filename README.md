@@ -24,7 +24,7 @@
 
 ## 設計書
 ER図は[こちら](https://app.diagrams.net/#G1oTRhp3erju9DKSvosBorASZEdheVmNZe)<br>
-UI Flows：[こちら](https://drive.google.com/file/d/1lq4GI3CTlTWIdC3lFWDzDbZgzyea5ZLz/view?usp=sharing)<br>
+UI Flowsは[こちら](https://drive.google.com/file/d/1lq4GI3CTlTWIdC3lFWDzDbZgzyea5ZLz/view?usp=sharing)<br>
 テーブル定義書は[こちら](https://docs.google.com/spreadsheets/d/1fmrbVQmbp1pQuAKB2mJj0oC2-kfgEpYzaZQKrBIGUFE/edit#gid=202497749)
 
 ## チャレンジ要素一覧
