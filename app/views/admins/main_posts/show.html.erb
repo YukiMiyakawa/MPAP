@@ -29,7 +29,7 @@
           <div><iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@main_post.youtube_url[32..42]%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
           <% end %>
           <div><%= attachment_image_tag @main_post, :image, format: "jpeg", size: "560x315" %></div>
-          <div><%= audio_tag @main_post.audio_was, :controls => true if @main_post.audio? %></div>
+          <div><%= audio_tag @main_post.audio_url, :controls => true if @main_post.audio? %></div>
         </div>
         <div class="pb-3 border-top mt-2"><%= @main_post.content %></div>
 
