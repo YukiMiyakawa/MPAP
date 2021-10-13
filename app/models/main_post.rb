@@ -30,9 +30,9 @@ class MainPost < ApplicationRecord
 
   def check_image(name)
     if !['.jpg', '.png', '.gif'].include?(File.extname(name).downcase)
-        errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
-      else
-        errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
+      errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
+    else
+      errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
     end
   end
 
@@ -44,9 +44,9 @@ class MainPost < ApplicationRecord
     if audio.filename
       pp audio.file.file
       if !['.mp3'].include?(File.extname(audio.filename).downcase)
-          errors.add(:audio, "はmp3のみアップロードできます。")
+        errors.add(:audio, "はmp3のみアップロードできます。")
       elsif File.size(audio.file.file) > 30.megabyte
-          errors.add(:audio, "は30MBまでアップロードできます")
+        errors.add(:audio, "は30MBまでアップロードできます")
       end
     end
   end
@@ -130,6 +130,4 @@ class MainPost < ApplicationRecord
     end
     notification.save if notification.valid?
   end
-
-
 end

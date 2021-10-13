@@ -24,7 +24,6 @@ class Admins::UsersController < ApplicationController
     redirect_to admins_users_path, notice: "ユーザーを削除しました"
   end
 
-
   private
 
   def user_params

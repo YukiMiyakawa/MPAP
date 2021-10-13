@@ -2,7 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   before_action :reject_inactive_user, only: [:create]
-  
+
   # ゲストログイン
   def guest_sign_in
     user = User.guest

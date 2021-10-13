@@ -98,10 +98,10 @@ class User < ApplicationRecord
   # ファイル形式バリデーション
   def check_image(name)
     if !['.jpg', '.png', '.gif'].include?(File.extname(name).downcase)
-        errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
+      errors.add(:image, "はJPG, PNG, GIFのみアップロードできます。")
     end
   end
-  
+
   # ゲストログイン
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
