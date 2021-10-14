@@ -50,7 +50,6 @@ class MainPostsController < ApplicationController
     tag_list = params[:main_post][:tag_name].split(',')
     # byebug
 
-
     # if params[:main_post][:image] != "{}"
     #   @main_post.check_image(params[:main_post][:image].original_filename)
     #   if @main_post.errors.any?

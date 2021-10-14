@@ -1,5 +1,17 @@
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+# RDBMSのunique indexがついていないカラムに対して、Active Recordのレイヤーでuniquenessバリデーションを書いている場合に警告をしている
+# 対応カラムに index を追加することで対応可能だが過去同様のカラム変更を行ったところエラーが起きたため今回は一時的にエラー文を除去する形で回避
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
 inherit_from:
   - .rubocop_airbnb.yml
+
+Layout/LineLength:
+  Enabled: false
 
 #ここにはrubocopでコード解析したくないファイルやフォルダを指定します
 AllCops:
@@ -15,6 +27,6 @@ AllCops:
     - 'path/ruby'
     - 'db/schema.rb'
     - 'vendor/**/*'
-    
 
-  
+
+

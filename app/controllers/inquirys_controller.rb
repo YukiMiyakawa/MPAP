@@ -1,4 +1,4 @@
-class InquirysController < ApplicationController
+class InquirysController < ApplicationControllerin
   def index
     # 入力画面を表示
     @inquiry = Inquiry.new
