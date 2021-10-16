@@ -76,6 +76,7 @@ gem 'bootstrap-select-rails'
 gem 'rails-i18n'
 gem 'dotenv-rails'
 gem 'rubocop-airbnb'
+gem 'rspec-rails'
 
 # デプロイ用
 
