@@ -77,9 +77,10 @@ gem 'rails-i18n'
 gem 'dotenv-rails'
 gem 'rubocop-airbnb'
 gem 'rspec-rails'
+gem 'factory_bot_rails'
 
 # デプロイ用
 
-group :production do
-  gem 'mysql2'
-end
+# group :production do
+#   gem 'mysql2'
+# end

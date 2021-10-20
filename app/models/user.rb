@@ -2,11 +2,11 @@ class User < ApplicationRecord
   # 認証キー追加
   devise :database_authenticatable, authentication_keys: [:name]
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
+
   validates :name, length: { minimum: 1, maximum: 20 }, presence: true
+  validates :email, presence: true, uniqueness: true
   validates :introduction, length: { minimum: 1, maximum: 80 }, presence: true
   validates :target_time, presence: true, numericality: { only_integer: true }
 
